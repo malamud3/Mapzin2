@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+enum AuthMethod {
+    case phone
+    case apple
+    case google
+    case sms
+}
