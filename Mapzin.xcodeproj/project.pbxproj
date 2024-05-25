@@ -35,6 +35,7 @@
 		A9916A812BE3635F00427095 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9916A802BE3635F00427095 /* LoginView.swift */; };
 		A9916A832BE36B8000427095 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9916A822BE36B8000427095 /* UserLocation.swift */; };
 		A9916A862BE36BB800427095 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9916A852BE36BB800427095 /* LocationViewModel.swift */; };
+		A9E352562C01BC9200CF7605 /* LocationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E352552C01BC9200CF7605 /* LocationDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		A9916A802BE3635F00427095 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A9916A822BE36B8000427095 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		A9916A852BE36BB800427095 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		A9E352552C01BC9200CF7605 /* LocationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 		A9496DB82BE383BD009F2B97 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				A9C4AC7C2C01F472000C4D3E /* ModelView */,
 				A9496DB92BE383DB009F2B97 /* Components */,
 				A97563E32BA6DA43002B08AD /* HomeView.swift */,
 			);
@@ -177,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				A9496DBA2BE383F7009F2B97 /* UserAnnotation.swift */,
+				A9E352552C01BC9200CF7605 /* LocationDetailsView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -310,6 +314,13 @@
 				A9916A852BE36BB800427095 /* LocationViewModel.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		A9C4AC7C2C01F472000C4D3E /* ModelView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ModelView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -466,6 +477,7 @@
 				A9916A7D2BE362DE00427095 /* LoginViewModel.swift in Sources */,
 				A9916A5B2BE345F000427095 /* AuthMethod.swift in Sources */,
 				A9916A832BE36B8000427095 /* UserLocation.swift in Sources */,
+				A9E352562C01BC9200CF7605 /* LocationDetailsView.swift in Sources */,
 				A97563E22BA6DA43002B08AD /* MapzinApp.swift in Sources */,
 				A9916A862BE36BB800427095 /* LocationViewModel.swift in Sources */,
 				A9916A812BE3635F00427095 /* LoginView.swift in Sources */,
