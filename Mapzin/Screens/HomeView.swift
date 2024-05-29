@@ -12,6 +12,7 @@ struct HomeView: View {
     @State private var cameraPosition: MapCameraPosition = .region(.userRegion)
     @State private var showDetails = false
     @State private var getDirections = false
+    @State private var showSearchResults = false
 
     @StateObject private var viewModel = SearchViewModel()
 
@@ -27,13 +28,19 @@ struct HomeView: View {
             )
 
             VStack {
-               SearchBar(searchText: $viewModel.searchText)
+                SearchBar(searchText: $viewModel.searchText)
+                    .onChange(of: viewModel.searchText) { oldValue, newValue in
+                        viewModel.triggerSearch()
+                        showSearchResults = !newValue.isEmpty && !viewModel.results.isEmpty
+                    }
 
-               if !viewModel.results.isEmpty {
-                   SearchResultsList(results: $viewModel.results, mapSelection: $viewModel.mapSelection)
-               }
-               Spacer()
-           }
+                if showSearchResults {
+                    SearchResultsList(results: $viewModel.results, mapSelection: $viewModel.mapSelection) {
+                        showSearchResults = false
+                    }
+                }
+                Spacer()
+            }
         }
         .onAppear {
             CLLocationManager().requestWhenInUseAuthorization()
@@ -62,16 +69,5 @@ struct HomeView: View {
                 .padding()
             }
         }
-    }
-}
-extension CLLocationCoordinate2D {
-    static var userLocation: CLLocationCoordinate2D {
-        return .init(latitude: 32.1226, longitude: 34.8065)
-    }
-}
-
-extension MKCoordinateRegion {
-    static var userRegion: MKCoordinateRegion {
-        return .init(center: .userLocation, latitudinalMeters: 10000, longitudinalMeters: 10000)
     }
 }

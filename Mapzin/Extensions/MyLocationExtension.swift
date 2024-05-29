@@ -8,7 +8,7 @@ import MapKit
 
 extension CLLocationCoordinate2D {
     static var userLocation: CLLocationCoordinate2D {
-        return .init(latitude: 32.1226, longitude: 34.8065)
+        return .init(latitude: 32.11500, longitude: 34.81778)
     }
 }
 

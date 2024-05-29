@@ -4,6 +4,8 @@ import MapKit
 struct SearchResultsList: View {
     @Binding var results: [MKMapItem]
     @Binding var mapSelection: MKMapItem?
+    
+    var onSelect: () -> Void
 
     var body: some View {
         VStack {
@@ -12,6 +14,7 @@ struct SearchResultsList: View {
                     ForEach(results, id: \.self) { item in
                         Button(action: {
                             mapSelection = item
+                            onSelect()
                         }) {
                             HStack {
                                 Image(systemName: "mappin.and.ellipse")
