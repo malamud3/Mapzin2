@@ -7,37 +7,82 @@
 
 import Foundation
 import CoreLocation
-import Combine
+import SwiftUI
 
-class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
-    
-    @Published var userLocation: UserLocation?
-    @Published var authorizationStatus: CLAuthorizationStatus
+    @Published var userLocation: CLLocation?
+    @Published var authorizationStatus: CLAuthorizationStatus?
     
     override init() {
-        self.authorizationStatus = locationManager.authorizationStatus
         super.init()
-        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
-        requestLocationPermission()
+        locationManager.distanceFilter = kCLDistanceFilterNone
     }
     
-    func requestLocationPermission() {
+    func requestAuthorization() {
         locationManager.requestWhenInUseAuthorization()
     }
     
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        self.authorizationStatus = manager.authorizationStatus
-        if authorizationStatus == .authorizedWhenInUse {
+    func startUpdatingLocation() {
+        if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
         }
     }
     
+    func stopUpdatingLocation() {
+        locationManager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        self.authorizationStatus = status
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            startUpdatingLocation()
+        case .denied:
+            handleDeniedAuthorization()
+        case .restricted:
+            handleRestrictedAuthorization()
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        @unknown default:
+            print("Unhandled authorization status.")
+        }
+    }
+    
+    func handleDeniedAuthorization() {
+        // Handle case where user denied access to location services
+        // Example: Show an alert informing the user and guiding them to settings
+        let alert = UIAlertController(
+            title: "Location Access Denied",
+            message: "Please enable location access in Settings to use this feature.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
+        
+        // Optionally, set userLocation to nil or perform other actions as needed
+        userLocation = nil
+    }
+    
+    func handleRestrictedAuthorization() {
+        // Handle case where location access is restricted (e.g., parental controls)
+        // Example: Inform the user that location services are restricted
+        print("Location access is restricted. Unable to retrieve location.")
+        
+        // Optionally, set userLocation to nil or perform other actions as needed
+        userLocation = nil
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        userLocation = UserLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        guard let latestLocation = locations.last else { return }
+        userLocation = latestLocation
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to find user's location: \(error.localizedDescription)")
     }
 }
+
+
