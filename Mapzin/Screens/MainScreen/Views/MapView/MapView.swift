@@ -1,6 +1,7 @@
 import SwiftUI
 import MapKit
 
+
 struct MapView: View {
     @Binding var cameraPosition: MapCameraPosition
     @Binding var mapSelection: MKMapItem?
@@ -8,26 +9,32 @@ struct MapView: View {
     @Binding var route: MKRoute?
     @Binding var routeDisplaying: Bool
     @Binding var routeDestination: MKMapItem?
+    @Binding var userLocation: CLLocation?
+
 
     var body: some View {
         ZStack {
             Map(position: $cameraPosition, selection: $mapSelection) {
-                Annotation("", coordinate: .userLocation) {
-                    UserLocationAnnotationView()
+                if userLocation != nil {
+                    Annotation("", coordinate: .userLocation) {
+                        UserLocationAnnotationView()
+                    }
+                } else{
+                    
                 }
                 
                 // Results annotations
-                                        ForEach(results, id: \.self) { item in
-                                                            if routeDisplaying {
-                                                                if item == routeDestination {
-                                                                    let placemark = item.placemark
-                                                            Marker(placemark.name ?? "", coordinate: placemark.coordinate)
-                                                        }
-                                                    } else{
-                                                        let placemark = item.placemark
-                                                        Marker(placemark.name ?? "", coordinate:  placemark.coordinate  )
-                                                    }
-                                                }
+             ForEach(results, id: \.self) { item in
+                                 if routeDisplaying {
+                                     if item == routeDestination {
+                                         let placemark = item.placemark
+                                 Marker(placemark.name ?? "", coordinate: placemark.coordinate)
+                             }
+                         } else{
+                             let placemark = item.placemark
+                             Marker(placemark.name ?? "", coordinate:  placemark.coordinate  )
+                         }
+                   }
                 
                 // Route polyline
                 if let route {
@@ -37,11 +44,17 @@ struct MapView: View {
             }
             .edgesIgnoringSafeArea(.all)
             
+            
             CenterButton(action: centerOnUserLocation)
         }
     }
 
     private func centerOnUserLocation() {
-        cameraPosition = .region(.userRegion)
+        if let userLocation = userLocation {
+            cameraPosition = .region(MKCoordinateRegion(
+                center: userLocation.coordinate,
+                span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            ))
+        }
     }
 }

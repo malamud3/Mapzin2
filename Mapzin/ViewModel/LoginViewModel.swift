@@ -6,34 +6,45 @@
 //
 
 import Foundation
-import FirebaseAuth
 import Combine
 
+@MainActor
 class LoginViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     @Published var errorMessage = ""
     @Published var isLoggedIn = false
-    internal var cancellables = Set<AnyCancellable>()
+    
+    private var authProvider: FirebaseAuthProvider
+    var cancellables = Set<AnyCancellable>()
+    
+    init(authProvider: FirebaseAuthProvider = FirebaseAuthProvider()) {
+        self.authProvider = authProvider
+    }
 
     func login() {
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
-            if let error = error {
-                self?.errorMessage = error.localizedDescription
-            } else {
-                self?.isLoggedIn = true
-            }         
+        Task {
+            for await result in authProvider.signIn(withEmail: email, password: password) {
+                switch result {
+                case .failure(let error):
+                    errorMessage = error.localizedDescription
+                case .success:
+                    isLoggedIn = true
+                }
+            }
         }
     }
 
     func signUp() {
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
-            if let error = error {
-                self?.errorMessage = error.localizedDescription
-            } else {
-                self?.isLoggedIn = true
+        Task {
+            for await result in authProvider.createUser(withEmail: email, password: password) {
+                switch result {
+                case .failure(let error):
+                    errorMessage = error.localizedDescription
+                case .success:
+                    isLoggedIn = true
+                }
             }
         }
     }
 }
-

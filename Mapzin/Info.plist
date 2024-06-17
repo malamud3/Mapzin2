@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict/>
+<dict>
+	<key>Privacy - Location Always and When I Description n Use Usage</key>
+	<string>We need your location to provide GPS tracking functionality.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location to provide GPS tracking functionality.</string>
+</dict>
 </plist>

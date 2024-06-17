@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+@MainActor
 class LoginCoordinator: ObservableObject {
     @Published var currentView: AnyView?
 
@@ -16,8 +17,6 @@ class LoginCoordinator: ObservableObject {
     init() {
         loginViewModel = LoginViewModel()
 
-        
-        // Observe when the user is logged in and navigate accordingly
         loginViewModel.$isLoggedIn
             .sink { [weak self] isLoggedIn in
                 if isLoggedIn {
@@ -26,12 +25,11 @@ class LoginCoordinator: ObservableObject {
             }
             .store(in: &loginViewModel.cancellables)  
 
-        // Default view is the login view
         currentView = AnyView(LoginView(viewModel: loginViewModel))
     }
 
     func navigateToHome() {
-        currentView = AnyView(HomeView()) // Define your HomeView elsewhere
+        currentView = AnyView(HomeView())
     }
 }
 
