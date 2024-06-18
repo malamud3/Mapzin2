@@ -23,8 +23,16 @@ struct CoordinatorView: View {
 //                .sheet(isPresented: $coordinator, content: { sheet in
 //                    coordinator.build(sheet: sheet)
 //                })
-            
+
         }
+        .navigationBarHidden(true)
         .environmentObject(coordinator);
     }
+}
+extension UINavigationController {
+  open override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    navigationBar.topItem?.backButtonDisplayMode = .minimal
+
+  }
 }

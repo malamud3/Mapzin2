@@ -1,8 +1,11 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var viewModel: LoginViewModel
-    @State private var errorMessagePresented = false
+    
+    @EnvironmentObject private var coordinator : Coordinator;
+    
+    @ObservedObject var viewModel: LoginViewModel;
+    @State private var errorMessagePresented = false;
 
     var body: some View {
         ZStack {
@@ -23,15 +26,17 @@ struct LoginView: View {
 
                 VStack(spacing: 20) {
                     
-                    CustomTextField(placeholder: "Email", text: $viewModel.email)
-                    CustomTextField(placeholder: "Password", text: $viewModel.password, isSecure: true)
+                    CustomTextField(placeholder: "Email", text: $viewModel.email);
+                    CustomTextField(placeholder: "Password", text: $viewModel.password, isSecure: true);
 
                         LoginButton {
-                            viewModel.login()
+                            viewModel.login();
+                            coordinator.push(.home);
                         }
                         
                         SignUpButton {
-                            viewModel.signUp()
+                            viewModel.signUp();
+                            coordinator.push(.home);
                         }
                  
                 }

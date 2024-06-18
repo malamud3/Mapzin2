@@ -35,17 +35,20 @@ class Coordinator: ObservableObject {
     }
     
     @MainActor
-    @ViewBuilder
-    func build(screen: AppScreenType ) -> some View {
-        switch screen {
-        case .login:
-            LoginView(viewModel: LoginViewModel())
-        case .home:
-            HomeView();
-        case .selectBuilding:
-            SelectBuildingView();
-        }
-    }
+       @ViewBuilder
+       func build(screen: AppScreenType) -> some View {
+           NavigationView {
+               switch screen {
+               case .login:
+                   LoginView(viewModel: LoginViewModel())
+               case .home:
+                   HomeView().environmentObject(self) // Inject the coordinator into HomeView
+               case .selectBuilding:
+                   SelectBuildingView()
+               }
+           }
+           .navigationBarHidden(true) // Hide the navigation bar
+       }
     
 //    @ViewBuilder
 //    func build( sheet: SheetType ) -> some View {

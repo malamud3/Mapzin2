@@ -2,6 +2,8 @@ import SwiftUI
 import MapKit
 
 struct HomeView: View {
+    
+    @EnvironmentObject private var coordinator : Coordinator;
     @State private var cameraPosition: MapCameraPosition = .region(.userRegion)
     @State private var showDetails = false
     @State private var getDirections = false

@@ -43,6 +43,7 @@
 		A99B1F432C219BE8002B7B32 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F422C219BE8002B7B32 /* Views.swift */; };
 		A99B1F452C21A494002B7B32 /* CoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F442C21A494002B7B32 /* CoordinatorView.swift */; };
 		A99B1F482C21A69E002B7B32 /* LocationDetailsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F472C21A69E002B7B32 /* LocationDetailsSheet.swift */; };
+		A99B1F4A2C21B4D4002B7B32 /* TransparentNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F492C21B4D4002B7B32 /* TransparentNavBar.swift */; };
 		A9A683C32C1EF1000016455C /* KeyboardAvoider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A683C22C1EF1000016455C /* KeyboardAvoider.swift */; };
 		A9A683C52C1EF8CA0016455C /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A683C42C1EF8CA0016455C /* CustomTextField.swift */; };
 		A9A683C72C1F225E0016455C /* SelectBuilding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A683C62C1F225E0016455C /* SelectBuilding.swift */; };
@@ -108,6 +109,7 @@
 		A99B1F422C219BE8002B7B32 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
 		A99B1F442C21A494002B7B32 /* CoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorView.swift; sourceTree = "<group>"; };
 		A99B1F472C21A69E002B7B32 /* LocationDetailsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsSheet.swift; sourceTree = "<group>"; };
+		A99B1F492C21B4D4002B7B32 /* TransparentNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentNavBar.swift; sourceTree = "<group>"; };
 		A9A683C22C1EF1000016455C /* KeyboardAvoider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAvoider.swift; sourceTree = "<group>"; };
 		A9A683C42C1EF8CA0016455C /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		A9A683C62C1F225E0016455C /* SelectBuilding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBuilding.swift; sourceTree = "<group>"; };
@@ -224,7 +226,7 @@
 		A9496DB92BE383DB009F2B97 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A99B1F462C21A681002B7B32 /* Sheets */,
+				A99B1F4B2C21B4D8002B7B32 /* Modifiers */,
 				A94488182C035A940007A9F0 /* Search */,
 				A9496DB12BE38101009F2B97 /* Commons */,
 				A94488042C0351410007A9F0 /* MapView */,
@@ -382,6 +384,15 @@
 				A99B1F472C21A69E002B7B32 /* LocationDetailsSheet.swift */,
 			);
 			path = Sheets;
+			sourceTree = "<group>";
+		};
+		A99B1F4B2C21B4D8002B7B32 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				A99B1F462C21A681002B7B32 /* Sheets */,
+				A99B1F492C21B4D4002B7B32 /* TransparentNavBar.swift */,
+			);
+			path = Modifiers;
 			sourceTree = "<group>";
 		};
 		A9C4AC7F2C01FC71000C4D3E /* LocationDetailsView */ = {
@@ -563,6 +574,7 @@
 				A9496DAF2BE380BD009F2B97 /* DataFields.swift in Sources */,
 				A9916A7F2BE3632400427095 /* LoginCoordinator.swift in Sources */,
 				A9496DB72BE381FF009F2B97 /* SignUpButton.swift in Sources */,
+				A99B1F4A2C21B4D4002B7B32 /* TransparentNavBar.swift in Sources */,
 				A9A683C72C1F225E0016455C /* SelectBuilding.swift in Sources */,
 				A9A683C52C1EF8CA0016455C /* CustomTextField.swift in Sources */,
 				A9916A7D2BE362DE00427095 /* LoginViewModel.swift in Sources */,
