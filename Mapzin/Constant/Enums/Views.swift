@@ -8,11 +8,20 @@
 import Foundation
 
 
-enum AppScreens: String , Identifiable {
-    var id: ObjectIdentifier
+enum AppScreenType: String , Identifiable {
     
     case login
     case home
     case selectBuilding
-    // Add more cases as needed
+    
+    var id: String {
+        self.rawValue
+    }
+}
+
+enum SheetType: String, Identifiable {
+   case poiData
+    var id: String {
+        self.rawValue
+    }
 }

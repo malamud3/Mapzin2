@@ -24,13 +24,8 @@ struct LoginView: View {
                 VStack(spacing: 20) {
                     
                     CustomTextField(placeholder: "Email", text: $viewModel.email)
-                    CustomTextField(placeholder: "Password", text: $viewModel.password)
+                    CustomTextField(placeholder: "Password", text: $viewModel.password, isSecure: true)
 
-                    if !viewModel.errorMessage.isEmpty {
-                        Text(viewModel.errorMessage)
-                            .foregroundColor(.red)
-                            .padding(.top, 10)
-                    }
                         LoginButton {
                             viewModel.login()
                         }
@@ -42,13 +37,13 @@ struct LoginView: View {
                 }
                 .padding(.vertical, 40)
                 .padding(.horizontal, 20)
-                .background(Color.clear) // Ensures the background is transparent for gradient
+                .background(Color.clear)
 
-                Spacer() // Ensures the VStack can expand properly
+                Spacer()
             }
             .padding(.vertical, 40)
             .padding(.horizontal, 20)
-            .background(Color.clear) // Ensures the background is transparent for gradient
+            .background(Color.clear)
         }
         .alert(isPresented: $errorMessagePresented) {
             Alert(

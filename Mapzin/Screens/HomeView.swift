@@ -8,10 +8,7 @@ struct HomeView: View {
     @State private var showSearchResults = false
 
     @StateObject private var viewModel = SearchViewModel()
-    
     @StateObject private var locationManager = LocationManager()
-    
-    // Add a state to manage the selected task
     @State private var selectedTask: TaskType? = nil
 
     var body: some View {
@@ -49,7 +46,6 @@ struct HomeView: View {
                     .padding(.trailing, 16)
                 }
 
-
                 if showSearchResults {
                     SearchResultsList(results: $viewModel.results, mapSelection: $viewModel.mapSelection) {
                         showSearchResults = false
@@ -71,32 +67,21 @@ struct HomeView: View {
         .onChange(of: viewModel.mapSelection) { oldValue, newValue in
             showDetails = newValue != nil
         }
-        .sheet(isPresented: $showDetails) {
-            if viewModel.mapSelection != nil {
-                LocationDetailsView(
-                    mapSelection: $viewModel.mapSelection,
-                    show: $showDetails,
-                    getDirections: $getDirections
-                )
-                .presentationDetents([.height(340)])
-                .presentationBackgroundInteraction(.enabled(upThrough: .height(340)))
-                .presentationCornerRadius(12)
-                .padding()
-            }
-        }
+        .locationDetailsSheet(
+            showDetails: $showDetails,
+            mapSelection: $viewModel.mapSelection,
+            getDirections: $getDirections
+        )
     }
-    
+
     private func handleTask(_ task: TaskType) {
-        // Handle task selection
         selectedTask = task
-        // Perform task-specific actions here
         switch task {
         case .task1:
             print("Task 1 selected")
             // Add task 1 specific logic
         case .task2:
             print("Task 2 selected")
-            // Add task 2 specific logic
         }
     }
 }

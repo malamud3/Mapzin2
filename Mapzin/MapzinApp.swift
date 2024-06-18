@@ -19,11 +19,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct MapzinApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject var coordinator = LoginCoordinator()
+//    @StateObject var coordinator = LoginCoordinator()
 
   var body: some Scene {
     WindowGroup {
-          coordinator.currentView
+//          coordinator.currentView
+        CoordinatorView()
     }
   }
 }

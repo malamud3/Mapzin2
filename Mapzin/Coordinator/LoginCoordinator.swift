@@ -8,28 +8,34 @@
 import SwiftUI
 import Combine
 
+import SwiftUI
+import Combine
+
 @MainActor
 class LoginCoordinator: ObservableObject {
-    @Published var currentView: AnyView?
-
-    private let loginViewModel: LoginViewModel
+    @Published var currentView: AnyView
+    private var loginViewModel: LoginViewModel
 
     init() {
-        loginViewModel = LoginViewModel()
+        self.loginViewModel = LoginViewModel()
+        self.currentView = AnyView(LoginView(viewModel: loginViewModel))
 
         loginViewModel.$isLoggedIn
             .sink { [weak self] isLoggedIn in
-                if isLoggedIn {
-                    self?.navigateToHome()
-                }
+                self?.handleLoginStateChange(isLoggedIn)
             }
-            .store(in: &loginViewModel.cancellables)  
-
-        currentView = AnyView(LoginView(viewModel: loginViewModel))
+            .store(in: &loginViewModel.cancellables)
     }
 
-    func navigateToHome() {
+    private func handleLoginStateChange(_ isLoggedIn: Bool) {
+        if isLoggedIn {
+            navigateToHome()
+        } else {
+            currentView = AnyView(LoginView(viewModel: loginViewModel))
+        }
+    }
+
+    private func navigateToHome() {
         currentView = AnyView(HomeView())
     }
 }
-
