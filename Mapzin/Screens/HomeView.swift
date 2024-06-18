@@ -84,6 +84,7 @@ struct HomeView: View {
             // Add task 1 specific logic
         case .task2:
             print("Task 2 selected")
+            coordinator.push(.selectBuilding)
         }
     }
 }
