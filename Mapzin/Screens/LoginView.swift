@@ -9,14 +9,6 @@ struct LoginView: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [Color.blue.opacity(0.3), Color.white]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .edgesIgnoringSafeArea(.all)
-
-            // Main content container
             VStack {
                 
                 Image("logo")
@@ -50,6 +42,7 @@ struct LoginView: View {
             .padding(.horizontal, 20)
             .background(Color.clear)
         }
+        .backgroundGradient()
         .alert(isPresented: $errorMessagePresented) {
             Alert(
                 title: Text("Error"),

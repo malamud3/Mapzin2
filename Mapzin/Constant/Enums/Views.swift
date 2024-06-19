@@ -13,6 +13,7 @@ enum AppScreenType: String , Identifiable {
     case login
     case home
     case selectBuilding
+    case ar
     
     var id: String {
         self.rawValue

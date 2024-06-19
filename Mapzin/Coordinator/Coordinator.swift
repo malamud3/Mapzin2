@@ -45,6 +45,8 @@ class Coordinator: ObservableObject {
                    HomeView().environmentObject(self) // Inject the coordinator into HomeView
                case .selectBuilding:
                    SelectBuildingView()
+               case .ar:
+                   ARView(buildingName: "Afeka")
                }
            }
            .navigationBarHidden(true) // Hide the navigation bar
