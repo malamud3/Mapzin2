@@ -8,23 +8,50 @@
 
 import SwiftUI
 
-struct SelectBuildingView: View {
-    @EnvironmentObject var coordinator: Coordinator
 
+struct SelectBuildingView: View {
+    
+    @EnvironmentObject var coordinator: Coordinator;
+    @State private var searchText = "";
+    
+    let buildings = [
+        Building(name: "Afeka", imageName: "AfekaLogo"),
+        Building(name: "Building 2", imageName: "TelAvivLogo"),
+        Building(name: "Building 3", imageName: "BGLogo")
+    ];
+    
+    var filteredBuildings: [Building] {
+        if searchText.isEmpty {
+            return buildings
+        } else {
+            return buildings.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+        }
+    };
+    
     var body: some View {
         VStack {
-            Text("Select a Building")
-                .font(.largeTitle)
-            
-            // Add your SelectBuilding content here
-            
-            Button(action: {
-//                coordinator.navigateTo(.home)
-            }) {
-                Text("Back to Home")
+            SearchBar(searchText: $searchText)
+                               .padding(.horizontal)
+                               .padding(.top, 70)
+            ScrollView {
+                LazyVStack(spacing: 16) {
+                    ForEach(filteredBuildings) { building in
+                        BuildingCardView(building: building)
+                            .onTapGesture {
+                                if(building.name == "Afeka"){
+                                    coordinator.push(.ar);
+                                }
+                               }
+                    }
+                }
+                .padding(40);
+
             }
         }
-        .padding()
-    }
+        .backgroundGradient();
+    };
 }
 
+#Preview {
+    SelectBuildingView()
+}
