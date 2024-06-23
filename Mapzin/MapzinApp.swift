@@ -7,30 +7,19 @@
 
 import SwiftUI
 import FirebaseCore
+import ARKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    return true
-  }
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        if !ARWorldTrackingConfiguration.supportsFrameSemantics(.sceneDepth){
+            print("Not support AR")
+        }
+        FirebaseApp.configure()
+        return true
+    }
 }
 
-//@main
-//struct MapzinApp: App {
-//  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-//    @State private var locationManager = LocationManager();
-//
-//  var body: some Scene {
-//    WindowGroup {
-//        if locationManager.isAuthorized{
-//            CoordinatorView();
-//        }else{
-//            Text("Need to help user");
-//        }
-//    }
-//  }
-//}
 
 @main
 struct MapzinApp: App {

@@ -4,11 +4,6 @@
 //
 //  Created by Amir Malamud on 16/06/2024.
 //
-
-import Foundation
-import SwiftUI
-
-
 import SwiftUI
 
 struct CustomTextField: View {

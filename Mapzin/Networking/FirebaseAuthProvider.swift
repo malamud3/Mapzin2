@@ -8,8 +8,6 @@ import Foundation
 import FirebaseAuth
 import Combine
 
-import Foundation
-import FirebaseAuth
 
 class FirebaseAuthProvider {
     func signIn(withEmail email: String, password: String) -> AsyncStream<Result<Void, Error>> {

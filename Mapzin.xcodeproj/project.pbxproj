@@ -9,6 +9,16 @@
 /* Begin PBXBuildFile section */
 		A91CD55B2C130DE10056DE4D /* POI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91CD55A2C130DE10056DE4D /* POI.swift */; };
 		A92BB4F72C26FF62004061D7 /* RequestLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB4F62C26FF62004061D7 /* RequestLocationView.swift */; };
+		A92BB4FB2C27F2B9004061D7 /* MeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB4FA2C27F2B9004061D7 /* MeasurementView.swift */; };
+		A92BB4FE2C27F33A004061D7 /* POIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB4FD2C27F33A004061D7 /* POIManager.swift */; };
+		A92BB5042C27F4F8004061D7 /* ReadBDMFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB5032C27F4F8004061D7 /* ReadBDMFile.swift */; };
+		A92BB5062C27F54D004061D7 /* BDMData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB5052C27F54D004061D7 /* BDMData.swift */; };
+		A92BB5082C27F6E0004061D7 /* RoomScanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB5072C27F6DF004061D7 /* RoomScanData.swift */; };
+		A92BB50A2C27F7B5004061D7 /* Primary_Bdm.scn in Resources */ = {isa = PBXBuildFile; fileRef = A92BB5092C27F7B5004061D7 /* Primary_Bdm.scn */; };
+		A92BB50C2C27F9DE004061D7 /* ARWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB50B2C27F9DE004061D7 /* ARWrapper.swift */; };
+		A92BB50E2C282BE7004061D7 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB50D2C282BE7004061D7 /* CustomButton.swift */; };
+		A92BB5122C28311A004061D7 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB5112C28311A004061D7 /* KeyboardObserver.swift */; };
+		A92BB5142C283473004061D7 /* CustomAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB5132C283473004061D7 /* CustomAlertModifier.swift */; };
 		A94488092C03522E0007A9F0 /* UserLocationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94488082C03522E0007A9F0 /* UserLocationAnnotationView.swift */; };
 		A94488102C0352E00007A9F0 /* CenterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944880F2C0352E00007A9F0 /* CenterButton.swift */; };
 		A94488172C0355A90007A9F0 /* MyLocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94488162C0355A90007A9F0 /* MyLocationExtension.swift */; };
@@ -51,8 +61,8 @@
 		A99B1F542C22D5E0002B7B32 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = A99B1F532C22D5E0002B7B32 /* SwiftUIX */; };
 		A99B1F562C22D674002B7B32 /* CardViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F552C22D674002B7B32 /* CardViewModifier.swift */; };
 		A99B1F592C22E11C002B7B32 /* MainFullScreenGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F582C22E11C002B7B32 /* MainFullScreenGradient.swift */; };
-		A99B1F5D2C22F873002B7B32 /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F5C2C22F873002B7B32 /* ARView.swift */; };
-		A9A683C32C1EF1000016455C /* KeyboardAvoider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A683C22C1EF1000016455C /* KeyboardAvoider.swift */; };
+		A99B1F5D2C22F873002B7B32 /* MyARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F5C2C22F873002B7B32 /* MyARView.swift */; };
+		A9A683C32C1EF1000016455C /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A683C22C1EF1000016455C /* KeyboardAdaptive.swift */; };
 		A9A683C52C1EF8CA0016455C /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A683C42C1EF8CA0016455C /* CustomTextField.swift */; };
 		A9A683C72C1F225E0016455C /* SelectBuilding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A683C62C1F225E0016455C /* SelectBuilding.swift */; };
 		A9A683CB2C1F26940016455C /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A683CA2C1F26940016455C /* Coordinator.swift */; };
@@ -88,6 +98,16 @@
 /* Begin PBXFileReference section */
 		A91CD55A2C130DE10056DE4D /* POI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POI.swift; sourceTree = "<group>"; };
 		A92BB4F62C26FF62004061D7 /* RequestLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLocationView.swift; sourceTree = "<group>"; };
+		A92BB4FA2C27F2B9004061D7 /* MeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementView.swift; sourceTree = "<group>"; };
+		A92BB4FD2C27F33A004061D7 /* POIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIManager.swift; sourceTree = "<group>"; };
+		A92BB5032C27F4F8004061D7 /* ReadBDMFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadBDMFile.swift; sourceTree = "<group>"; };
+		A92BB5052C27F54D004061D7 /* BDMData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDMData.swift; sourceTree = "<group>"; };
+		A92BB5072C27F6DF004061D7 /* RoomScanData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomScanData.swift; sourceTree = "<group>"; };
+		A92BB5092C27F7B5004061D7 /* Primary_Bdm.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Primary_Bdm.scn; sourceTree = "<group>"; };
+		A92BB50B2C27F9DE004061D7 /* ARWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARWrapper.swift; sourceTree = "<group>"; };
+		A92BB50D2C282BE7004061D7 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		A92BB5112C28311A004061D7 /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
+		A92BB5132C283473004061D7 /* CustomAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertModifier.swift; sourceTree = "<group>"; };
 		A94488082C03522E0007A9F0 /* UserLocationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationAnnotationView.swift; sourceTree = "<group>"; };
 		A944880F2C0352E00007A9F0 /* CenterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterButton.swift; sourceTree = "<group>"; };
 		A94488162C0355A90007A9F0 /* MyLocationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationExtension.swift; sourceTree = "<group>"; };
@@ -124,8 +144,8 @@
 		A99B1F512C22D5C8002B7B32 /* BuildingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCardView.swift; sourceTree = "<group>"; };
 		A99B1F552C22D674002B7B32 /* CardViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModifier.swift; sourceTree = "<group>"; };
 		A99B1F582C22E11C002B7B32 /* MainFullScreenGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFullScreenGradient.swift; sourceTree = "<group>"; };
-		A99B1F5C2C22F873002B7B32 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
-		A9A683C22C1EF1000016455C /* KeyboardAvoider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAvoider.swift; sourceTree = "<group>"; };
+		A99B1F5C2C22F873002B7B32 /* MyARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyARView.swift; sourceTree = "<group>"; };
+		A9A683C22C1EF1000016455C /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
 		A9A683C42C1EF8CA0016455C /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		A9A683C62C1F225E0016455C /* SelectBuilding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBuilding.swift; sourceTree = "<group>"; };
 		A9A683CA2C1F26940016455C /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -205,7 +225,8 @@
 			isa = PBXGroup;
 			children = (
 				A99B1F412C219BBE002B7B32 /* Enums */,
-				A9A683C22C1EF1000016455C /* KeyboardAvoider.swift */,
+				A9A683C22C1EF1000016455C /* KeyboardAdaptive.swift */,
+				A92BB5112C28311A004061D7 /* KeyboardObserver.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -236,6 +257,7 @@
 				A9496DB22BE381AB009F2B97 /* ErrorMessage.swift */,
 				A9496DB02BE380DE009F2B97 /* Auth */,
 				A9A683C42C1EF8CA0016455C /* CustomTextField.swift */,
+				A92BB50D2C282BE7004061D7 /* CustomButton.swift */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -249,6 +271,7 @@
 				A94488042C0351410007A9F0 /* MapView */,
 				A99B1F512C22D5C8002B7B32 /* BuildingCardView.swift */,
 				A92BB4F62C26FF62004061D7 /* RequestLocationView.swift */,
+				A92BB4FA2C27F2B9004061D7 /* MeasurementView.swift */,
 			);
 			name = Views;
 			path = Screens/MainScreen/Views;
@@ -258,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				A97A7B1A2C0D8E3600DA4619 /* Logger.swift */,
+				A92BB5092C27F7B5004061D7 /* Primary_Bdm.scn */,
 				A97563E02BA6DA43002B08AD /* Mapzin */,
 				A97563F12BA6DA44002B08AD /* MapzinTests */,
 				A97563FB2BA6DA44002B08AD /* MapzinUITests */,
@@ -284,7 +308,6 @@
 				A94488112C0352F70007A9F0 /* Extensions */,
 				A9496DB92BE383DB009F2B97 /* Views */,
 				A9496DA82BE36F00009F2B97 /* Info.plist */,
-				A9916A592BE337C500427095 /* Protocols */,
 				A9916A582BE337A000427095 /* Networking */,
 				A9916A572BE3371000427095 /* Coordinator */,
 				A9916A562BE3370100427095 /* ViewModel */,
@@ -332,6 +355,8 @@
 				A9E8C5652C084522004CFBBA /* Location.swift */,
 				A91CD55A2C130DE10056DE4D /* POI.swift */,
 				A99B1F4C2C22D34B002B7B32 /* Building.swift */,
+				A92BB5052C27F54D004061D7 /* BDMData.swift */,
+				A92BB5072C27F6DF004061D7 /* RoomScanData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -342,7 +367,7 @@
 				A97563E32BA6DA43002B08AD /* HomeView.swift */,
 				A9916A802BE3635F00427095 /* LoginView.swift */,
 				A9A683C62C1F225E0016455C /* SelectBuilding.swift */,
-				A99B1F5C2C22F873002B7B32 /* ARView.swift */,
+				A99B1F5C2C22F873002B7B32 /* MyARView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -357,10 +382,13 @@
 		A9916A562BE3370100427095 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A92BB5032C27F4F8004061D7 /* ReadBDMFile.swift */,
 				A9C4AC922C0210A9000C4D3E /* SearchViewModel.swift */,
 				A9916A852BE36BB800427095 /* LocationManager.swift */,
 				A9916A7C2BE362DE00427095 /* LoginViewModel.swift */,
 				A99B1F4E2C22D37B002B7B32 /* BuildingViewModel.swift */,
+				A92BB4FD2C27F33A004061D7 /* POIManager.swift */,
+				A92BB50B2C27F9DE004061D7 /* ARWrapper.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -384,13 +412,6 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		A9916A592BE337C500427095 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		A99B1F412C219BBE002B7B32 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -410,20 +431,13 @@
 		A99B1F4B2C21B4D8002B7B32 /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
-				A99B1F572C22E0D7002B7B32 /* ScreenBackground */,
+				A99B1F582C22E11C002B7B32 /* MainFullScreenGradient.swift */,
+				A99B1F552C22D674002B7B32 /* CardViewModifier.swift */,
+				A92BB5132C283473004061D7 /* CustomAlertModifier.swift */,
 				A99B1F462C21A681002B7B32 /* Sheets */,
 				A99B1F492C21B4D4002B7B32 /* TransparentNavBar.swift */,
-				A99B1F552C22D674002B7B32 /* CardViewModifier.swift */,
 			);
 			path = Modifiers;
-			sourceTree = "<group>";
-		};
-		A99B1F572C22E0D7002B7B32 /* ScreenBackground */ = {
-			isa = PBXGroup;
-			children = (
-				A99B1F582C22E11C002B7B32 /* MainFullScreenGradient.swift */,
-			);
-			path = ScreenBackground;
 			sourceTree = "<group>";
 		};
 		A9C4AC7F2C01FC71000C4D3E /* LocationDetailsView */ = {
@@ -568,6 +582,7 @@
 				A97563E92BA6DA44002B08AD /* Preview Assets.xcassets in Resources */,
 				A97563E62BA6DA44002B08AD /* Assets.xcassets in Resources */,
 				A9916A7A2BE361F600427095 /* GoogleService-Info.plist in Resources */,
+				A92BB50A2C27F7B5004061D7 /* Primary_Bdm.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,17 +609,23 @@
 			files = (
 				A91CD55B2C130DE10056DE4D /* POI.swift in Sources */,
 				A99B1F452C21A494002B7B32 /* CoordinatorView.swift in Sources */,
+				A92BB5142C283473004061D7 /* CustomAlertModifier.swift in Sources */,
 				A9C4AC932C0210A9000C4D3E /* SearchViewModel.swift in Sources */,
+				A92BB5042C27F4F8004061D7 /* ReadBDMFile.swift in Sources */,
+				A92BB50E2C282BE7004061D7 /* CustomButton.swift in Sources */,
 				A9916A5D2BE3462A00427095 /* User.swift in Sources */,
 				A94488102C0352E00007A9F0 /* CenterButton.swift in Sources */,
 				A9496DB52BE381D0009F2B97 /* LoginButton.swift in Sources */,
 				A97A7B1B2C0D8E3600DA4619 /* Logger.swift in Sources */,
 				A94488172C0355A90007A9F0 /* MyLocationExtension.swift in Sources */,
+				A92BB4FE2C27F33A004061D7 /* POIManager.swift in Sources */,
 				A92BB4F72C26FF62004061D7 /* RequestLocationView.swift in Sources */,
 				A97563E42BA6DA43002B08AD /* HomeView.swift in Sources */,
+				A92BB5062C27F54D004061D7 /* BDMData.swift in Sources */,
 				A9C4AC832C01FD06000C4D3E /* LookAroundPreviewView.swift in Sources */,
 				A9E8C5662C084522004CFBBA /* Location.swift in Sources */,
 				A9496DB32BE381AB009F2B97 /* ErrorMessage.swift in Sources */,
+				A92BB4FB2C27F2B9004061D7 /* MeasurementView.swift in Sources */,
 				A9496DAF2BE380BD009F2B97 /* DataFields.swift in Sources */,
 				A9916A7F2BE3632400427095 /* LoginCoordinator.swift in Sources */,
 				A99B1F522C22D5C8002B7B32 /* BuildingCardView.swift in Sources */,
@@ -613,13 +634,16 @@
 				A9A683C72C1F225E0016455C /* SelectBuilding.swift in Sources */,
 				A9A683C52C1EF8CA0016455C /* CustomTextField.swift in Sources */,
 				A9916A7D2BE362DE00427095 /* LoginViewModel.swift in Sources */,
+				A92BB5082C27F6E0004061D7 /* RoomScanData.swift in Sources */,
 				A9916A5B2BE345F000427095 /* AuthMethod.swift in Sources */,
 				A94488092C03522E0007A9F0 /* UserLocationAnnotationView.swift in Sources */,
-				A9A683C32C1EF1000016455C /* KeyboardAvoider.swift in Sources */,
-				A99B1F5D2C22F873002B7B32 /* ARView.swift in Sources */,
+				A9A683C32C1EF1000016455C /* KeyboardAdaptive.swift in Sources */,
+				A99B1F5D2C22F873002B7B32 /* MyARView.swift in Sources */,
+				A92BB5122C28311A004061D7 /* KeyboardObserver.swift in Sources */,
 				A9E8C5692C08478B004CFBBA /* FirebaseAuthProvider.swift in Sources */,
 				A9C4AC8F2C020701000C4D3E /* SearchResultsList.swift in Sources */,
 				A99B1F4F2C22D37B002B7B32 /* BuildingViewModel.swift in Sources */,
+				A92BB50C2C27F9DE004061D7 /* ARWrapper.swift in Sources */,
 				A99B1F432C219BE8002B7B32 /* Views.swift in Sources */,
 				A9916A832BE36B8000427095 /* UserLocation.swift in Sources */,
 				A9C4AC852C01FD5E000C4D3E /* ActionButtons.swift in Sources */,

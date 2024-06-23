@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 
-@MainActor
 class LoginViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
@@ -23,26 +22,34 @@ class LoginViewModel: ObservableObject {
     }
 
     func login() {
-        Task {
+        Task(priority: .userInitiated) {
             for await result in authProvider.signIn(withEmail: email, password: password) {
                 switch result {
                 case .failure(let error):
-                    errorMessage = error.localizedDescription
+                    DispatchQueue.main.async {
+                        self.errorMessage = error.localizedDescription
+                    }
                 case .success:
-                    isLoggedIn = true
+                    DispatchQueue.main.async {
+                        self.isLoggedIn = true
+                    }
                 }
             }
         }
     }
 
     func signUp() {
-        Task {
+        Task(priority: .userInitiated) {
             for await result in authProvider.createUser(withEmail: email, password: password) {
                 switch result {
                 case .failure(let error):
-                    errorMessage = error.localizedDescription
+                    DispatchQueue.main.async {
+                        self.errorMessage = error.localizedDescription
+                    }
                 case .success:
-                    isLoggedIn = true
+                    DispatchQueue.main.async {
+                        self.isLoggedIn = true
+                    }
                 }
             }
         }

@@ -11,26 +11,16 @@ struct SignUpButton: View {
     let action: () -> Void
     
     var body: some View {
-        Button(action: action) {
-            Text("Sign Up")
-                .font(.headline)
-                .foregroundColor(Color.blue)
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(Color.white)
-                .cornerRadius(10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(
-                            LinearGradient(
-                                gradient: Gradient(colors: [Color.blue, Color.purple]),
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            ),
-                            lineWidth: 2
-                        )
-                )
-                .shadow(color: Color.gray.opacity(0.3), radius: 5, x: 0, y: 2)
-        }
+        CustomButton(
+            title: "Sign Up",
+            titleColor: Color.blue,
+            backgroundColor: LinearGradient(colors: [Color.white, Color.white], startPoint: .leading, endPoint: .trailing),
+            borderColor: LinearGradient(
+                gradient: Gradient(colors: [Color.blue, Color.purple]),
+                startPoint: .leading,
+                endPoint: .trailing
+            ),
+            action: action
+        )
     }
 }

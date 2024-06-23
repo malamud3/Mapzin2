@@ -34,31 +34,39 @@ class Coordinator: ObservableObject {
         self.sheet = nil;
     }
     
+    @ViewBuilder
     @MainActor
-       @ViewBuilder
-       func build(screen: AppScreenType) -> some View {
-           NavigationView {
-               switch screen {
-               case .login:
-                   LoginView(viewModel: LoginViewModel())
-               case .home:
-                   HomeView().environmentObject(self)
-               case .selectBuilding:
-                   SelectBuildingView()
-               case .ar:
-                   ARView(buildingName: "Afeka")
-               }
-           }
-           .navigationBarHidden(true) // Hide the navigation bar
-       }
+    func build(screen: AppScreenType) -> some View {
+        NavigationView {
+            switch screen {
+            case .login:
+                LoginView(viewModel: LoginViewModel())
+            case .home:
+                HomeView()
+                    .environmentObject(self)
+            case .selectBuilding:
+                SelectBuildingView()
+            case .ar:
+                MyARView(buildingName: "Afeka")
+//                    .onAppear {
+//                        let arWrapper = ARWrapper()
+//                        let bdmFilePath = "Primary_Bdm"
+//                        arWrapper.placeObjectsFromBDM(filePath: bdmFilePath)
+//                    }
+                    .edgesIgnoringSafeArea(.all)
+                
+            }
+        }
+       // Hide the navigation bar
+    }
     
-//    @ViewBuilder
-//    func build( sheet: SheetType ) -> some View {
-//        switch sheet {
-//            case .poiData:
-//            
-//        }
-//    }
+    //    @ViewBuilder
+    //    func build( sheet: SheetType ) -> some View {
+    //        switch sheet {
+    //            case .poiData:
+    //
+    //        }
+    //    }
 }
 
 
