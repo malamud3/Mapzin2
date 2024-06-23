@@ -5,12 +5,15 @@
 //  Created by Amir Malamud on 02/05/2024.
 //
 
-import SwiftUI
-import Combine
+
+
 
 import SwiftUI
 import Combine
 
+// MARK: - Deprecated
+
+@available(*, deprecated, message: "Use new Coordinator Method instead")
 @MainActor
 class LoginCoordinator: ObservableObject {
     @Published var currentView: AnyView
@@ -39,3 +42,4 @@ class LoginCoordinator: ObservableObject {
         currentView = AnyView(HomeView())
     }
 }
+

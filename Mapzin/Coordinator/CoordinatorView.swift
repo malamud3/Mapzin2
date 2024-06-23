@@ -11,14 +11,21 @@ struct CoordinatorView: View {
     
     
     @StateObject private var coordinator = Coordinator()
-    
+    @StateObject private var locationManager = LocationManager()
+
     var body: some View {
         
         NavigationStack(path: $coordinator.path) {
             
             coordinator.build(screen : .login)
                 .navigationDestination(for: AppScreenType.self) { screen in
-                    coordinator.build(screen: screen)
+                    if locationManager.authorizationStatus == .notDetermined {
+                        Text("Determining location authorization status...")
+                    }else if locationManager.isAuthorized {
+                        coordinator.build(screen: screen)
+                    }else {
+                        Text("Location access is required to use this app. Please enable it in Settings.")
+                    }
                 }
 //                .sheet(isPresented: $coordinator, content: { sheet in
 //                    coordinator.build(sheet: sheet)
@@ -26,9 +33,13 @@ struct CoordinatorView: View {
 
         }
         .navigationBarHidden(true)
-        .environmentObject(coordinator);
+        .environmentObject(coordinator)
+        .environmentObject(locationManager)
+
+        
     }
 }
+
 extension UINavigationController {
   open override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationUsageDescription</key>
+	<string>We need your location to provide GPS tracking functionality.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>ARKit requires access to your camera to enable augmented reality experiences.
 ARKit requires access to your camera to enable augmented reality experiences.</string>

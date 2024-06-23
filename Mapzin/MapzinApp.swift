@@ -16,15 +16,29 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   }
 }
 
+//@main
+//struct MapzinApp: App {
+//  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+//    @State private var locationManager = LocationManager();
+//
+//  var body: some Scene {
+//    WindowGroup {
+//        if locationManager.isAuthorized{
+//            CoordinatorView();
+//        }else{
+//            Text("Need to help user");
+//        }
+//    }
+//  }
+//}
+
 @main
 struct MapzinApp: App {
-  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-//    @StateObject var coordinator = LoginCoordinator()
-
-  var body: some Scene {
-    WindowGroup {
-//          coordinator.currentView
-        CoordinatorView()
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+    var body: some Scene {
+        WindowGroup {
+            CoordinatorView()
+        }
     }
-  }
 }

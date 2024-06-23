@@ -42,7 +42,7 @@ class Coordinator: ObservableObject {
                case .login:
                    LoginView(viewModel: LoginViewModel())
                case .home:
-                   HomeView().environmentObject(self) // Inject the coordinator into HomeView
+                   HomeView().environmentObject(self)
                case .selectBuilding:
                    SelectBuildingView()
                case .ar:
