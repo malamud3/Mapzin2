@@ -7,15 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A907C1E52C285CC700F8802B /* ModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907C1E42C285CC700F8802B /* ModelType.swift */; };
+		A907C1E72C285D1300F8802B /* FloorDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907C1E62C285D1300F8802B /* FloorDetector.swift */; };
+		A907C1E92C285D3A00F8802B /* ARSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907C1E82C285D3A00F8802B /* ARSceneCoordinator.swift */; };
+		A907C1EB2C285D6B00F8802B /* ARSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907C1EA2C285D6B00F8802B /* ARSceneView.swift */; };
+		A907C1F02C287A9F00F8802B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907C1EF2C287A9F00F8802B /* WelcomeView.swift */; };
+		A907C1F22C287BB900F8802B /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907C1F12C287BB900F8802B /* SignUpView.swift */; };
 		A91CD55B2C130DE10056DE4D /* POI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91CD55A2C130DE10056DE4D /* POI.swift */; };
 		A92BB4F72C26FF62004061D7 /* RequestLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB4F62C26FF62004061D7 /* RequestLocationView.swift */; };
-		A92BB4FB2C27F2B9004061D7 /* MeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB4FA2C27F2B9004061D7 /* MeasurementView.swift */; };
 		A92BB4FE2C27F33A004061D7 /* POIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB4FD2C27F33A004061D7 /* POIManager.swift */; };
 		A92BB5042C27F4F8004061D7 /* ReadBDMFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB5032C27F4F8004061D7 /* ReadBDMFile.swift */; };
 		A92BB5062C27F54D004061D7 /* BDMData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB5052C27F54D004061D7 /* BDMData.swift */; };
 		A92BB5082C27F6E0004061D7 /* RoomScanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB5072C27F6DF004061D7 /* RoomScanData.swift */; };
-		A92BB50A2C27F7B5004061D7 /* Primary_Bdm.scn in Resources */ = {isa = PBXBuildFile; fileRef = A92BB5092C27F7B5004061D7 /* Primary_Bdm.scn */; };
-		A92BB50C2C27F9DE004061D7 /* ARWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB50B2C27F9DE004061D7 /* ARWrapper.swift */; };
 		A92BB50E2C282BE7004061D7 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB50D2C282BE7004061D7 /* CustomButton.swift */; };
 		A92BB5122C28311A004061D7 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB5112C28311A004061D7 /* KeyboardObserver.swift */; };
 		A92BB5142C283473004061D7 /* CustomAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB5132C283473004061D7 /* CustomAlertModifier.swift */; };
@@ -47,7 +50,6 @@
 		A9916A742BE35E6700427095 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A9916A732BE35E6700427095 /* FirebaseStorage */; };
 		A9916A7A2BE361F600427095 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9916A792BE361F600427095 /* GoogleService-Info.plist */; };
 		A9916A7D2BE362DE00427095 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9916A7C2BE362DE00427095 /* LoginViewModel.swift */; };
-		A9916A7F2BE3632400427095 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9916A7E2BE3632400427095 /* LoginCoordinator.swift */; };
 		A9916A812BE3635F00427095 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9916A802BE3635F00427095 /* LoginView.swift */; };
 		A9916A832BE36B8000427095 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9916A822BE36B8000427095 /* UserLocation.swift */; };
 		A9916A862BE36BB800427095 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9916A852BE36BB800427095 /* LocationManager.swift */; };
@@ -66,6 +68,7 @@
 		A9A683C52C1EF8CA0016455C /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A683C42C1EF8CA0016455C /* CustomTextField.swift */; };
 		A9A683C72C1F225E0016455C /* SelectBuilding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A683C62C1F225E0016455C /* SelectBuilding.swift */; };
 		A9A683CB2C1F26940016455C /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A683CA2C1F26940016455C /* Coordinator.swift */; };
+		A9AB313D2C2E9D63003CD177 /* Primary_bdm.scn in Resources */ = {isa = PBXBuildFile; fileRef = A9AB313C2C2E9D63003CD177 /* Primary_bdm.scn */; };
 		A9C4AC812C01FCDC000C4D3E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4AC802C01FCDC000C4D3E /* HeaderView.swift */; };
 		A9C4AC832C01FD06000C4D3E /* LookAroundPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4AC822C01FD06000C4D3E /* LookAroundPreviewView.swift */; };
 		A9C4AC852C01FD5E000C4D3E /* ActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4AC842C01FD5E000C4D3E /* ActionButtons.swift */; };
@@ -96,15 +99,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A907C1E42C285CC700F8802B /* ModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelType.swift; sourceTree = "<group>"; };
+		A907C1E62C285D1300F8802B /* FloorDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorDetector.swift; sourceTree = "<group>"; };
+		A907C1E82C285D3A00F8802B /* ARSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneCoordinator.swift; sourceTree = "<group>"; };
+		A907C1EA2C285D6B00F8802B /* ARSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneView.swift; sourceTree = "<group>"; };
+		A907C1EF2C287A9F00F8802B /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		A907C1F12C287BB900F8802B /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		A91CD55A2C130DE10056DE4D /* POI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POI.swift; sourceTree = "<group>"; };
 		A92BB4F62C26FF62004061D7 /* RequestLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLocationView.swift; sourceTree = "<group>"; };
-		A92BB4FA2C27F2B9004061D7 /* MeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementView.swift; sourceTree = "<group>"; };
 		A92BB4FD2C27F33A004061D7 /* POIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIManager.swift; sourceTree = "<group>"; };
 		A92BB5032C27F4F8004061D7 /* ReadBDMFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadBDMFile.swift; sourceTree = "<group>"; };
 		A92BB5052C27F54D004061D7 /* BDMData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDMData.swift; sourceTree = "<group>"; };
 		A92BB5072C27F6DF004061D7 /* RoomScanData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomScanData.swift; sourceTree = "<group>"; };
-		A92BB5092C27F7B5004061D7 /* Primary_Bdm.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Primary_Bdm.scn; sourceTree = "<group>"; };
-		A92BB50B2C27F9DE004061D7 /* ARWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARWrapper.swift; sourceTree = "<group>"; };
 		A92BB50D2C282BE7004061D7 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		A92BB5112C28311A004061D7 /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		A92BB5132C283473004061D7 /* CustomAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertModifier.swift; sourceTree = "<group>"; };
@@ -131,7 +137,6 @@
 		A9916A5C2BE3462A00427095 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A9916A792BE361F600427095 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A9916A7C2BE362DE00427095 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		A9916A7E2BE3632400427095 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		A9916A802BE3635F00427095 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A9916A822BE36B8000427095 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		A9916A852BE36BB800427095 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -149,6 +154,7 @@
 		A9A683C42C1EF8CA0016455C /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		A9A683C62C1F225E0016455C /* SelectBuilding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBuilding.swift; sourceTree = "<group>"; };
 		A9A683CA2C1F26940016455C /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		A9AB313C2C2E9D63003CD177 /* Primary_bdm.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Primary_bdm.scn; sourceTree = "<group>"; };
 		A9C4AC802C01FCDC000C4D3E /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		A9C4AC822C01FD06000C4D3E /* LookAroundPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookAroundPreviewView.swift; sourceTree = "<group>"; };
 		A9C4AC842C01FD5E000C4D3E /* ActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtons.swift; sourceTree = "<group>"; };
@@ -201,6 +207,25 @@
 			children = (
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		A907C1EC2C287A5C00F8802B /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				A9916A802BE3635F00427095 /* LoginView.swift */,
+				A907C1EF2C287A9F00F8802B /* WelcomeView.swift */,
+				A907C1F12C287BB900F8802B /* SignUpView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		A907C1ED2C287A6F00F8802B /* AR */ = {
+			isa = PBXGroup;
+			children = (
+				A99B1F5C2C22F873002B7B32 /* MyARView.swift */,
+				A907C1EA2C285D6B00F8802B /* ARSceneView.swift */,
+			);
+			path = AR;
 			sourceTree = "<group>";
 		};
 		A94488042C0351410007A9F0 /* MapView */ = {
@@ -271,7 +296,6 @@
 				A94488042C0351410007A9F0 /* MapView */,
 				A99B1F512C22D5C8002B7B32 /* BuildingCardView.swift */,
 				A92BB4F62C26FF62004061D7 /* RequestLocationView.swift */,
-				A92BB4FA2C27F2B9004061D7 /* MeasurementView.swift */,
 			);
 			name = Views;
 			path = Screens/MainScreen/Views;
@@ -281,7 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				A97A7B1A2C0D8E3600DA4619 /* Logger.swift */,
-				A92BB5092C27F7B5004061D7 /* Primary_Bdm.scn */,
+				A9AB313C2C2E9D63003CD177 /* Primary_bdm.scn */,
 				A97563E02BA6DA43002B08AD /* Mapzin */,
 				A97563F12BA6DA44002B08AD /* MapzinTests */,
 				A97563FB2BA6DA44002B08AD /* MapzinUITests */,
@@ -364,10 +388,10 @@
 		A975640C2BA6DB9C002B08AD /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				A907C1ED2C287A6F00F8802B /* AR */,
+				A907C1EC2C287A5C00F8802B /* Auth */,
 				A97563E32BA6DA43002B08AD /* HomeView.swift */,
-				A9916A802BE3635F00427095 /* LoginView.swift */,
 				A9A683C62C1F225E0016455C /* SelectBuilding.swift */,
-				A99B1F5C2C22F873002B7B32 /* MyARView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -388,7 +412,7 @@
 				A9916A7C2BE362DE00427095 /* LoginViewModel.swift */,
 				A99B1F4E2C22D37B002B7B32 /* BuildingViewModel.swift */,
 				A92BB4FD2C27F33A004061D7 /* POIManager.swift */,
-				A92BB50B2C27F9DE004061D7 /* ARWrapper.swift */,
+				A907C1E62C285D1300F8802B /* FloorDetector.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -396,9 +420,9 @@
 		A9916A572BE3371000427095 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				A9916A7E2BE3632400427095 /* LoginCoordinator.swift */,
 				A9A683CA2C1F26940016455C /* Coordinator.swift */,
 				A99B1F442C21A494002B7B32 /* CoordinatorView.swift */,
+				A907C1E82C285D3A00F8802B /* ARSceneCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -416,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				A99B1F422C219BE8002B7B32 /* Views.swift */,
+				A907C1E42C285CC700F8802B /* ModelType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -580,9 +605,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A97563E92BA6DA44002B08AD /* Preview Assets.xcassets in Resources */,
+				A9AB313D2C2E9D63003CD177 /* Primary_bdm.scn in Resources */,
 				A97563E62BA6DA44002B08AD /* Assets.xcassets in Resources */,
 				A9916A7A2BE361F600427095 /* GoogleService-Info.plist in Resources */,
-				A92BB50A2C27F7B5004061D7 /* Primary_Bdm.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,16 +650,16 @@
 				A9C4AC832C01FD06000C4D3E /* LookAroundPreviewView.swift in Sources */,
 				A9E8C5662C084522004CFBBA /* Location.swift in Sources */,
 				A9496DB32BE381AB009F2B97 /* ErrorMessage.swift in Sources */,
-				A92BB4FB2C27F2B9004061D7 /* MeasurementView.swift in Sources */,
 				A9496DAF2BE380BD009F2B97 /* DataFields.swift in Sources */,
-				A9916A7F2BE3632400427095 /* LoginCoordinator.swift in Sources */,
 				A99B1F522C22D5C8002B7B32 /* BuildingCardView.swift in Sources */,
 				A9496DB72BE381FF009F2B97 /* SignUpButton.swift in Sources */,
 				A99B1F4A2C21B4D4002B7B32 /* TransparentNavBar.swift in Sources */,
+				A907C1E72C285D1300F8802B /* FloorDetector.swift in Sources */,
 				A9A683C72C1F225E0016455C /* SelectBuilding.swift in Sources */,
 				A9A683C52C1EF8CA0016455C /* CustomTextField.swift in Sources */,
 				A9916A7D2BE362DE00427095 /* LoginViewModel.swift in Sources */,
 				A92BB5082C27F6E0004061D7 /* RoomScanData.swift in Sources */,
+				A907C1E52C285CC700F8802B /* ModelType.swift in Sources */,
 				A9916A5B2BE345F000427095 /* AuthMethod.swift in Sources */,
 				A94488092C03522E0007A9F0 /* UserLocationAnnotationView.swift in Sources */,
 				A9A683C32C1EF1000016455C /* KeyboardAdaptive.swift in Sources */,
@@ -642,8 +667,9 @@
 				A92BB5122C28311A004061D7 /* KeyboardObserver.swift in Sources */,
 				A9E8C5692C08478B004CFBBA /* FirebaseAuthProvider.swift in Sources */,
 				A9C4AC8F2C020701000C4D3E /* SearchResultsList.swift in Sources */,
+				A907C1E92C285D3A00F8802B /* ARSceneCoordinator.swift in Sources */,
 				A99B1F4F2C22D37B002B7B32 /* BuildingViewModel.swift in Sources */,
-				A92BB50C2C27F9DE004061D7 /* ARWrapper.swift in Sources */,
+				A907C1EB2C285D6B00F8802B /* ARSceneView.swift in Sources */,
 				A99B1F432C219BE8002B7B32 /* Views.swift in Sources */,
 				A9916A832BE36B8000427095 /* UserLocation.swift in Sources */,
 				A9C4AC852C01FD5E000C4D3E /* ActionButtons.swift in Sources */,
@@ -655,7 +681,9 @@
 				A9916A812BE3635F00427095 /* LoginView.swift in Sources */,
 				A9C4AC892C01FE08000C4D3E /* SearchBar.swift in Sources */,
 				A9A683CB2C1F26940016455C /* Coordinator.swift in Sources */,
+				A907C1F02C287A9F00F8802B /* WelcomeView.swift in Sources */,
 				A99B1F592C22E11C002B7B32 /* MainFullScreenGradient.swift in Sources */,
+				A907C1F22C287BB900F8802B /* SignUpView.swift in Sources */,
 				A99B1F562C22D674002B7B32 /* CardViewModifier.swift in Sources */,
 				A99B1F4D2C22D34B002B7B32 /* Building.swift in Sources */,
 				A9C4AC812C01FCDC000C4D3E /* HeaderView.swift in Sources */,

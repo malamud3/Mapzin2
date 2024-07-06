@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import ARKit
+
 
 class Coordinator: ObservableObject {
     
@@ -39,6 +41,11 @@ class Coordinator: ObservableObject {
     func build(screen: AppScreenType) -> some View {
         NavigationView {
             switch screen {
+                
+            case .welcome:
+                WelcomeView()
+            case .signUp:
+                SignUpView(viewModel: LoginViewModel())
             case .login:
                 LoginView(viewModel: LoginViewModel())
             case .home:
@@ -48,16 +55,11 @@ class Coordinator: ObservableObject {
                 SelectBuildingView()
             case .ar:
                 MyARView(buildingName: "Afeka")
-//                    .onAppear {
-//                        let arWrapper = ARWrapper()
-//                        let bdmFilePath = "Primary_Bdm"
-//                        arWrapper.placeObjectsFromBDM(filePath: bdmFilePath)
-//                    }
                     .edgesIgnoringSafeArea(.all)
                 
             }
         }
-       // Hide the navigation bar
+        // Hide the navigation bar
     }
     
     //    @ViewBuilder

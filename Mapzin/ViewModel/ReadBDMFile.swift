@@ -6,24 +6,21 @@
 //
 
 import Foundation
+import simd
 
-struct BdmManagerData {
-    
-    func readBDMFile(filePath: String) -> RoomScanData? {
-        let fileManager = FileManager.default
-        guard fileManager.fileExists(atPath: filePath) else {
-            print("File not found: \(filePath)")
-            return nil
+class BDMParser {
+    func parse(filePath: String) -> [simd_float4x4]? {
+        var transforms = [simd_float4x4]()
+        
+        // Read the BDM file and extract transformation matrices
+        if let data = try? Data(contentsOf: URL(fileURLWithPath: filePath)) {
+            let count = data.count / MemoryLayout<simd_float4x4>.size
+            transforms = data.withUnsafeBytes { (pointer: UnsafeRawBufferPointer) -> [simd_float4x4] in
+                let bufferPointer = pointer.bindMemory(to: simd_float4x4.self)
+                return Array(bufferPointer.prefix(count))
+            }
         }
         
-        do {
-            let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
-            let decoder = JSONDecoder() // Example assuming BDM is JSON format
-            let roomScanData = try decoder.decode(RoomScanData.self, from: data)
-            return roomScanData
-        } catch {
-            print("Error reading or parsing BDM file: \(error)")
-            return nil
-        }
+        return transforms
     }
 }

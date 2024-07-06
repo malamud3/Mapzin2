@@ -32,7 +32,6 @@ struct ActionButtons: View {
                     .cornerRadius(12)
             }
             .accessibilityLabel("Get Directions")
-            .padding(.trailing)
         }
         .padding([.horizontal, .bottom])
     }

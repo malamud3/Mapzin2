@@ -2,14 +2,14 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @EnvironmentObject private var coordinator: Coordinator;
-    @State private var showDetails = false;
-    @State private var getDirections = false;
-    @State private var showSearchResults = false;
+    @EnvironmentObject private var coordinator: Coordinator
+    @State private var showDetails = false
+    @State private var getDirections = false
+    @State private var showSearchResults = false
 
-    @StateObject private var viewModel = SearchViewModel();
-    @State private var selectedTask: TaskType? = nil;
-
+    @StateObject private var viewModel = SearchViewModel()
+    @State private var selectedTask: TaskType? = nil
+    
     var body: some View {
         ZStack(alignment: .top) {
             MapView(

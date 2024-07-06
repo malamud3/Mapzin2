@@ -27,7 +27,6 @@ struct LocationDetailsView: View {
                 .fill(Color(.systemBackground))
                 .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
         )
-        .padding()
         .onAppear {
             fetchLookAroundPreview()
         }
@@ -65,5 +64,6 @@ struct LocationDetailsView: View {
 }
 
 #Preview {
-    LocationDetailsView(mapSelection: .constant(nil), show: .constant(false), getDirections: .constant(true))
+    LocationDetailsView(mapSelection: .constant(nil), 
+                        show: .constant(false), getDirections: .constant(true))
 }
