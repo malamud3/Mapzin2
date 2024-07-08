@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
-import SwiftUI
 
 struct BuildingCardView: View {
     let building: BuildingT
