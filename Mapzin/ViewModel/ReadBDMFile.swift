@@ -12,7 +12,6 @@ class BDMParser {
     func parse(filePath: String) -> [simd_float4x4]? {
         var transforms = [simd_float4x4]()
         
-        // Read the BDM file and extract transformation matrices
         if let data = try? Data(contentsOf: URL(fileURLWithPath: filePath)) {
             let count = data.count / MemoryLayout<simd_float4x4>.size
             transforms = data.withUnsafeBytes { (pointer: UnsafeRawBufferPointer) -> [simd_float4x4] in

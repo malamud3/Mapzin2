@@ -12,7 +12,7 @@ import SwiftUI
 import SwiftUI
 
 struct BuildingCardView: View {
-    let building: Building
+    let building: BuildingT
 
     var body: some View {
         HStack(spacing: 10) {
@@ -34,14 +34,3 @@ struct BuildingCardView: View {
         .shadow(radius: 5)
     }
 }
-
-struct BuildingCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        let building = Building(name: "Building 1", imageName: "building1")
-        BuildingCardView(building: building)
-            .previewLayout(.sizeThatFits)
-            .padding()
-    }
-}
-
-

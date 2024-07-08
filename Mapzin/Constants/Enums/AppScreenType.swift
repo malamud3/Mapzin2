@@ -5,8 +5,6 @@
 //  Created by Amir Malamud on 18/06/2024.
 //
 
-import Foundation
-
 
 enum AppScreenType: String , Identifiable {
     
@@ -18,13 +16,6 @@ enum AppScreenType: String , Identifiable {
     case ar
     
     
-    var id: String {
-        self.rawValue
-    }
-}
-
-enum SheetType: String, Identifiable {
-   case poiData
     var id: String {
         self.rawValue
     }

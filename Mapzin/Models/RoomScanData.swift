@@ -18,9 +18,3 @@ struct Object: Codable {
     let name: String
     let position: Position
 }
-
-struct Position: Codable {
-    let x: Float
-    let y: Float
-    let z: Float
-}

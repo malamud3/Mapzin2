@@ -7,6 +7,7 @@
 
 import ARKit
 import SwiftUI
+
 struct ARSceneView: UIViewRepresentable {
     @EnvironmentObject var mainCoordinator: Coordinator
     let sceneView = ARSCNView()
@@ -15,7 +16,7 @@ struct ARSceneView: UIViewRepresentable {
     var bdmFilePath: String? // Path to the BDM file
     
     func makeCoordinator() -> ARSceneCoordinator {
-        ARSceneCoordinator(parent: self, parser: BDMParser(), floorDetector: FloorDetector())
+        ARSceneCoordinator(parent: self, parser: BDMParser(), floorDetector: FloorDetector(), stepCounterService: StepCounterService())
     }
     
     func makeUIView(context: Context) -> ARSCNView {
@@ -24,6 +25,7 @@ struct ARSceneView: UIViewRepresentable {
         
         // Configure AR session
         let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
         sceneView.session.run(configuration)
         
         // Add tap gesture recognizer
