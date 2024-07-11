@@ -49,15 +49,15 @@ import ARKit
 
 struct MyARView: UIViewRepresentable {
     @EnvironmentObject var coordinator: Coordinator
-
+    @StateObject var arViewModel = ARViewModel()
     func makeUIView(context: Context) -> ARSCNView {
         let arView = ARSCNView()
         
         // Setup ARView using coordinator
-        context.coordinator.setupARView(arView)
+        arViewModel.setupARView(arView)
         
         // Add tap gesture recognizer
-        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.handleTap(_:)))
+        let tapGesture = UITapGestureRecognizer(target: arViewModel, action: #selector(arViewModel.handleTap(_:)))
         arView.addGestureRecognizer(tapGesture)
         
         return arView

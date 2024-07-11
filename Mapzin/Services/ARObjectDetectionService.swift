@@ -1,0 +1,55 @@
+//
+//  ARObjectDetectionService.swift
+//  Mapzin
+//
+//  Created by Amir Malamud on 11/07/2024.
+//
+
+import ARKit
+
+class ARObjectDetectionService {
+    func addBoxNode(to arView: ARSCNView) {
+        let boxNode = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
+        boxNode.position = SCNVector3(0, 0, -0.5) // Place the box 0.5 meters in front of the camera
+        boxNode.name = "boxNode"
+        arView.scene.rootNode.addChildNode(boxNode)
+    }
+
+    func getBoxNode(from session: ARSession) -> SCNNode? {
+        guard let arView = session.delegate as? ARSCNView else { return nil }
+        return arView.scene.rootNode.childNode(withName: "boxNode", recursively: false)
+    }
+
+    func calculate2DAngleAndVerticalPosition(to node: SCNNode, from cameraTransform: simd_float4x4) -> (Float, String) {
+        let cameraPosition = SCNVector3(cameraTransform.columns.3.x, cameraTransform.columns.3.y, cameraTransform.columns.3.z)
+        let nodePosition = node.position
+
+        // Project the positions onto the horizontal plane (ignore the y-axis)
+        let cameraPosition2D = SCNVector3(cameraPosition.x, 0, cameraPosition.z)
+        let nodePosition2D = SCNVector3(nodePosition.x, 0, nodePosition.z)
+        let vectorToNode = SCNVector3(nodePosition2D.x - cameraPosition2D.x, 0, nodePosition2D.z - cameraPosition2D.z)
+
+        // Normalize vectors
+        let cameraForward = SCNVector3(-cameraTransform.columns.2.x, 0, -cameraTransform.columns.2.z)
+        let normalizedVectorToNode = normalize(vectorToNode)
+        let normalizedCameraForward = normalize(cameraForward)
+
+        // Calculate dot product
+        let dotProduct = dot(normalizedVectorToNode, normalizedCameraForward)
+        let angle = acos(dotProduct) * (180.0 / .pi) // Convert to degrees
+
+        // Determine vertical position
+        let verticalPosition = cameraPosition.y > nodePosition.y ? "above" : "below"
+
+        return (angle, verticalPosition)
+    }
+
+    private func normalize(_ vector: SCNVector3) -> SCNVector3 {
+        let length = sqrt(vector.x * vector.x + vector.z * vector.z) // Only considering x and z for 2D normalization
+        return SCNVector3(vector.x / length, 0, vector.z / length)
+    }
+
+    private func dot(_ v1: SCNVector3, _ v2: SCNVector3) -> Float {
+        return v1.x * v2.x + v1.z * v2.z // Only considering x and z for 2D dot product
+    }
+}
