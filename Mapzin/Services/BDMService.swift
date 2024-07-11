@@ -8,7 +8,7 @@
 import Foundation
 import simd
 
-class BDMParser {
+class BDMService {
     func parse(filePath: String) -> [simd_float4x4]? {
         var transforms = [simd_float4x4]()
         
