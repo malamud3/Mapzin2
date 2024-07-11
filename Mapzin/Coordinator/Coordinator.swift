@@ -55,6 +55,7 @@ class Coordinator: NSObject, ObservableObject, ARSCNViewDelegate, ARSessionDeleg
 
     private var arView: ARSCNView?
     private var measurements: [(total: Float, x: Float, y: Float, z: Float)] = []
+    private var lastPosition: SCNVector3?
 
     func push(_ screen: AppScreenType) {
         path.append(screen)
@@ -83,12 +84,12 @@ class Coordinator: NSObject, ObservableObject, ARSCNViewDelegate, ARSessionDeleg
         arView.delegate = self
         arView.session.delegate = self
         arView.automaticallyUpdatesLighting = true
-        
+
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = [.horizontal]
         arView.session.run(configuration)
         print("AR session started with horizontal plane detection")
-        
+
         // Add a 3D object to the scene
         addBoxNode()
     }
@@ -98,7 +99,7 @@ class Coordinator: NSObject, ObservableObject, ARSCNViewDelegate, ARSessionDeleg
         let boxNode = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
         boxNode.position = SCNVector3(0, 0, -0.5) // Place the box 0.5 meters in front of the camera
         boxNode.name = "boxNode"
-        
+
         arView?.scene.rootNode.addChildNode(boxNode)
     }
 
@@ -107,11 +108,11 @@ class Coordinator: NSObject, ObservableObject, ARSCNViewDelegate, ARSessionDeleg
         guard let arView = arView else { return }
         let touchLocation = gestureRecognizer.location(in: arView)
         let hitTestResults = arView.hitTest(touchLocation, options: nil)
-        
+
         if let result = hitTestResults.first(where: { $0.node.name == "boxNode" }) {
             let distances = calculateDistances(to: result.node)
             measurements.append(distances)
-            
+
             if measurements.count >= 5 { // Take 5 measurements and then calculate the average
                 let averageDistances = calculateAverageDistances()
                 print("Average distance to the object: \(averageDistances.total) meters")
@@ -145,6 +146,70 @@ class Coordinator: NSObject, ObservableObject, ARSCNViewDelegate, ARSessionDeleg
                     result.z + measurement.z)
         }
         return (sum.total / count, sum.x / count, sum.y / count, sum.z / count)
+    }
+
+    // Print the current position and orientation of the camera
+    func printCameraPositionAndOrientation() {
+        guard let cameraTransform = arView?.session.currentFrame?.camera.transform else { return }
+        let cameraPosition = SCNVector3(cameraTransform.columns.3.x, cameraTransform.columns.3.y, cameraTransform.columns.3.z)
+
+        // Check for movement greater than the noise threshold
+        if let lastPosition = lastPosition {
+            let movement = abs(cameraPosition.x - lastPosition.x) + abs(cameraPosition.y - lastPosition.y) + abs(cameraPosition.z - lastPosition.z)
+            if movement < 0.01 {
+                return // Consider as noise, no significant movement
+            }
+        }
+
+        lastPosition = cameraPosition
+        let formattedPosition = SCNVector3(round(cameraPosition.x * 1000) / 1000, round(cameraPosition.y * 1000) / 1000, round(cameraPosition.z * 1000) / 1000)
+        print("Camera Position: \(formattedPosition)")
+
+        // Calculate and print the 2D angle to the object and vertical position
+        if let boxNode = arView?.scene.rootNode.childNode(withName: "boxNode", recursively: false) {
+            let angle = calculate2DAngleToNode(boxNode)
+            let verticalPosition = cameraPosition.y > boxNode.position.y ? "below" : "above"
+            print(String(format: "2D Angle to object: %.3f degrees", angle))
+            print("The object is \(verticalPosition) the camera.")
+        }
+    }
+
+    // Calculate the 2D angle between the camera's forward direction and the vector to the node
+    func calculate2DAngleToNode(_ node: SCNNode) -> Float {
+        guard let cameraTransform = arView?.session.currentFrame?.camera.transform else { return 0.0 }
+        let cameraPosition = SCNVector3(cameraTransform.columns.3.x, cameraTransform.columns.3.y, cameraTransform.columns.3.z)
+        let nodePosition = node.position
+
+        // Project the positions onto the horizontal plane (ignore the y-axis)
+        let cameraPosition2D = SCNVector3(cameraPosition.x, 0, cameraPosition.z)
+        let nodePosition2D = SCNVector3(nodePosition.x, 0, nodePosition.z)
+        let vectorToNode = SCNVector3(nodePosition2D.x - cameraPosition2D.x, 0, nodePosition2D.z - cameraPosition2D.z)
+
+        // Normalize vectors
+        let cameraForward = SCNVector3(-cameraTransform.columns.2.x, 0, -cameraTransform.columns.2.z)
+        let normalizedVectorToNode = normalize(vectorToNode)
+        let normalizedCameraForward = normalize(cameraForward)
+
+        // Calculate dot product
+        let dotProduct = dot(normalizedVectorToNode, normalizedCameraForward)
+        let angle = acos(dotProduct) * (180.0 / .pi) // Convert to degrees
+        return angle
+    }
+
+    // Normalize a vector
+    func normalize(_ vector: SCNVector3) -> SCNVector3 {
+        let length = sqrt(vector.x * vector.x + vector.z * vector.z) // Only considering x and z for 2D normalization
+        return SCNVector3(vector.x / length, 0, vector.z / length)
+    }
+
+    // Calculate dot product of two vectors
+    func dot(_ v1: SCNVector3, _ v2: SCNVector3) -> Float {
+        return v1.x * v2.x + v1.z * v2.z // Only considering x and z for 2D dot product
+    }
+
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        // Call the function to print camera position and orientation
+        printCameraPositionAndOrientation()
     }
 
     @ViewBuilder
