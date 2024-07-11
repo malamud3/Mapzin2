@@ -6,3 +6,16 @@
 //
 
 import Foundation
+import ARKit
+
+class ARViewModel: ObservableObject {
+    var arModel: ARModel
+
+    init(model: ARModel) {
+        self.arModel = model
+    }
+
+    func createARConfiguration() -> ARWorldTrackingConfiguration {
+        return ARWorldTrackingConfiguration()
+    }
+}

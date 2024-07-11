@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct ARModel {
+    // Add any properties or methods you need for your model
+}

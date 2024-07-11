@@ -6,16 +6,66 @@
 //
 
 
+//import SwiftUI
+//
+//struct MyARView: View {
+//   @StateObject private var viewModel = MapViewModel(
+//            arService: ARService(),
+//            poiService: POIService(),
+//            floorService: FloorService(),
+//            bdmService: BDMService()
+//    )
+//    let buildingName: String
+//    var bdmFilePath: String? // Path to the sBDM file
+//    
+//    var body: some View {
+//        ZStack{
+//            ARSceneView(viewModel: viewModel, bdmFilePath: bdmFilePath)
+//                .edgesIgnoringSafeArea(.all)
+//                .navigationBarTitle("AR View for \(buildingName)", displayMode: .inline)
+//            VStack {
+//                            Text(viewModel.arStatus)
+//                                .padding()
+//                                .background(Color.black.opacity(0.7))
+//                                .foregroundColor(.white)
+//                                .cornerRadius(10)
+//                            
+//                            Spacer()
+//                            
+//                            if viewModel.isPlaneDetected {
+//                                Text("Plane detected!")
+//                                    .padding()
+//                                    .background(Color.green.opacity(0.8))
+//                                    .foregroundColor(.white)
+//                                    .cornerRadius(10)
+//                            }
+//                        }
+//        }
+//
+//    }
+//}
 import SwiftUI
+import ARKit
 
-struct MyARView: View {
-    let buildingName: String
-    var bdmFilePath: String? // Path to the BDM file
+struct MyARView: UIViewRepresentable {
+    @EnvironmentObject var coordinator: Coordinator
+
+    func makeUIView(context: Context) -> ARSCNView {
+        let arView = ARSCNView()
+        
+        // Setup ARView using coordinator
+        context.coordinator.setupARView(arView)
+        
+        // Add tap gesture recognizer
+        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.handleTap(_:)))
+        arView.addGestureRecognizer(tapGesture)
+        
+        return arView
+    }
+
+    func updateUIView(_ uiView: ARSCNView, context: Context) {}
     
-    var body: some View {
-        ARSceneView(bdmFilePath: bdmFilePath)
-            .edgesIgnoringSafeArea(.all)
-            .navigationBarTitle("AR View for \(buildingName)", displayMode: .inline)
-            .environmentObject(Coordinator())
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
     }
 }

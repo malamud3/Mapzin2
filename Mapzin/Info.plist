@@ -9,6 +9,8 @@
 ARKit requires access to your camera to enable augmented reality experiences.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need your location to provide GPS tracking functionality.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>This app requires access to motion data to provide accurate indoor navigation.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to provide GPS tracking functionality.</string>
 </dict>

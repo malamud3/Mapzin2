@@ -5,11 +5,10 @@
 //  Created by Amir Malamud on 23/06/2024.
 //
 
-import Foundation
-import simd
+import ARKit
 
 class BDMService {
-    func parse(filePath: String) -> [simd_float4x4]? {
+    func parseBDMFile(filePath: String) -> [simd_float4x4]? {
         var transforms = [simd_float4x4]()
         
         if let data = try? Data(contentsOf: URL(fileURLWithPath: filePath)) {
@@ -23,3 +22,4 @@ class BDMService {
         return transforms
     }
 }
+
