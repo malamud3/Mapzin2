@@ -56,9 +56,9 @@ struct MyARView: UIViewRepresentable {
         // Setup ARView using coordinator
         arViewModel.setupARView(arView)
         
-        // Add tap gesture recognizer
-        let tapGesture = UITapGestureRecognizer(target: arViewModel, action: #selector(arViewModel.handleTap(_:)))
-        arView.addGestureRecognizer(tapGesture)
+//        // Add tap gesture recognizer
+//        let tapGesture = UITapGestureRecognizer(target: arViewModel, action: #selector(arViewModel.handleTap(_:)))
+//        arView.addGestureRecognizer(tapGesture)
         
         return arView
     }

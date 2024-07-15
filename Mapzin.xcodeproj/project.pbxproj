@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A907C1E52C285CC700F8802B /* ModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907C1E42C285CC700F8802B /* ModelType.swift */; };
-		A907C1E72C285D1300F8802B /* FloorDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907C1E62C285D1300F8802B /* FloorDetector.swift */; };
 		A907C1E92C285D3A00F8802B /* ARSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907C1E82C285D3A00F8802B /* ARSceneCoordinator.swift */; };
 		A907C1EB2C285D6B00F8802B /* ARSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907C1EA2C285D6B00F8802B /* ARSceneView.swift */; };
 		A907C1F02C287A9F00F8802B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907C1EF2C287A9F00F8802B /* WelcomeView.swift */; };
@@ -25,6 +24,8 @@
 		A92BB50E2C282BE7004061D7 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB50D2C282BE7004061D7 /* CustomButton.swift */; };
 		A92BB5122C28311A004061D7 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB5112C28311A004061D7 /* KeyboardObserver.swift */; };
 		A92BB5142C283473004061D7 /* CustomAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB5132C283473004061D7 /* CustomAlertModifier.swift */; };
+		A93ACCF22C45355A0032B7A2 /* Salon.scn in Resources */ = {isa = PBXBuildFile; fileRef = A93ACCF12C45355A0032B7A2 /* Salon.scn */; };
+		A93ACCF42C45397F0032B7A2 /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A93ACCF32C45397F0032B7A2 /* ARKit.framework */; };
 		A94488092C03522E0007A9F0 /* UserLocationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94488082C03522E0007A9F0 /* UserLocationAnnotationView.swift */; };
 		A94488102C0352E00007A9F0 /* CenterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944880F2C0352E00007A9F0 /* CenterButton.swift */; };
 		A94488172C0355A90007A9F0 /* MyLocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94488162C0355A90007A9F0 /* MyLocationExtension.swift */; };
@@ -66,7 +67,6 @@
 		A99B1F542C22D5E0002B7B32 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = A99B1F532C22D5E0002B7B32 /* SwiftUIX */; };
 		A99B1F562C22D674002B7B32 /* CardViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F552C22D674002B7B32 /* CardViewModifier.swift */; };
 		A99B1F592C22E11C002B7B32 /* MainFullScreenGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F582C22E11C002B7B32 /* MainFullScreenGradient.swift */; };
-		A99B1F5D2C22F873002B7B32 /* MyARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F5C2C22F873002B7B32 /* MyARView.swift */; };
 		A9A683C32C1EF1000016455C /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A683C22C1EF1000016455C /* KeyboardAdaptive.swift */; };
 		A9A683C52C1EF8CA0016455C /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A683C42C1EF8CA0016455C /* CustomTextField.swift */; };
 		A9A683C72C1F225E0016455C /* SelectBuilding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A683C62C1F225E0016455C /* SelectBuilding.swift */; };
@@ -86,6 +86,9 @@
 		A9CB41122C401F2A00CF40FA /* ARObjectDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CB41112C401F2A00CF40FA /* ARObjectDetectionService.swift */; };
 		A9CB41142C4022B500CF40FA /* ARCameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CB41132C4022B500CF40FA /* ARCameraService.swift */; };
 		A9E352562C01BC9200CF7605 /* LocationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E352552C01BC9200CF7605 /* LocationDetailsView.swift */; };
+		A9E669222C4551CC007C95A5 /* MyARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E669212C4551CC007C95A5 /* MyARView.swift */; };
+		A9E669242C4555F0007C95A5 /* NavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E669232C4555F0007C95A5 /* NavigationService.swift */; };
+		A9E669262C455A57007C95A5 /* simple-navigation-system.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E669252C455A57007C95A5 /* simple-navigation-system.swift */; };
 		A9E8C5692C08478B004CFBBA /* FirebaseAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E8C5682C08478B004CFBBA /* FirebaseAuthProvider.swift */; };
 		A9F2F49C2C3E8F4200DF5960 /* ARService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F2F49B2C3E8F4200DF5960 /* ARService.swift */; };
 		A9F2F49E2C3E8F7100DF5960 /* FloorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F2F49D2C3E8F7100DF5960 /* FloorService.swift */; };
@@ -115,7 +118,6 @@
 
 /* Begin PBXFileReference section */
 		A907C1E42C285CC700F8802B /* ModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelType.swift; sourceTree = "<group>"; };
-		A907C1E62C285D1300F8802B /* FloorDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorDetector.swift; sourceTree = "<group>"; };
 		A907C1E82C285D3A00F8802B /* ARSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneCoordinator.swift; sourceTree = "<group>"; };
 		A907C1EA2C285D6B00F8802B /* ARSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneView.swift; sourceTree = "<group>"; };
 		A907C1EF2C287A9F00F8802B /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -132,6 +134,8 @@
 		A92BB50D2C282BE7004061D7 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		A92BB5112C28311A004061D7 /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		A92BB5132C283473004061D7 /* CustomAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertModifier.swift; sourceTree = "<group>"; };
+		A93ACCF12C45355A0032B7A2 /* Salon.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Salon.scn; sourceTree = "<group>"; };
+		A93ACCF32C45397F0032B7A2 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
 		A94488082C03522E0007A9F0 /* UserLocationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationAnnotationView.swift; sourceTree = "<group>"; };
 		A944880F2C0352E00007A9F0 /* CenterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterButton.swift; sourceTree = "<group>"; };
 		A94488162C0355A90007A9F0 /* MyLocationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationExtension.swift; sourceTree = "<group>"; };
@@ -167,7 +171,6 @@
 		A99B1F512C22D5C8002B7B32 /* BuildingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCardView.swift; sourceTree = "<group>"; };
 		A99B1F552C22D674002B7B32 /* CardViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModifier.swift; sourceTree = "<group>"; };
 		A99B1F582C22E11C002B7B32 /* MainFullScreenGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFullScreenGradient.swift; sourceTree = "<group>"; };
-		A99B1F5C2C22F873002B7B32 /* MyARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyARView.swift; sourceTree = "<group>"; };
 		A9A683C22C1EF1000016455C /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
 		A9A683C42C1EF8CA0016455C /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		A9A683C62C1F225E0016455C /* SelectBuilding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBuilding.swift; sourceTree = "<group>"; };
@@ -187,6 +190,9 @@
 		A9CB41112C401F2A00CF40FA /* ARObjectDetectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARObjectDetectionService.swift; sourceTree = "<group>"; };
 		A9CB41132C4022B500CF40FA /* ARCameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCameraService.swift; sourceTree = "<group>"; };
 		A9E352552C01BC9200CF7605 /* LocationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsView.swift; sourceTree = "<group>"; };
+		A9E669212C4551CC007C95A5 /* MyARView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyARView.swift; sourceTree = "<group>"; };
+		A9E669232C4555F0007C95A5 /* NavigationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationService.swift; sourceTree = "<group>"; };
+		A9E669252C455A57007C95A5 /* simple-navigation-system.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "simple-navigation-system.swift"; sourceTree = "<group>"; };
 		A9E8C5682C08478B004CFBBA /* FirebaseAuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthProvider.swift; sourceTree = "<group>"; };
 		A9F2F49B2C3E8F4200DF5960 /* ARService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARService.swift; sourceTree = "<group>"; };
 		A9F2F49D2C3E8F7100DF5960 /* FloorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorService.swift; sourceTree = "<group>"; };
@@ -202,6 +208,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A93ACCF42C45397F0032B7A2 /* ARKit.framework in Frameworks */,
 				A9916A702BE35E6700427095 /* FirebaseDatabaseSwift in Frameworks */,
 				A9916A6E2BE35E6700427095 /* FirebaseDatabase in Frameworks */,
 				A9916A682BE35E6700427095 /* FirebaseAnalyticsSwift in Frameworks */,
@@ -252,7 +259,7 @@
 		A907C1ED2C287A6F00F8802B /* AR */ = {
 			isa = PBXGroup;
 			children = (
-				A99B1F5C2C22F873002B7B32 /* MyARView.swift */,
+				A9E669212C4551CC007C95A5 /* MyARView.swift */,
 				A907C1EA2C285D6B00F8802B /* ARSceneView.swift */,
 				A9F2F4A32C3E920900DF5960 /* MyMapView.swift */,
 			);
@@ -338,6 +345,7 @@
 			children = (
 				A97A7B1A2C0D8E3600DA4619 /* Logger.swift */,
 				A9F2F4A62C3ED38400DF5960 /* Primary_bdm.scn */,
+				A93ACCF12C45355A0032B7A2 /* Salon.scn */,
 				A97563E02BA6DA43002B08AD /* Mapzin */,
 				A97563F12BA6DA44002B08AD /* MapzinTests */,
 				A97563FB2BA6DA44002B08AD /* MapzinUITests */,
@@ -433,6 +441,7 @@
 		A97A7B1C2C0D907400DA4619 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A93ACCF32C45397F0032B7A2 /* ARKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -444,7 +453,6 @@
 				A9916A852BE36BB800427095 /* LocationManager.swift */,
 				A9916A7C2BE362DE00427095 /* LoginViewModel.swift */,
 				A99B1F4E2C22D37B002B7B32 /* BuildingViewModel.swift */,
-				A907C1E62C285D1300F8802B /* FloorDetector.swift */,
 				A90CEABC2C3C4F9400986305 /* ARViewModel.swift */,
 				A9F2F49F2C3E8FCD00DF5960 /* MapViewModel.swift */,
 			);
@@ -472,6 +480,8 @@
 				A9BE73AB2C3A648500B1B808 /* Sensors */,
 				A9E8C5672C0846BE004CFBBA /* MockupData */,
 				A9CB41112C401F2A00CF40FA /* ARObjectDetectionService.swift */,
+				A9E669252C455A57007C95A5 /* simple-navigation-system.swift */,
+				A9E669232C4555F0007C95A5 /* NavigationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -688,6 +698,7 @@
 				A97563E92BA6DA44002B08AD /* Preview Assets.xcassets in Resources */,
 				A9F2F4A72C3ED38400DF5960 /* Primary_bdm.scn in Resources */,
 				A9BE73B72C3A6C3900B1B808 /* GoogleService-Info.plist in Resources */,
+				A93ACCF22C45355A0032B7A2 /* Salon.scn in Resources */,
 				A97563E62BA6DA44002B08AD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -726,6 +737,7 @@
 				A90CEABD2C3C4F9400986305 /* ARViewModel.swift in Sources */,
 				A9496DB52BE381D0009F2B97 /* LoginButton.swift in Sources */,
 				A97A7B1B2C0D8E3600DA4619 /* Logger.swift in Sources */,
+				A9E669222C4551CC007C95A5 /* MyARView.swift in Sources */,
 				A94488172C0355A90007A9F0 /* MyLocationExtension.swift in Sources */,
 				A92BB4FE2C27F33A004061D7 /* POIService.swift in Sources */,
 				A92BB4F72C26FF62004061D7 /* RequestLocationView.swift in Sources */,
@@ -741,18 +753,17 @@
 				A9F2F4A42C3E920900DF5960 /* MyMapView.swift in Sources */,
 				A99B1F4A2C21B4D4002B7B32 /* TransparentNavBar.swift in Sources */,
 				A90CEABF2C3C4FB900986305 /* ARModel.swift in Sources */,
-				A907C1E72C285D1300F8802B /* FloorDetector.swift in Sources */,
 				A9CB41142C4022B500CF40FA /* ARCameraService.swift in Sources */,
 				A9A683C72C1F225E0016455C /* SelectBuilding.swift in Sources */,
 				A9A683C52C1EF8CA0016455C /* CustomTextField.swift in Sources */,
 				A9916A7D2BE362DE00427095 /* LoginViewModel.swift in Sources */,
+				A9E669262C455A57007C95A5 /* simple-navigation-system.swift in Sources */,
 				A92BB5082C27F6E0004061D7 /* RoomScanData.swift in Sources */,
 				A907C1E52C285CC700F8802B /* ModelType.swift in Sources */,
 				A9916A5B2BE345F000427095 /* AuthMethod.swift in Sources */,
 				A94488092C03522E0007A9F0 /* UserLocationAnnotationView.swift in Sources */,
 				A9CB41122C401F2A00CF40FA /* ARObjectDetectionService.swift in Sources */,
 				A9A683C32C1EF1000016455C /* KeyboardAdaptive.swift in Sources */,
-				A99B1F5D2C22F873002B7B32 /* MyARView.swift in Sources */,
 				A92BB5122C28311A004061D7 /* KeyboardObserver.swift in Sources */,
 				A9E8C5692C08478B004CFBBA /* FirebaseAuthProvider.swift in Sources */,
 				A9F2F4A92C3FDDD900DF5960 /* ARkitMet.swift in Sources */,
@@ -769,6 +780,7 @@
 				A9E352562C01BC9200CF7605 /* LocationDetailsView.swift in Sources */,
 				A97563E22BA6DA43002B08AD /* MapzinApp.swift in Sources */,
 				A9916A862BE36BB800427095 /* LocationManager.swift in Sources */,
+				A9E669242C4555F0007C95A5 /* NavigationService.swift in Sources */,
 				A9C4AC872C01FDF4000C4D3E /* MapView.swift in Sources */,
 				A9F2F49E2C3E8F7100DF5960 /* FloorService.swift in Sources */,
 				A9BE73B02C3A69D100B1B808 /* SheetType.swift in Sources */,
@@ -961,7 +973,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mapzin/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "ARKit requires access to your camera to enable augmented reality experiences.\nARKit requires access to your camera to enable augmented reality experiences.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = Permission_User_Location;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to provide GPS tracking functionality.";
+				INFOPLIST_KEY_NSLocationUsageDescription = "We need your location to provide GPS tracking functionality.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide GPS tracking functionality.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "This app requires access to motion data to provide accurate indoor navigation.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -992,7 +1009,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mapzin/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "ARKit requires access to your camera to enable augmented reality experiences.\nARKit requires access to your camera to enable augmented reality experiences.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = Permission_User_Location;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to provide GPS tracking functionality.";
+				INFOPLIST_KEY_NSLocationUsageDescription = "We need your location to provide GPS tracking functionality.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide GPS tracking functionality.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "This app requires access to motion data to provide accurate indoor navigation.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

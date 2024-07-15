@@ -8,16 +8,22 @@
 import ARKit
 
 class ARObjectDetectionService {
-    func addBoxNode(to arView: ARSCNView) {
+    private var pois: [UUID: POI] = [:]
+
+    func addPOI(_ poi: POI, to arView: ARSCNView) {
         let boxNode = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
-        boxNode.position = SCNVector3(0, 0, -0.5) // Place the box 0.5 meters in front of the camera
-        boxNode.name = "boxNode"
+        boxNode.position = SCNVector3(poi.position.x, poi.position.y, poi.position.z)
+        boxNode.name = poi.id.uuidString
         arView.scene.rootNode.addChildNode(boxNode)
+        pois[poi.id] = poi
     }
 
-    func getBoxNode(from session: ARSession) -> SCNNode? {
-        guard let arView = session.delegate as? ARSCNView else { return nil }
-        return arView.scene.rootNode.childNode(withName: "boxNode", recursively: false)
+    func getPOI(by id: UUID) -> POI? {
+        return pois[id]
+    }
+
+    func getPOINode(by id: UUID, from arView: ARSCNView) -> SCNNode? {
+        return arView.scene.rootNode.childNode(withName: id.uuidString, recursively: false)
     }
 
     func calculate2DAngleAndVerticalPosition(to node: SCNNode, from cameraTransform: simd_float4x4) -> (Float, String) {

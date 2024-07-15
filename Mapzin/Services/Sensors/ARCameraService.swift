@@ -16,8 +16,8 @@ class ARCameraService {
         
         if let lastPosition = lastPosition {
             let movement = abs(cameraPosition.x - lastPosition.x) + abs(cameraPosition.y - lastPosition.y) + abs(cameraPosition.z - lastPosition.z)
-            if movement < 0.001 {
-                return // Consider as noise, no significant movement
+            if movement < 0.1 {
+                return // No significant movement
             }
         }
         
