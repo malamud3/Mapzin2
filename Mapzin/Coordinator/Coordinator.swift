@@ -38,12 +38,12 @@ class Coordinator: ObservableObject {
         case .login:
             LoginView(viewModel: LoginViewModel())
         case .home:
-            HomeView().environmentObject(self)
+            HomeView()
         case .selectBuilding:
             SelectBuildingView()
         case .ar:
-            MyARView()
-                .edgesIgnoringSafeArea(.all)
+            MyARViewContainer()
+                           .edgesIgnoringSafeArea(.all)
         }
     }
 }

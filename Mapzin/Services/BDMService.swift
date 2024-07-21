@@ -14,20 +14,25 @@ class BDMService {
             print("Failed to load scene file: \(filename)")
             return nil
         }
-        
+
         var nodes: [SCNNode] = []
-        
+
         scene.rootNode.enumerateChildNodes { (node, _) in
-            // You might want to filter nodes based on specific criteria
-            // For example, only adding nodes with a specific name or type
             nodes.append(node)
         }
-        
+
         print("Parsed \(nodes.count) nodes from the SCN file.")
         return nodes
     }
-    
-    func getTransformsWithNames(from nodes: [SCNNode]) -> [(simd_float4x4, String)] {
-        return nodes.map { ($0.simdTransform, $0.name ?? "Unnamed") }
+
+    func getTransformsWithNames(from nodes: [SCNNode]) -> [(simd_float4x4, String, SCNVector3, SCNVector3, SCNVector3)] {
+        return nodes.map { node in
+            let transform = node.simdTransform
+            let name = node.name ?? "Unnamed"
+            let position = node.position
+            let scale = node.scale
+            let rotation = node.eulerAngles
+            return (transform, name, position, scale, rotation)
+        }
     }
 }
