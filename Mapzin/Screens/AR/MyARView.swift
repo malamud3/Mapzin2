@@ -3,15 +3,7 @@
 //  Mapzin
 //
 //  Created by Amir Malamud on 19/06/2024.
-//
-//    }
-//}
-//
-//  ARView.swift
-//  Mapzin
-//
-//  Created by Amir Malamud on 19/06/2024.
-//
+
 
 import SwiftUI
 import ARKit
@@ -67,12 +59,6 @@ struct MyARViewOverlay: View {
                     .cornerRadius(10)
                     .shadow(radius: 10)
             }
-            Text(arViewModel.navigationInstructions)
-                .padding()
-                .background(Color.white)
-                .cornerRadius(10)
-                .shadow(radius: 10)
-            Spacer()
         }
         .padding()
     }

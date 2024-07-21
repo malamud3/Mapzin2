@@ -4,8 +4,6 @@ struct CoordinatorView: View {
     @StateObject private var coordinator = Coordinator()
     @StateObject private var locationManager = LocationManager()
 
-
-
     var body: some View {
         NavigationStack(path: $coordinator.path) {
             coordinator.build(screen: .ar)

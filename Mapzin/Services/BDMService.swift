@@ -6,7 +6,6 @@
 //
 
 import SceneKit
-import ARKit
 
 class BDMService {
     func parseSCNFile(named filename: String) -> [SCNNode]? {
@@ -16,7 +15,6 @@ class BDMService {
         }
 
         var nodes: [SCNNode] = []
-
         scene.rootNode.enumerateChildNodes { (node, _) in
             nodes.append(node)
         }
@@ -26,13 +24,20 @@ class BDMService {
     }
 
     func getTransformsWithNames(from nodes: [SCNNode]) -> [(simd_float4x4, String, SCNVector3, SCNVector3, SCNVector3)] {
-        return nodes.map { node in
+        let filteredNodes = nodes.filter { $0.position != SCNVector3(0.0, 0.0, 0.0) }
+        return filteredNodes.map { node in
             let transform = node.simdTransform
             let name = node.name ?? "Unnamed"
             let position = node.position
             let scale = node.scale
             let rotation = node.eulerAngles
             return (transform, name, position, scale, rotation)
+        }
+    }
+
+    func printNodeDetails(_ nodes: [(simd_float4x4, String, SCNVector3, SCNVector3, SCNVector3)]) {
+        for (transform, name, position, scale, rotation) in nodes {
+            print("Node Name: \(name), Position: \(position), Scale: \(scale), Rotation: \(rotation)")
         }
     }
 }
