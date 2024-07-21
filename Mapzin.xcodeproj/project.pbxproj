@@ -31,7 +31,7 @@
 		A9496DB32BE381AB009F2B97 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9496DB22BE381AB009F2B97 /* ErrorMessage.swift */; };
 		A9496DB52BE381D0009F2B97 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9496DB42BE381D0009F2B97 /* LoginButton.swift */; };
 		A9496DB72BE381FF009F2B97 /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9496DB62BE381FF009F2B97 /* SignUpButton.swift */; };
-		A94CDD132C4D8642006FC0E3 /* ARViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94CDD122C4D8642006FC0E3 /* ARViewModel.swift */; };
+		A94CDD132C4D8642006FC0E3 /* ARViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94CDD122C4D8642006FC0E3 /* ARViewExtension.swift */; };
 		A97563E22BA6DA43002B08AD /* MapzinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97563E12BA6DA43002B08AD /* MapzinApp.swift */; };
 		A97563E42BA6DA43002B08AD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97563E32BA6DA43002B08AD /* HomeView.swift */; };
 		A97563E62BA6DA44002B08AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A97563E52BA6DA44002B08AD /* Assets.xcassets */; };
@@ -87,7 +87,7 @@
 		A9D5A09E2C4D1C98009BCE96 /* ARSessionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5A09D2C4D1C98009BCE96 /* ARSessionServiceProtocol.swift */; };
 		A9D5A0A02C4D1CB1009BCE96 /* ARViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5A09F2C4D1CB1009BCE96 /* ARViewModelProtocol.swift */; };
 		A9D5A0A22C4D2CB0009BCE96 /* ARCameraServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5A0A12C4D2CB0009BCE96 /* ARCameraServiceProtocol.swift */; };
-		A9D5A0A42C4D5D98009BCE96 /* SCNVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5A0A32C4D5D98009BCE96 /* SCNVector3.swift */; };
+		A9D5A0A42C4D5D98009BCE96 /* SCNVector3Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5A0A32C4D5D98009BCE96 /* SCNVector3Extension.swift */; };
 		A9D5A0A92C4D6101009BCE96 /* NavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5A0A82C4D6101009BCE96 /* NavigationService.swift */; };
 		A9E352562C01BC9200CF7605 /* LocationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E352552C01BC9200CF7605 /* LocationDetailsView.swift */; };
 		A9E669222C4551CC007C95A5 /* MyARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E669212C4551CC007C95A5 /* MyARView.swift */; };
@@ -141,7 +141,7 @@
 		A9496DB22BE381AB009F2B97 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		A9496DB42BE381D0009F2B97 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		A9496DB62BE381FF009F2B97 /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
-		A94CDD122C4D8642006FC0E3 /* ARViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewModel.swift; sourceTree = "<group>"; };
+		A94CDD122C4D8642006FC0E3 /* ARViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewExtension.swift; sourceTree = "<group>"; };
 		A97563DE2BA6DA43002B08AD /* Mapzin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mapzin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A97563E12BA6DA43002B08AD /* MapzinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapzinApp.swift; sourceTree = "<group>"; };
 		A97563E32BA6DA43002B08AD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 		A9D5A09D2C4D1C98009BCE96 /* ARSessionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionServiceProtocol.swift; sourceTree = "<group>"; };
 		A9D5A09F2C4D1CB1009BCE96 /* ARViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewModelProtocol.swift; sourceTree = "<group>"; };
 		A9D5A0A12C4D2CB0009BCE96 /* ARCameraServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCameraServiceProtocol.swift; sourceTree = "<group>"; };
-		A9D5A0A32C4D5D98009BCE96 /* SCNVector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3.swift; sourceTree = "<group>"; };
+		A9D5A0A32C4D5D98009BCE96 /* SCNVector3Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3Extension.swift; sourceTree = "<group>"; };
 		A9D5A0A82C4D6101009BCE96 /* NavigationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationService.swift; sourceTree = "<group>"; };
 		A9E352552C01BC9200CF7605 /* LocationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsView.swift; sourceTree = "<group>"; };
 		A9E669212C4551CC007C95A5 /* MyARView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyARView.swift; sourceTree = "<group>"; };
@@ -277,8 +277,8 @@
 			children = (
 				A94488162C0355A90007A9F0 /* MyLocationExtension.swift */,
 				A9F2F4A82C3FDDD900DF5960 /* ARkitMet.swift */,
-				A9D5A0A32C4D5D98009BCE96 /* SCNVector3.swift */,
-				A94CDD122C4D8642006FC0E3 /* ARViewModel.swift */,
+				A9D5A0A32C4D5D98009BCE96 /* SCNVector3Extension.swift */,
+				A94CDD122C4D8642006FC0E3 /* ARViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -754,7 +754,7 @@
 				A94488172C0355A90007A9F0 /* MyLocationExtension.swift in Sources */,
 				A92BB4FE2C27F33A004061D7 /* POIService.swift in Sources */,
 				A92BB4F72C26FF62004061D7 /* RequestLocationView.swift in Sources */,
-				A9D5A0A42C4D5D98009BCE96 /* SCNVector3.swift in Sources */,
+				A9D5A0A42C4D5D98009BCE96 /* SCNVector3Extension.swift in Sources */,
 				A97563E42BA6DA43002B08AD /* HomeView.swift in Sources */,
 				A92BB5062C27F54D004061D7 /* BDMData.swift in Sources */,
 				A9C4AC832C01FD06000C4D3E /* LookAroundPreviewView.swift in Sources */,
@@ -772,7 +772,7 @@
 				A92BB5082C27F6E0004061D7 /* RoomScanData.swift in Sources */,
 				A907C1E52C285CC700F8802B /* ModelType.swift in Sources */,
 				A9916A5B2BE345F000427095 /* AuthMethod.swift in Sources */,
-				A94CDD132C4D8642006FC0E3 /* ARViewModel.swift in Sources */,
+				A94CDD132C4D8642006FC0E3 /* ARViewExtension.swift in Sources */,
 				A94488092C03522E0007A9F0 /* UserLocationAnnotationView.swift in Sources */,
 				A9D5A0A22C4D2CB0009BCE96 /* ARCameraServiceProtocol.swift in Sources */,
 				A9CB41122C401F2A00CF40FA /* ARObjectDetectionService.swift in Sources */,

@@ -1,3 +1,4 @@
+
 //
 //  ARViewModel.swift
 //  Mapzin
@@ -54,4 +55,3 @@ extension ARViewModel: ARSessionDelegate {
         arView.session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
     }
 }
-
