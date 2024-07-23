@@ -7,37 +7,52 @@
 
 import SceneKit
 
+struct NodeData {
+    let name: String
+    let position: SCNVector3
+    let rotation: SCNVector3
+    let type: NodeType
+}
+
+enum NodeType {
+    case door
+    case window
+}
+
 class BDMService {
-    func parseSCNFile(named filename: String) -> [SCNNode]? {
+    func parseSCNFile(named filename: String) -> [NodeData]? {
         guard let scene = SCNScene(named: filename) else {
             print("Failed to load scene file: \(filename)")
             return nil
         }
 
-        var nodes: [SCNNode] = []
+        var nodeDataArray: [NodeData] = []
         scene.rootNode.enumerateChildNodes { (node, _) in
-            nodes.append(node)
+            if node.position != SCNVector3(0, 0, 0) {
+                let nodeType: NodeType
+                if node.name?.hasPrefix("Door") == true {
+                    nodeType = .door
+                } else {
+                    nodeType = .window
+                }
+                
+                let nodeData = NodeData(
+                    name: node.name ?? "Unnamed",
+                    position: node.position,
+                    rotation: node.eulerAngles,
+                    type: nodeType
+                )
+                nodeDataArray.append(nodeData)
+            }
         }
 
-        print("Parsed \(nodes.count) nodes from the SCN file.")
-        return nodes
+        print("Parsed \(nodeDataArray.count) nodes from the SCN file.")
+        return nodeDataArray
     }
 
-    func getTransformsWithNames(from nodes: [SCNNode]) -> [(simd_float4x4, String, SCNVector3, SCNVector3, SCNVector3)] {
-        let filteredNodes = nodes.filter { $0.position != SCNVector3(0.0, 0.0, 0.0) }
-        return filteredNodes.map { node in
-            let transform = node.simdTransform
-            let name = node.name ?? "Unnamed"
-            let position = node.position
-            let scale = node.scale
-            let rotation = node.eulerAngles
-            return (transform, name, position, scale, rotation)
-        }
-    }
-
-    func printNodeDetails(_ nodes: [(simd_float4x4, String, SCNVector3, SCNVector3, SCNVector3)]) {
-        for (transform, name, position, scale, rotation) in nodes {
-            print("Node Name: \(name), Position: \(position), Scale: \(scale), Rotation: \(rotation)")
+    func printNodeDetails(_ nodes: [NodeData]) {
+        for node in nodes {
+            print("Name: \(node.name), Type: \(node.type), Position: \(node.position), Rotation: \(node.rotation)")
         }
     }
 }

@@ -17,19 +17,22 @@ class ARViewModel: NSObject, ObservableObject, ARViewModelProtocol {
 
      var isNavigatingToDoor = false
      var isRedBoxPlaced = false
-    
+     private let bdmService: BDMService
+
     var arSessionService: ARSessionServiceProtocol
     private let cameraService: ARCameraServiceProtocol
 
-    init(arSessionService: ARSessionServiceProtocol = ARSessionService(), cameraService: ARCameraServiceProtocol = ARCameraService()) {
+    init(arSessionService: ARSessionServiceProtocol = ARSessionService(), cameraService: ARCameraServiceProtocol = ARCameraService(), bdmService: BDMService = BDMService()) {
         self.arSessionService = arSessionService
         self.cameraService = cameraService
+        self.bdmService = bdmService
         super.init()
         self.arSessionService.delegate = self
     }
 
     func setupARView(_ arView: ARSCNView) {
         arSessionService.setupARView(arView)
+        loadAndPrintSceneNodes(from: "Salon.scn")
     }
 
     func didAdd(anchor: ARAnchor, in session: ARSession) {
@@ -48,13 +51,19 @@ class ARViewModel: NSObject, ObservableObject, ARViewModelProtocol {
                     addVisualIndicator(at: anchorPosition, to: arView)
                     addVisualIndicator(at: door0Position, to: arView, color: .green)
                     addVisualIndicator(at: window0Position, to: arView, color: .magenta)
-                    
                 }
                 isNavigatingToDoor = true
             }
         }
     }
-
+    // New method to load and print scene nodes using BDMService
+    private func loadAndPrintSceneNodes(from filename: String) {
+        if let nodes = bdmService.parseSCNFile(named: filename) {
+            bdmService.printNodeDetails(nodes)
+        } else {
+            print("No nodes parsed from the file.")
+        }
+    }
     func didUpdateCameraPosition(_ position: SCNVector3) {
         updateCameraPosition(position)
     }

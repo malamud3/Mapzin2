@@ -61,5 +61,6 @@ struct MyARViewOverlay: View {
             }
         }
         .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     }
 }
