@@ -1,5 +1,5 @@
 //
-//  Position.swift
+//  QRHandleService.swift
 //  Mapzin
 //
 //  Created by Amir Malamud on 23/07/2024.
