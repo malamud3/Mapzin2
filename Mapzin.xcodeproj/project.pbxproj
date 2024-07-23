@@ -57,6 +57,7 @@
 		A9916A832BE36B8000427095 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9916A822BE36B8000427095 /* UserLocation.swift */; };
 		A9916A862BE36BB800427095 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9916A852BE36BB800427095 /* LocationManager.swift */; };
 		A9923A022C4FD2E8007171D2 /* NodeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9923A012C4FD2E8007171D2 /* NodeData.swift */; };
+		A9923A042C4FED70007171D2 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9923A032C4FED70007171D2 /* MockData.swift */; };
 		A99B1F432C219BE8002B7B32 /* AppScreenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F422C219BE8002B7B32 /* AppScreenType.swift */; };
 		A99B1F452C21A494002B7B32 /* CoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F442C21A494002B7B32 /* CoordinatorView.swift */; };
 		A99B1F482C21A69E002B7B32 /* LocationDetailsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F472C21A69E002B7B32 /* LocationDetailsSheet.swift */; };
@@ -162,6 +163,7 @@
 		A9916A822BE36B8000427095 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		A9916A852BE36BB800427095 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A9923A012C4FD2E8007171D2 /* NodeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeData.swift; sourceTree = "<group>"; };
+		A9923A032C4FED70007171D2 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		A99B1F422C219BE8002B7B32 /* AppScreenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreenType.swift; sourceTree = "<group>"; };
 		A99B1F442C21A494002B7B32 /* CoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorView.swift; sourceTree = "<group>"; };
 		A99B1F472C21A69E002B7B32 /* LocationDetailsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsSheet.swift; sourceTree = "<group>"; };
@@ -504,6 +506,7 @@
 				A97891A52C4FB65800E13D34 /* NavigationENG */,
 				A9BE73B12C3A6A2B00B1B808 /* API */,
 				A9BE73AB2C3A648500B1B808 /* Sensors */,
+				A9923A032C4FED70007171D2 /* MockData.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -777,6 +780,7 @@
 				A90CEABD2C3C4F9400986305 /* ARViewModel.swift in Sources */,
 				A9496DB52BE381D0009F2B97 /* LoginButton.swift in Sources */,
 				A97A7B1B2C0D8E3600DA4619 /* Logger.swift in Sources */,
+				A9923A042C4FED70007171D2 /* MockData.swift in Sources */,
 				A9E669222C4551CC007C95A5 /* MyARView.swift in Sources */,
 				A94488172C0355A90007A9F0 /* MyLocationExtension.swift in Sources */,
 				A92BB4FE2C27F33A004061D7 /* POIService.swift in Sources */,
