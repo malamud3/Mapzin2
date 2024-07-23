@@ -7,16 +7,7 @@
 
 import SceneKit
 
-struct NodeData {
-    let name: String
-    let position: SCNVector3
-    let type: NodeType
-}
 
-enum NodeType {
-    case door
-    case window
-}
 
 class BDMService {
     func parseSCNFile(named filename: String) -> [NodeData]? {
