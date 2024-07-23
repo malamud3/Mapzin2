@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-  
+
 const imageSchema = new mongoose.Schema({
     name: String,
     desc: String,
@@ -10,5 +10,5 @@ const imageSchema = new mongoose.Schema({
         contentType: String
     }
 });
-  
+  //
 module.exports = new mongoose.model('ImageFile', imageSchema);
