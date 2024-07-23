@@ -41,7 +41,6 @@
 		A97563FF2BA6DA44002B08AD /* MapzinUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97563FE2BA6DA44002B08AD /* MapzinUITestsLaunchTests.swift */; };
 		A97A7B1B2C0D8E3600DA4619 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A7B1A2C0D8E3600DA4619 /* Logger.swift */; };
 		A97A7B1E2C0D907400DA4619 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = A97A7B1D2C0D907400DA4619 /* SwiftyBeaver */; };
-		A98523062C3BB438008CF22F /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98523052C3BB438008CF22F /* Position.swift */; };
 		A9916A5B2BE345F000427095 /* AuthMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9916A5A2BE345F000427095 /* AuthMethod.swift */; };
 		A9916A5D2BE3462A00427095 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9916A5C2BE3462A00427095 /* User.swift */; };
 		A9916A662BE35E6700427095 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A9916A652BE35E6700427095 /* FirebaseAnalytics */; };
@@ -58,6 +57,11 @@
 		A9916A862BE36BB800427095 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9916A852BE36BB800427095 /* LocationManager.swift */; };
 		A9923A022C4FD2E8007171D2 /* NodeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9923A012C4FD2E8007171D2 /* NodeData.swift */; };
 		A9923A042C4FED70007171D2 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9923A032C4FED70007171D2 /* MockData.swift */; };
+		A9923A062C4FF168007171D2 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9923A052C4FF168007171D2 /* Position.swift */; };
+		A9923A082C4FF432007171D2 /* QRHandleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9923A072C4FF432007171D2 /* QRHandleService.swift */; };
+		A9923A0A2C4FF5C8007171D2 /* VisualIndicatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9923A092C4FF5C8007171D2 /* VisualIndicatorService.swift */; };
+		A9923A0C2C4FFA65007171D2 /* QRCodeServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9923A0B2C4FFA65007171D2 /* QRCodeServiceProtocol.swift */; };
+		A9923A0E2C4FFA90007171D2 /* NavigationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9923A0D2C4FFA90007171D2 /* NavigationServiceProtocol.swift */; };
 		A99B1F432C219BE8002B7B32 /* AppScreenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F422C219BE8002B7B32 /* AppScreenType.swift */; };
 		A99B1F452C21A494002B7B32 /* CoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F442C21A494002B7B32 /* CoordinatorView.swift */; };
 		A99B1F482C21A69E002B7B32 /* LocationDetailsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B1F472C21A69E002B7B32 /* LocationDetailsSheet.swift */; };
@@ -155,7 +159,6 @@
 		A97563FC2BA6DA44002B08AD /* MapzinUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapzinUITests.swift; sourceTree = "<group>"; };
 		A97563FE2BA6DA44002B08AD /* MapzinUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapzinUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A97A7B1A2C0D8E3600DA4619 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		A98523052C3BB438008CF22F /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		A9916A5A2BE345F000427095 /* AuthMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethod.swift; sourceTree = "<group>"; };
 		A9916A5C2BE3462A00427095 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A9916A7C2BE362DE00427095 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -164,6 +167,11 @@
 		A9916A852BE36BB800427095 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A9923A012C4FD2E8007171D2 /* NodeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeData.swift; sourceTree = "<group>"; };
 		A9923A032C4FED70007171D2 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		A9923A052C4FF168007171D2 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
+		A9923A072C4FF432007171D2 /* QRHandleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRHandleService.swift; sourceTree = "<group>"; };
+		A9923A092C4FF5C8007171D2 /* VisualIndicatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualIndicatorService.swift; sourceTree = "<group>"; };
+		A9923A0B2C4FFA65007171D2 /* QRCodeServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeServiceProtocol.swift; sourceTree = "<group>"; };
+		A9923A0D2C4FFA90007171D2 /* NavigationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationServiceProtocol.swift; sourceTree = "<group>"; };
 		A99B1F422C219BE8002B7B32 /* AppScreenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreenType.swift; sourceTree = "<group>"; };
 		A99B1F442C21A494002B7B32 /* CoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorView.swift; sourceTree = "<group>"; };
 		A99B1F472C21A69E002B7B32 /* LocationDetailsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsSheet.swift; sourceTree = "<group>"; };
@@ -423,10 +431,10 @@
 				A92BB5052C27F54D004061D7 /* BDMData.swift */,
 				A92BB5072C27F6DF004061D7 /* RoomScanData.swift */,
 				A9BE73B82C3A6D4600B1B808 /* Floor.swift */,
-				A98523052C3BB438008CF22F /* Position.swift */,
 				A90CEABE2C3C4FB900986305 /* ARModel.swift */,
 				A9F2F4A12C3E90BB00DF5960 /* FloorMap.swift */,
 				A9923A012C4FD2E8007171D2 /* NodeData.swift */,
+				A9923A052C4FF168007171D2 /* Position.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -446,6 +454,7 @@
 			isa = PBXGroup;
 			children = (
 				A9D5A0A82C4D6101009BCE96 /* NavigationService.swift */,
+				A9923A072C4FF432007171D2 /* QRHandleService.swift */,
 			);
 			path = NavigationENG;
 			sourceTree = "<group>";
@@ -457,6 +466,7 @@
 				A92BB4FD2C27F33A004061D7 /* POIService.swift */,
 				A9F2F49D2C3E8F7100DF5960 /* FloorService.swift */,
 				A92BB5032C27F4F8004061D7 /* BDMService.swift */,
+				A9923A092C4FF5C8007171D2 /* VisualIndicatorService.swift */,
 			);
 			path = MapENG;
 			sourceTree = "<group>";
@@ -601,6 +611,8 @@
 			children = (
 				A9D5A0A12C4D2CB0009BCE96 /* ARCameraServiceProtocol.swift */,
 				A9D5A09D2C4D1C98009BCE96 /* ARSessionServiceProtocol.swift */,
+				A9923A0B2C4FFA65007171D2 /* QRCodeServiceProtocol.swift */,
+				A9923A0D2C4FFA90007171D2 /* NavigationServiceProtocol.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -797,11 +809,14 @@
 				A9496DB72BE381FF009F2B97 /* SignUpButton.swift in Sources */,
 				A99B1F4A2C21B4D4002B7B32 /* TransparentNavBar.swift in Sources */,
 				A90CEABF2C3C4FB900986305 /* ARModel.swift in Sources */,
+				A9923A082C4FF432007171D2 /* QRHandleService.swift in Sources */,
+				A9923A0A2C4FF5C8007171D2 /* VisualIndicatorService.swift in Sources */,
 				A9CB41142C4022B500CF40FA /* ARCameraService.swift in Sources */,
 				A9A683C72C1F225E0016455C /* SelectBuilding.swift in Sources */,
 				A9A683C52C1EF8CA0016455C /* CustomTextField.swift in Sources */,
 				A9916A7D2BE362DE00427095 /* LoginViewModel.swift in Sources */,
 				A92BB5082C27F6E0004061D7 /* RoomScanData.swift in Sources */,
+				A9923A0E2C4FFA90007171D2 /* NavigationServiceProtocol.swift in Sources */,
 				A907C1E52C285CC700F8802B /* ModelType.swift in Sources */,
 				A9916A5B2BE345F000427095 /* AuthMethod.swift in Sources */,
 				A94CDD132C4D8642006FC0E3 /* ARViewExtension.swift in Sources */,
@@ -815,7 +830,6 @@
 				A9D5A0A02C4D1CB1009BCE96 /* ARViewModelProtocol.swift in Sources */,
 				A9CB41102C401F1400CF40FA /* ARSessionService.swift in Sources */,
 				A9C4AC8F2C020701000C4D3E /* SearchResultsList.swift in Sources */,
-				A98523062C3BB438008CF22F /* Position.swift in Sources */,
 				A99B1F4F2C22D37B002B7B32 /* BuildingViewModel.swift in Sources */,
 				A99B1F432C219BE8002B7B32 /* AppScreenType.swift in Sources */,
 				A9916A832BE36B8000427095 /* UserLocation.swift in Sources */,
@@ -829,7 +843,9 @@
 				A9BE73B02C3A69D100B1B808 /* SheetType.swift in Sources */,
 				A99B1F482C21A69E002B7B32 /* LocationDetailsSheet.swift in Sources */,
 				A9D5A0A92C4D6101009BCE96 /* NavigationService.swift in Sources */,
+				A9923A0C2C4FFA65007171D2 /* QRCodeServiceProtocol.swift in Sources */,
 				A9916A812BE3635F00427095 /* LoginView.swift in Sources */,
+				A9923A062C4FF168007171D2 /* Position.swift in Sources */,
 				A9C4AC892C01FE08000C4D3E /* SearchBar.swift in Sources */,
 				A9A683CB2C1F26940016455C /* Coordinator.swift in Sources */,
 				A9F2F4A22C3E90BB00DF5960 /* FloorMap.swift in Sources */,

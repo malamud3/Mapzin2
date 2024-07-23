@@ -1,37 +1,65 @@
-//
-//  ARCameraService.swift
-//  Mapzin
-//
-//  Created by Amir Malamud on 11/07/2024.
-//
 import ARKit
 
-class ARCameraService: ARCameraServiceProtocol {
-    private var lastPosition: SCNVector3?
+protocol ARCameraServiceDelegate: AnyObject {
+    func didUpdateCameraPosition(_ position: SCNVector3)
+}
 
-    func updateCameraPosition(frame: ARFrame) -> SCNVector3? {
-        let cameraTransform = frame.camera.transform
-        let cameraPosition = SCNVector3(cameraTransform.columns.3.x, cameraTransform.columns.3.y, cameraTransform.columns.3.z)
-
-        if let lastPosition = lastPosition {
-            let movement = abs(cameraPosition.x - lastPosition.x) + abs(cameraPosition.y - lastPosition.y) + abs(cameraPosition.z - lastPosition.z)
-            if movement < 0.1 {
-                return nil // No significant movement
-            }
-        }
-
-        lastPosition = cameraPosition
-        return cameraPosition
+class ARCameraService {
+    weak var delegate: ARCameraServiceDelegate?
+    
+    private(set) var cameraPosition: SCNVector3?
+    private(set) var qrCodeOrigin: SCNVector3?
+    
+    private var cameraPositionReadings: [SCNVector3] = []
+    
+    func setQRCodeOrigin(_ origin: SCNVector3) {
+        qrCodeOrigin = origin
     }
-
-    func calculateDistances(to node: SCNNode, from arView: ARSCNView) -> (total: Float, x: Float, y: Float, z: Float) {
-        guard let cameraTransform = arView.session.currentFrame?.camera.transform else { return (0, 0, 0, 0) }
-        let cameraPosition = SCNVector3(cameraTransform.columns.3.x, cameraTransform.columns.3.y, cameraTransform.columns.3.z)
-        let nodePosition = node.position
-        let distanceX = nodePosition.x - cameraPosition.x
-        let distanceY = nodePosition.y - cameraPosition.y
-        let distanceZ = nodePosition.z - cameraPosition.z
-        let totalDistance = sqrt(pow(distanceX, 2) + pow(distanceY, 2) + pow(distanceZ, 2))
-        return (totalDistance, distanceX, distanceY, distanceZ)
+    
+    func updateCameraPosition(_ position: SCNVector3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.processNewCameraPosition(position)
+        }
+    }
+    
+    private func processNewCameraPosition(_ position: SCNVector3) {
+        guard let origin = qrCodeOrigin else { return }
+        
+        let relativePosition = SCNVector3(
+            position.x - origin.x,
+            position.y - origin.y,
+            position.z - origin.z
+        )
+        
+        cameraPositionReadings.append(relativePosition)
+        
+        if cameraPositionReadings.count > 10 {
+            cameraPositionReadings.removeFirst()
+        }
+        
+        let averagedPosition = averagePositions(cameraPositionReadings)
+        
+        print("Updated relative camera position: \(averagedPosition)")
+        cameraPosition = averagedPosition
+        
+        delegate?.didUpdateCameraPosition(averagedPosition)
+    }
+    
+    private func averagePositions(_ positions: [SCNVector3]) -> SCNVector3 {
+        guard !positions.isEmpty else {
+            return SCNVector3(0, 0, 0)
+        }
+        let sum = positions.reduce(SCNVector3(0, 0, 0)) { (result, position) in
+            return SCNVector3(
+                result.x + position.x,
+                result.y + position.y,
+                result.z + position.z
+            )
+        }
+        return SCNVector3(
+            sum.x / Float(positions.count),
+            sum.y / Float(positions.count),
+            sum.z / Float(positions.count)
+        )
     }
 }

@@ -10,7 +10,7 @@ import ARKit
 
 struct MyARView: UIViewRepresentable {
     @EnvironmentObject var coordinator: Coordinator
-    @StateObject var arViewModel = ARViewModel()
+    @EnvironmentObject var arViewModel: ARViewModel
 
     func makeUIView(context: Context) -> ARSCNView {
         let arView = ARSCNView()
@@ -25,9 +25,24 @@ struct MyARView: UIViewRepresentable {
     }
 }
 
+
 struct MyARViewContainer: View {
     @EnvironmentObject var coordinator: Coordinator
-    @StateObject var arViewModel = ARViewModel()
+    @StateObject var arViewModel: ARViewModel
+
+    init() {
+        let arSessionService = ARSessionService()
+        let qrHandleService = QRHandleService(arSessionService: arSessionService)
+        let navigationService = NavigationService(door0Position: MockData.position1.toSCNVector3(), window0Position: MockData.position2.toSCNVector3())
+        let visualIndicatorService = VisualIndicatorService()
+        _arViewModel = StateObject(wrappedValue: ARViewModel(
+            arSessionService: arSessionService,
+            bdmService: BDMService(),
+            qrHandleService: qrHandleService,
+            navigationService: navigationService,
+            visualIndicatorService: visualIndicatorService
+        ))
+    }
 
     var body: some View {
         ZStack {
