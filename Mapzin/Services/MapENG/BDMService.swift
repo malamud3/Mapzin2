@@ -7,8 +7,6 @@
 
 import SceneKit
 
-
-
 class BDMService {
     func parseSCNFile(named filename: String) -> [NodeData]? {
         guard let scene = SCNScene(named: filename) else {
@@ -17,13 +15,18 @@ class BDMService {
         }
 
         var nodeDataArray: [NodeData] = []
+        
         scene.rootNode.enumerateChildNodes { (node, _) in
-            if node.position != SCNVector3(0, 0, 0) {
+            if node.position != SCNVector3Zero {
                 let nodeType: NodeType
                 if node.name?.hasPrefix("Door") == true {
                     nodeType = .door
-                } else {
+                } else if node.name?.hasPrefix("Window") == true {
                     nodeType = .window
+                } else if node.name?.hasSuffix("Room0") == true {
+                    nodeType = .room
+                } else {
+                    nodeType = .other
                 }
                 
                 let nodeData = NodeData(
@@ -38,10 +41,5 @@ class BDMService {
         print("Parsed \(nodeDataArray.count) nodes from the SCN file.")
         return nodeDataArray
     }
-
-    func printNodeDetails(_ nodes: [NodeData]) {
-        for node in nodes {
-            print("Name: \(node.name), Type: \(node.type), Position: \(node.position)")
-        }
-    }
 }
+

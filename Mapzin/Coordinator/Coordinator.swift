@@ -42,7 +42,7 @@ class Coordinator: ObservableObject {
         case .selectBuilding:
             SelectBuildingView()
         case .ar:
-            MyARViewContainer()
+            ARViewContainer()
                            .edgesIgnoringSafeArea(.all)
         }
     }
