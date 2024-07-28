@@ -6,6 +6,7 @@ class ARViewModel: NSObject, ObservableObject {
     @Published var navigationInstructions: String = "Looking for QR code..."
     @Published var detectedQRCodePosition: SCNVector3?
     @Published var cameraPosition: SCNVector3?
+
     @Published var doorNavigationInstructions: String = ""
     @Published var detectedWindows: [SCNVector3] = []
     @Published var currentRoom: String = ""
@@ -33,6 +34,7 @@ class ARViewModel: NSObject, ObservableObject {
         super.init()
         self.arSessionService.delegate = self
         loadSceneData()
+
     }
 
     func setupARView(_ arView: ARSCNView) {
@@ -147,5 +149,7 @@ extension ARViewModel: ARSessionServiceDelegate {
             self.cameraPosition = position
         }
         updateNavigationInstructions()
+
     }
 }
+

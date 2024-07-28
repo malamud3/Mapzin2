@@ -13,10 +13,10 @@ struct Building: Identifiable, Codable {
     let id: UUID
     let name: String
     let coordinates: CLLocationCoordinate2D
-    let address: String
+    let address: String?
     let floors: [Floor]
-    let imageName: String
-    let link: String
+    let imageName: String?
+    let link: String?
     
     init(name: String, imageName: String, coordinates: CLLocationCoordinate2D, address: String, floors: [Floor], link: String) {
          self.id = UUID()
