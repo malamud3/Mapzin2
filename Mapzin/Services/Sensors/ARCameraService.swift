@@ -1,10 +1,19 @@
 import ARKit
 
+protocol ARCameraServiceProtocol {
+    var delegate: ARCameraServiceDelegate? { get set }
+    var cameraPosition: SCNVector3? { get }
+    var qrCodeOrigin: SCNVector3? { get }
+    
+    func setQRCodeOrigin(_ origin: SCNVector3)
+    func updateCameraPosition(frame: ARFrame) -> SCNVector3?
+}
+
 protocol ARCameraServiceDelegate: AnyObject {
     func didUpdateCameraPosition(_ position: SCNVector3)
 }
 
-class ARCameraService {
+class ARCameraService: ARCameraServiceProtocol {
     weak var delegate: ARCameraServiceDelegate?
     
     private(set) var cameraPosition: SCNVector3?
@@ -16,10 +25,20 @@ class ARCameraService {
         qrCodeOrigin = origin
     }
     
-    func updateCameraPosition(_ position: SCNVector3) {
+    func updateCameraPosition(frame: ARFrame) -> SCNVector3? {
+        let cameraTransform = frame.camera.transform
+        
+        let cameraPosition = SCNVector3(
+            x: cameraTransform.columns.3.x,
+            y: cameraTransform.columns.3.y,
+            z: cameraTransform.columns.3.z
+        )
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.processNewCameraPosition(position)
+            self.processNewCameraPosition(cameraPosition)
         }
+        
+        return cameraPosition
     }
     
     private func processNewCameraPosition(_ position: SCNVector3) {

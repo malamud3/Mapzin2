@@ -36,7 +36,6 @@ class NavigationService {
             )
             print("Updated relative camera position: \(relativePosition)")
             return relativePosition
-
         }
         return nil
     }
@@ -58,22 +57,6 @@ class NavigationService {
     }
 
     private func generateDirections(from camPosition: SCNVector3, to targetPosition: SCNVector3, distance: Float) -> String {
-            let deltaX = targetPosition.x - camPosition.x
-            let deltaY = targetPosition.y - camPosition.y
-            let deltaZ = targetPosition.z - camPosition.z
-            
-            var instructions = "Navigate to Door0: "
-            
-            if abs(deltaX) > 0.1 {
-                instructions += deltaX > 0 ? "Move right. " : "Move left. "
-            }
-
-            if abs(deltaY) > 0.1 {
-                instructions += deltaY > 0 ? "Move up. " : "Move down. "
-            }
-
-
-    private func generateDirections(from camPosition: SCNVector3, to targetPosition: SCNVector3, distance: Float) -> String {
         let deltaX = targetPosition.x - camPosition.x
         let deltaY = targetPosition.y - camPosition.y
         let deltaZ = targetPosition.z - camPosition.z
@@ -88,24 +71,32 @@ class NavigationService {
             instructions += deltaY > 0 ? "Move up. " : "Move down. "
         }
 
-    func calculateRelativePosition(of targetPosition: SCNVector3, from originPosition: SCNVector3) -> SCNVector3 {
-            return SCNVector3(
-                targetPosition.x - originPosition.x,
-                targetPosition.y - originPosition.y,
-                targetPosition.z - originPosition.z
-            )
+        if abs(deltaZ) > 0.1 {
+            instructions += deltaZ > 0 ? "Move forward. " : "Move backward. "
         }
 
-    func calculateDistance(from startPosition: SCNVector3, to endPosition: SCNVector3) -> Float {
-            let deltaX = endPosition.x - startPosition.x
-            let deltaY = endPosition.y - startPosition.y
-            let deltaZ = endPosition.z - startPosition.z
-            
-            return sqrt(pow(deltaX, 2) + pow(deltaY, 2) + pow(deltaZ, 2))
-        }
+        instructions += "Distance: \(String(format: "%.2f", distance)) meters."
+        
+        return instructions
+    }
 
-        func clamp(value: Float, lower: Float, upper: Float) -> Float {
-            return min(max(value, lower), upper)
-        }
+    private func calculateRelativePosition(of targetPosition: SCNVector3, from originPosition: SCNVector3) -> SCNVector3 {
+        return SCNVector3(
+            targetPosition.x - originPosition.x,
+            targetPosition.y - originPosition.y,
+            targetPosition.z - originPosition.z
+        )
+    }
 
+    private func calculateDistance(from startPosition: SCNVector3, to endPosition: SCNVector3) -> Float {
+        let deltaX = endPosition.x - startPosition.x
+        let deltaY = endPosition.y - startPosition.y
+        let deltaZ = endPosition.z - startPosition.z
+        
+        return sqrt(pow(deltaX, 2) + pow(deltaY, 2) + pow(deltaZ, 2))
+    }
+
+    private func clamp(value: Float, lower: Float, upper: Float) -> Float {
+        return min(max(value, lower), upper)
+    }
 }

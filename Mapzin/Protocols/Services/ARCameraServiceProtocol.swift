@@ -7,7 +7,7 @@
 
 import ARKit
 
-protocol ARCameraServiceProtocol {
-    func updateCameraPosition(frame: ARFrame) -> SCNVector3? 
-    func calculateDistances(to node: SCNNode, from arView: ARSCNView) -> (total: Float, x: Float, y: Float, z: Float)
-}
+//protocol ARCameraServiceProtocol {
+//    func updateCameraPosition(frame: ARFrame) -> SCNVector3? 
+//    func calculateDistances(to node: SCNNode, from arView: ARSCNView) -> (total: Float, x: Float, y: Float, z: Float)
+//}

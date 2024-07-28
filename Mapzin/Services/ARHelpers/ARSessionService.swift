@@ -5,14 +5,6 @@
 //  Created by Amir Malamud on 11/07/2024.
 //
 
-
-//
-//  ARSessionService.swift
-//  Mapzin
-//
-//  Created by Amir Malamud on 11/07/2024.
-//
-
 import ARKit
 
 class ARSessionService: NSObject, ARSessionServiceProtocol, ARSCNViewDelegate, ARSessionDelegate {
