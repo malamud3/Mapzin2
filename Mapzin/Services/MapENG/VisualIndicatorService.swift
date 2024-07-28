@@ -10,13 +10,18 @@ import ARKit
 import SceneKit
 
 class VisualIndicatorService {
+    
     func addVisualIndicators(for nodes: [NodeData], origin: SCNVector3, to arView: ARSCNView) {
-        for node in nodes {
-            addVisualIndicator(for: node, origin: origin, to: arView)
+        DispatchQueue.concurrentPerform(iterations: nodes.count) { index in
+            addVisualIndicator(for: nodes[index], origin: origin, to: arView)
         }
     }
-
-    private func addVisualIndicator(for node: NodeData, origin: SCNVector3, to arView: ARSCNView) {
+    
+    private func addVisualIndicator(for node: NodeData?, origin: SCNVector3, to arView: ARSCNView) {
+        guard let node = node else {
+            print("Error: Invalid node")
+            return
+        }
         let indicator: SCNNode
         
         switch node.type {
