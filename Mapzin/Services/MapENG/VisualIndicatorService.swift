@@ -87,5 +87,6 @@ class VisualIndicatorService {
         if let node = arView.scene.rootNode.childNode(withName: nodeName, recursively: true) {
             node.isHidden = !isVisible
         }
+
     }
 }

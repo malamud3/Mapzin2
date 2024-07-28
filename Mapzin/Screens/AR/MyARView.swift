@@ -13,6 +13,7 @@ struct ARViewContainer: View {
     @State private var showInstructions = false
     @State private var showSettings = false
 
+
     var body: some View {
         ZStack {
             ARViewRepresentable(viewModel: viewModel)
@@ -85,6 +86,7 @@ struct ARViewContainer: View {
             Spacer()
             scanButton
         }
+
     }
 
     private var statusIndicator: some View {

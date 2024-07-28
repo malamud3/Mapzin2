@@ -36,6 +36,7 @@ class NavigationService {
             )
             print("Updated relative camera position: \(relativePosition)")
             return relativePosition
+
         }
         return nil
     }
@@ -71,12 +72,20 @@ class NavigationService {
                 instructions += deltaY > 0 ? "Move up. " : "Move down. "
             }
 
-            if abs(deltaZ) > 0.1 {
-                instructions += deltaZ > 0 ? "Move backward. " : "Move forward. "
-            }
 
-            instructions += String(format: "Distance: %.2f meters", distance)
-            return instructions
+    private func generateDirections(from camPosition: SCNVector3, to targetPosition: SCNVector3, distance: Float) -> String {
+        let deltaX = targetPosition.x - camPosition.x
+        let deltaY = targetPosition.y - camPosition.y
+        let deltaZ = targetPosition.z - camPosition.z
+        
+        var instructions = "Navigate to Door0: "
+        
+        if abs(deltaX) > 0.1 {
+            instructions += deltaX > 0 ? "Move right. " : "Move left. "
+        }
+
+        if abs(deltaY) > 0.1 {
+            instructions += deltaY > 0 ? "Move up. " : "Move down. "
         }
 
     func calculateRelativePosition(of targetPosition: SCNVector3, from originPosition: SCNVector3) -> SCNVector3 {
@@ -98,4 +107,5 @@ class NavigationService {
         func clamp(value: Float, lower: Float, upper: Float) -> Float {
             return min(max(value, lower), upper)
         }
+
 }
