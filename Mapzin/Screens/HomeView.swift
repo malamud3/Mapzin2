@@ -30,8 +30,8 @@ struct HomeView: View {
                         }
                     
                     Menu {
-                        Button("Task 1", action: { handleTask(.task1) })
-                        Button("Task 2", action: { handleTask(.task2) })
+                        Button("Profile", action: { handleTask(.task1) })
+                        Button("Buildings", action: { handleTask(.task2) })
                     } label: {
                         Image(systemName: "ellipsis.circle")
                             .font(.title)

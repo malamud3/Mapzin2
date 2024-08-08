@@ -7,7 +7,7 @@ struct MapView: View {
     @Binding var route: MKRoute?
     @Binding var routeDisplaying: Bool
     @Binding var routeDestination: MKMapItem?
-    @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var locationManager: LocationService
     @State private var cameraPosition: MapCameraPosition = .userLocation(fallback: .automatic)
 
     var body: some View {

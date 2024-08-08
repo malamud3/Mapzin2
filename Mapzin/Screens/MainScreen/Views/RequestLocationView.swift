@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct RequestLocationView: View {
-    @ObservedObject var locationManager: LocationManager
+    @ObservedObject var locationManager: LocationService
     
     var body: some View {
         VStack {
