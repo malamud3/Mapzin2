@@ -2,11 +2,11 @@ import SwiftUI
 
 struct CoordinatorView: View {
     @StateObject private var coordinator = Coordinator()
-    @StateObject private var locationManager = LocationManager()
+    @StateObject private var locationManager = LocationService()
 
     var body: some View {
         NavigationStack(path: $coordinator.path) {
-            coordinator.build(screen: .ar)
+            coordinator.build(screen: .welcome)
                 .navigationDestination(for: AppScreenType.self) { screen in
                     if locationManager.authorizationStatus == .notDetermined {
                         Text("Determining location authorization status...")

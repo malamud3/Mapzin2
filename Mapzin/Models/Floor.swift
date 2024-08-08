@@ -12,5 +12,4 @@ struct Floor: Identifiable, Codable {
     let name: String
     let levelIndex: Int
     let pois: [POI]
-    let mapImage: String
 }

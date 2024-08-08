@@ -9,7 +9,7 @@ import FirebaseAuth
 import Combine
 
 
-class FirebaseAuthProvider {
+class FirebaseAuthService {
     func signIn(withEmail email: String, password: String) -> AsyncStream<Result<Void, Error>> {
         return AsyncStream { continuation in
             Auth.auth().signIn(withEmail: email, password: password) { result, error in

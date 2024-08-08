@@ -14,10 +14,10 @@ class LoginViewModel: ObservableObject {
     @Published var errorMessage = ""
     @Published var isLoggedIn = false
     
-    private var authProvider: FirebaseAuthProvider
+    private var authProvider: FirebaseAuthService
     var cancellables = Set<AnyCancellable>()
     
-    init(authProvider: FirebaseAuthProvider = FirebaseAuthProvider()) {
+    init(authProvider: FirebaseAuthService = FirebaseAuthService()) {
         self.authProvider = authProvider
     }
 
