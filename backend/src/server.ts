@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { MongoClient, ObjectId } from 'mongodb';
+import {Building, isValidBuilding} from './types/Building';
 
 dotenv.config();
 
@@ -18,7 +19,7 @@ async function connectToDatabase() {
     try {
         await client.connect();
         console.log('Connected to MongoDB Atlas');
-        return client.db('mapzin'); // Replace 'mapzin' with your actual database name
+        return client.db('mapzin');
     } catch (error) {
         console.error('MongoDB Atlas connection error:', error);
         process.exit(1);
@@ -32,7 +33,16 @@ app.get('/', (req, res) => {
 // Building CRUD operations
 app.post('/api/buildings', async (req, res) => {
     try {
-        const building = req.body;
+        const buildingData = req.body;
+
+        // Validate the incoming data
+        if (!isValidBuilding(buildingData)) {
+            return res.status(400).json({ message: 'Invalid building data' });
+        }
+
+        // If validation passes, we can safely assert the type
+        const building: Building = buildingData as Building;
+
         const result = await db.collection('buildings').insertOne(building);
         res.status(201).json(result);
     } catch (error) {
@@ -46,6 +56,61 @@ app.get('/api/buildings', async (req, res) => {
         res.json(buildings);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching buildings', error });
+    }
+});
+
+app.get('/api/buildings/:id', async (req, res) => {
+    try {
+        const id = new ObjectId(req.params.id);
+        const building = await db.collection('buildings').findOne({ _id: id });
+        if (building) {
+            res.json(building);
+        } else {
+            res.status(404).json({ message: 'Building not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching building', error });
+    }
+});
+
+app.put('/api/buildings/:id', async (req, res) => {
+    try {
+        const id = new ObjectId(req.params.id);
+        const buildingData = req.body;
+
+        // Validate the incoming data
+        if (!isValidBuilding(buildingData)) {
+            return res.status(400).json({ message: 'Invalid building data' });
+        }
+
+        // If validation passes, we can safely assert the type
+        const updatedBuilding = buildingData as Building;
+
+        const result = await db.collection('buildings').updateOne(
+            { _id: id },
+            { $set: updatedBuilding }
+        );
+        if (result.matchedCount > 0) {
+            res.json({ message: 'Building updated successfully' });
+        } else {
+            res.status(404).json({ message: 'Building not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating building', error });
+    }
+});
+
+app.delete('/api/buildings/:id', async (req, res) => {
+    try {
+        const id = new ObjectId(req.params.id);
+        const result = await db.collection('buildings').deleteOne({ _id: id });
+        if (result.deletedCount > 0) {
+            res.json({ message: 'Building deleted successfully' });
+        } else {
+            res.status(404).json({ message: 'Building not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting building', error });
     }
 });
 
