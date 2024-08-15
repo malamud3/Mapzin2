@@ -1,7 +1,9 @@
 // src/types/Building.ts
+import { ObjectId } from 'mongodb';
+import {Floor, FloorDocument, fromFloorDocument, toFloorDocument} from "./Floor";
 
 export interface Building {
-    _id?: string;
+    _id?: string | ObjectId;
     name: string;
     address: string;
     location: {
@@ -11,31 +13,32 @@ export interface Building {
     floors: Floor[];
 }
 
-interface Floor {
-    level: number;
-    name: string;
-    pois: POI[];
+export interface BuildingDocument extends Omit<Building, '_id' | 'floors'> {
+    _id?: ObjectId;
+    floors: FloorDocument[];
 }
 
-interface POI {
-    name: string;
-    type: string;
-    location: {
-        x: number;
-        y: number;
+export function toBuildingDocument(building: Building): BuildingDocument {
+    const { _id, floors, ...rest } = building;
+    return {
+        ...rest,
+        _id: _id instanceof ObjectId ? _id : _id ? new ObjectId(_id) : undefined,
+        floors: floors.map(floor => toFloorDocument(floor))
     };
-    description: string;
-    connections: Connection[];
 }
 
-interface Connection {
-    connectedPoiId: string;
-    distance: number;
+export function fromBuildingDocument(doc: BuildingDocument): Building {
+    return {
+        ...doc,
+        _id: doc._id ? doc._id.toString() : undefined,
+        floors: doc.floors.map(floor => fromFloorDocument(floor))
+    };
 }
 
 export function isValidBuilding(data: any): data is Building {
     return (
         typeof data === 'object' &&
+        (data._id === undefined || typeof data._id === 'string' || data._id instanceof ObjectId) &&
         typeof data.name === 'string' &&
         typeof data.address === 'string' &&
         typeof data.location === 'object' &&

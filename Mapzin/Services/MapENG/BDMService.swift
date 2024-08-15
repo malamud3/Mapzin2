@@ -1,10 +1,3 @@
-//
-//  BDMFileManger.swift
-//  Mapzin
-//
-//  Created by Amir Malamud on 23/06/2024.
-//
-
 import SceneKit
 
 class BDMService {
@@ -17,6 +10,14 @@ class BDMService {
         var nodeDataArray: [NodeData] = []
         
         scene.rootNode.enumerateChildNodes { (node, _) in
+            // Debug: Print all node names and their immediate properties
+            print("Node: \(node.name ?? "Unnamed"), Position: \(node.position), Has Geometry: \(node.geometry != nil)")
+            
+            if let geometry = node.geometry {
+                let (min, max) = geometry.boundingBox
+                print("  Geometry Bounding Box - Min: \(min), Max: \(max)")
+            }
+            
             if node.position != SCNVector3Zero {
                 let nodeType: NodeType
                 if node.name?.hasPrefix("Door") == true {
@@ -29,12 +30,34 @@ class BDMService {
                     nodeType = .other
                 }
                 
+                // Try different methods to get bounding box
+                let boundingBox: BoundingBox
+                if let geometry = node.geometry {
+                    let (min, max) = geometry.boundingBox
+                    boundingBox = BoundingBox(
+                        width: max.x - min.x,
+                        height: max.y - min.y,
+                        depth: max.z - min.z
+                    )
+                } else {
+                    // Fallback to node's bounding box if geometry is nil
+                    let (min, max) = node.boundingBox
+                    boundingBox = BoundingBox(
+                        width: max.x - min.x,
+                        height: max.y - min.y,
+                        depth: max.z - min.z
+                    )
+                }
+                
                 let nodeData = NodeData(
                     name: node.name ?? "Unnamed",
                     position: node.position,
-                    type: nodeType
+                    type: nodeType,
+                    boundingBox: boundingBox
                 )
                 nodeDataArray.append(nodeData)
+                
+                print("Parsed node: \(nodeData.name), Position: \(nodeData.position), Type: \(nodeType), Bounding Box: \(boundingBox)")
             }
         }
 
@@ -43,3 +66,4 @@ class BDMService {
     }
 }
 
+// Structs and enums remain the same

@@ -102,7 +102,7 @@ struct ARViewContainer: View {
         .background(Color.black.opacity(0.5))
         .cornerRadius(20)
     }
-
+    
     private var scanButton: some View {
         Button(action: { /* Trigger QR scan */ }) {
             Text("Scan QR")

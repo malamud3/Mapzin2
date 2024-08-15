@@ -95,8 +95,4 @@ class NavigationService {
         
         return sqrt(pow(deltaX, 2) + pow(deltaY, 2) + pow(deltaZ, 2))
     }
-
-    private func clamp(value: Float, lower: Float, upper: Float) -> Float {
-        return min(max(value, lower), upper)
-    }
 }

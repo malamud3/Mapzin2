@@ -39,7 +39,7 @@ class ARViewModel: NSObject, ObservableObject {
 
     func setupARView(_ arView: ARSCNView) {
         arSessionService.setupARView(arView)
-        addSceneNodesTo(arView)
+//        addSceneNodesTo(arView)
     }
 
     private func loadSceneData() {
@@ -49,29 +49,29 @@ class ARViewModel: NSObject, ObservableObject {
         }
     }
 
-    private func addSceneNodesTo(_ arView: ARSCNView) {
-        for node in sceneNodes {
-            let visualNode = SCNNode()
-            visualNode.position = node.position
-            
-            switch node.type {
-            case .door:
-                visualNode.geometry = SCNBox(width: 0.1, height: 2.0, length: 1.0, chamferRadius: 0)
-                visualNode.geometry?.firstMaterial?.diffuse.contents = UIColor.brown.withAlphaComponent(0.5)
-            case .window:
-                visualNode.geometry = SCNBox(width: 0.1, height: 1.0, length: 1.0, chamferRadius: 0)
-                visualNode.geometry?.firstMaterial?.diffuse.contents = UIColor.blue.withAlphaComponent(0.3)
-            case .room:
-                visualNode.geometry = SCNBox(width: 0.1, height: 1.0, length: 1.0, chamferRadius: 0)
-                visualNode.geometry?.firstMaterial?.diffuse.contents = UIColor.blue.withAlphaComponent(0.3)
-            case .other:
-                visualNode.geometry = SCNBox(width: 0.1, height: 1.0, length: 1.0, chamferRadius: 0)
-                visualNode.geometry?.firstMaterial?.diffuse.contents = UIColor.blue.withAlphaComponent(0.3)
-            }
-            
-            arView.scene.rootNode.addChildNode(visualNode)
-        }
-    }
+//    private func addSceneNodesTo(_ arView: ARSCNView) {
+//        for node in sceneNodes {
+//            let visualNode = SCNNode()
+//            visualNode.position = node.position
+//            
+//            switch node.type {
+//            case .door:
+//                visualNode.geometry = SCNBox(width: 0.1, height: 2.0, length: 1.0, chamferRadius: 0)
+//                visualNode.geometry?.firstMaterial?.diffuse.contents = UIColor.brown.withAlphaComponent(0.5)
+//            case .window:
+//                visualNode.geometry = SCNBox(width: 0.1, height: 1.0, length: 1.0, chamferRadius: 0)
+//                visualNode.geometry?.firstMaterial?.diffuse.contents = UIColor.blue.withAlphaComponent(0.3)
+//            case .room:
+//                visualNode.geometry = SCNBox(width: 0.1, height: 1.0, length: 1.0, chamferRadius: 0)
+//                visualNode.geometry?.firstMaterial?.diffuse.contents = UIColor.blue.withAlphaComponent(0.3)
+//            case .other:
+//                visualNode.geometry = SCNBox(width: 0.1, height: 1.0, length: 1.0, chamferRadius: 0)
+//                visualNode.geometry?.firstMaterial?.diffuse.contents = UIColor.blue.withAlphaComponent(0.3)
+//            }
+//            
+//            arView.scene.rootNode.addChildNode(visualNode)
+//        }
+//    }
 
     func updateNavigationInstructions() {
         DispatchQueue.main.async {

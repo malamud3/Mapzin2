@@ -3,25 +3,33 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/server.ts",
-    "dev": "nodemon --exec ts-node src/server.ts",
-    "build": "tsc"
+    "start": "ts-node src/serverSetup/server.ts",
+    "dev": "nodemon --exec ts-node src/serverSetup/server.ts",
+    "build": "tsc",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "csv-stringify": "^6.5.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mongodb": "^6.8.0",
-    "mongoose": "^8.5.2"
+    "mongoose": "^8.5.2",
+    "typescript-collections": "^1.3.3"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
     "@types/mongodb": "^4.0.6",
-    "@types/node": "^22.1.0",
+    "@types/node": "^22.3.0",
+    "jest": "^29.7.0",
+    "mongodb-memory-server": "^10.0.0",
     "nodemon": "^3.1.4",
+    "ts-jest": "^29.2.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   }
