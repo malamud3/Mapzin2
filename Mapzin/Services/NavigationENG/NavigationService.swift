@@ -22,6 +22,7 @@ class NavigationService {
     private var objectNodes: [String: SCNNode] = [:]
     private let arrowSpacing: Float = 0.3 // Space between arrows in meters
     private let fixedHeight: Float = -1.4 // Fixed height for all cubes
+    private let qrCodePosition = SCNVector3(0, -1.5, -2.5)
 
 
     func handleAnchorDetection(anchor: ARImageAnchor, arView: ARSCNView?) -> SCNVector3? {
@@ -41,46 +42,36 @@ class NavigationService {
         return nil
     }
 
+
     private func createSequentialRoute(in arView: ARSCNView, startingFrom redCubePosition: SCNVector3) {
+        var previousPosition = redCubePosition
         
+        for (index, object) in arObjects.enumerated() {
+            print("Processing object: \(object.name)")
 
-           var previousPosition = redCubePosition
-           
-           for (index, object) in arObjects.enumerated() {
-               print("Processing object: \(object.name)")
-
-               if let objectNode = objectNodes[object.name] {
-                   if index == 0 {
-                       // First leg: from red cube to first object
-                       presentRoute(in: arView, from: previousPosition, to: objectNode.position)
-                   } else {
-                       // Subsequent legs: from previous object to current object
-                       let previousObjectNode = objectNodes[arObjects[index - 1].name]!
-                       presentRoute(in: arView, from: previousObjectNode.position, to: objectNode.position)
-                   }
-                   previousPosition = objectNode.position
-               }
-           }
-       }
-//    private func createSequentialRoute(in arView: ARSCNView, startingFrom redCubePosition: SCNVector3) {
-//        var previousPosition = redCubePosition
-//        
-//        for (index, object) in arObjects.enumerated() {
-//            print("Processing object: \(object.name)")
-//
-//            if let objectNode = objectNodes[object.name] {
-//                presentRoute(in: arView, from: previousPosition, to: objectNode.position)
-//                previousPosition = objectNode.position
-//            }
-//        }
-//    }
+            if let objectNode = objectNodes[object.name] {
+                presentRoute(in: arView, from: previousPosition, to: objectNode.position)
+                previousPosition = objectNode.position
+            }
+        }
+    }
        private func addObjectCubes(in arView: ARSCNView, qrTransform: simd_float4x4) {
 
            for object in arObjects {
                let cubeNode = createCube(color: object.color)
                
+               let relativeObjectPosition = SCNVector3(
+                        object.position.x - qrCodePosition.x,
+                        0, // Y difference is now 0
+                        object.position.z - qrCodePosition.z
+                   )
+               
                // Calculate the world position based on QR code transform
-               var worldPosition = simd_float4(object.position.x, 0, object.position.z, 1)
+               var worldPosition = simd_float4(
+                    relativeObjectPosition.x,
+                    0,
+                    relativeObjectPosition.z, 1
+               )
                worldPosition = simd_mul(qrTransform, worldPosition)
                
                // Set the cube's position, forcing Y to be at fixedHeight
@@ -255,20 +246,4 @@ class NavigationService {
         return directions
     }
 }
-extension SCNVector3 {
-    func distance(to vector: SCNVector3) -> Float {
-        let deltaX = vector.x - self.x
-        let deltaY = vector.y - self.y
-        let deltaZ = vector.z - self.z
-        return sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ)
-    }
 
-    func normalized() -> SCNVector3 {
-        let length = self.length()
-        return SCNVector3(self.x / length, self.y / length, self.z / length)
-    }
-
-    func length() -> Float {
-        return sqrt(x * x + y * y + z * z)
-    }
-}
