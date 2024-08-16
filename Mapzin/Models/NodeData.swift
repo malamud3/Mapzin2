@@ -19,5 +19,5 @@ struct NodeData {
     let name: String
     let position: SCNVector3
     let type: NodeType
-    let boundingBox: BoundingBox
+//    let boundingBox: BoundingBox
 }

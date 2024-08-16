@@ -30,34 +30,34 @@ class BDMService {
                     nodeType = .other
                 }
                 
-                // Try different methods to get bounding box
-                let boundingBox: BoundingBox
-                if let geometry = node.geometry {
-                    let (min, max) = geometry.boundingBox
-                    boundingBox = BoundingBox(
-                        width: max.x - min.x,
-                        height: max.y - min.y,
-                        depth: max.z - min.z
-                    )
-                } else {
-                    // Fallback to node's bounding box if geometry is nil
-                    let (min, max) = node.boundingBox
-                    boundingBox = BoundingBox(
-                        width: max.x - min.x,
-                        height: max.y - min.y,
-                        depth: max.z - min.z
-                    )
-                }
+//                // Try different methods to get bounding box
+//                let boundingBox: BoundingBox
+//                if let geometry = node.geometry {
+//                    let (min, max) = geometry.boundingBox
+//                    boundingBox = BoundingBox(
+//                        width: max.x - min.x,
+//                        height: max.y - min.y,
+//                        depth: max.z - min.z
+//                    )
+//                } else {
+//                    // Fallback to node's bounding box if geometry is nil
+//                    let (min, max) = node.boundingBox
+//                    boundingBox = BoundingBox(
+//                        width: max.x - min.x,
+//                        height: max.y - min.y,
+//                        depth: max.z - min.z
+//                    )
+//                }
                 
                 let nodeData = NodeData(
                     name: node.name ?? "Unnamed",
                     position: node.position,
-                    type: nodeType,
-                    boundingBox: boundingBox
+                    type: nodeType
+//                    boundingBox: boundingBox
                 )
                 nodeDataArray.append(nodeData)
                 
-                print("Parsed node: \(nodeData.name), Position: \(nodeData.position), Type: \(nodeType), Bounding Box: \(boundingBox)")
+                print("Parsed node: \(nodeData.name), Position: \(nodeData.position), Type: \(nodeType)")
             }
         }
 
@@ -66,4 +66,3 @@ class BDMService {
     }
 }
 
-// Structs and enums remain the same
