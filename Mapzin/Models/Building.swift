@@ -15,8 +15,6 @@ struct Building: Identifiable, Codable {
     let coordinates: CLLocationCoordinate2D
     let address: String?
     let floors: [Floor]
-    let imageName: String?
-    let link: String?
     
     init(name: String, imageName: String, coordinates: CLLocationCoordinate2D, address: String, floors: [Floor], link: String) {
          self.id = UUID()
@@ -24,8 +22,6 @@ struct Building: Identifiable, Codable {
          self.coordinates = coordinates
          self.address = address
          self.floors = floors
-         self.imageName = imageName
-         self.link = link
      }
 }
 

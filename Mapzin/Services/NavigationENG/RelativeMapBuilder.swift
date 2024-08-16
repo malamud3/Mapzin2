@@ -18,26 +18,24 @@ class RelativeMapBuilder {
         self.relativeMap.removeAll()
     }
 
-    func addNode(_ node: SCNNode?) {
-        guard let node = node else {
-            print("Error: Invalid node")
-            return
-        }
-        guard let qrPosition = qrCodePosition else {
-            print("Error: QR code position not set")
-            return
-        }
 
-        let relativePosition = SCNVector3(
-            node.worldPosition.x - qrPosition.x,
-            node.worldPosition.y - qrPosition.y,
-            node.worldPosition.z - qrPosition.z
-        )
+//    func addNode(_ node: SCNNode) {
+//        guard let qrPosition = qrCodePosition else {
+//            print("Error: QR code position not set")
+//            return
+//        }
+//
+//        let relativePosition = SCNVector3(
+//            node.worldPosition.x - qrPosition.x,
+//            node.worldPosition.y - qrPosition.y,
+//            node.worldPosition.z - qrPosition.z
+//        )
+//
+//        let nodeType = determineNodeType(node)
+//        let nodeData = NodeData(name: node.name ?? "Unknown", position: relativePosition, type: nodeType, boundingBox: <#BoundingBox#>)
+//        relativeMap.append(nodeData)
+//    }
 
-        let nodeType = determineNodeType(node)
-        let nodeData = NodeData(name: node.name ?? "Unknown", position: relativePosition, type: nodeType)
-        relativeMap.append(nodeData)
-    }
 
     private func determineNodeType(_ node: SCNNode) -> NodeType {
         let nodeTypes: [String: NodeType] = [
