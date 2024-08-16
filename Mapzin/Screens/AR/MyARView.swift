@@ -4,7 +4,6 @@
 //
 //  Created by Amir Malamud on 19/06/2024.
 
-
 import SwiftUI
 import ARKit
 
@@ -13,7 +12,9 @@ struct ARViewContainer: View {
     @StateObject private var sharedViewModel = SharedViewModel()
     @State private var showInstructions = false
     @State private var showSettings = false
+    @State private var currentObjectIndex = 0
 
+     
     var body: some View {
         ZStack {
             ARViewRepresentable(viewModel: viewModel)
@@ -39,10 +40,9 @@ struct ARViewContainer: View {
             AccordionListView()
                 .environmentObject(sharedViewModel)
         }
-        .onChange(of: sharedViewModel.selectedItem) {_, newItem in
+        .onChange(of: sharedViewModel.selectedItem) { _, newItem in
             if let item = newItem {
-                print("Selected item from AccordionListView: \(item)")
-                print("Selected item from AccordionListView: \(String(describing: sharedViewModel.selectedItem))")
+                viewModel.selectedItemObject = ARObject(name: item, position: SCNVector3(-0.568, -0.478, -1.851), color: .green)
             }
         }
     }

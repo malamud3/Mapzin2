@@ -20,49 +20,9 @@ class NavigationService {
     private let scaleFactor: Float = 1.0
     private var redCubeNode: SCNNode?
     private var objectNodes: [String: SCNNode] = [:]
-    private var vectorData: [String: SCNVector3] = [:]
     private let arrowSpacing: Float = 0.3 // Space between arrows in meters
     private let fixedHeight: Float = -1.4 // Fixed height for all cubes
 
-    private let qrCodePosition = SCNVector3(0, -1.5, -2.5) // Updated Y to fixedHeight
-    private let door0Position = SCNVector3(0.568, -1.4, -1.851) // Y is already at fixedHeight
-
-    init() {
-        // Calculate Door0 position relative to QR code
-        let relativeDoor0Position = SCNVector3(
-            door0Position.x - qrCodePosition.x,
-            0, // Y difference is now 0
-            door0Position.z - qrCodePosition.z
-        )
-
-        // Calculate Window0 position (1 meter away from Door0 in the same direction)
-        let doorToQRVector = SCNVector3(
-            qrCodePosition.x - door0Position.x,
-            0, // Ignore Y difference
-            qrCodePosition.z - door0Position.z
-        )
-        let normalizedVector = normalize(doorToQRVector)
-        let window0Position = SCNVector3(
-            door0Position.x + normalizedVector.x,
-            fixedHeight,
-            door0Position.z + normalizedVector.z
-        )
-        let relativeWindow0Position = SCNVector3(
-            window0Position.x - qrCodePosition.x,
-            0, // Y difference is now 0
-            window0Position.z - qrCodePosition.z
-        )
-
-        arObjects = [
-            ARObject(name: "Door0", position: relativeDoor0Position, color: .green),
-            ARObject(name: "Window0", position: relativeWindow0Position, color: .blue),
-        ]
-    }
-
-    private func normalize(_ vector: SCNVector3) -> SCNVector3 {
-        let length = sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z)
-        return SCNVector3(vector.x / length, vector.y / length, vector.z / length)
-    }
 
     func handleAnchorDetection(anchor: ARImageAnchor, arView: ARSCNView?) -> SCNVector3? {
         let referenceImageName = anchor.referenceImage.name
@@ -72,10 +32,8 @@ class NavigationService {
             
             if let arView = arView {
                 let redCubePosition = addRedCubeAtUserPosition(arView)
-                addObjectCubes(in: arView, qrTransform: anchor.transform, redCubePosition: redCubePosition)
-                if let firstObject = objectNodes.values.first {
-                    createSequentialRoute(in: arView, startingFrom: redCubePosition)
-                }
+                addObjectCubes(in: arView, qrTransform: anchor.transform)
+                createSequentialRoute(in: arView, startingFrom: redCubePosition)
             }
             
             return SCNVector3(anchor.transform.columns.3.x, anchor.transform.columns.3.y, anchor.transform.columns.3.z)
@@ -84,25 +42,61 @@ class NavigationService {
     }
 
     private func createSequentialRoute(in arView: ARSCNView, startingFrom redCubePosition: SCNVector3) {
-        let sortedObjects = objectNodes.sorted { $0.key < $1.key }
-        var previousPosition = redCubePosition
         
-        for (index, object) in sortedObjects.enumerated() {
-            print("Start node: \(object.key)")
 
-            if index == 0 {
-                // First leg: from red cube to first object
-                presentRoute(in: arView, from: previousPosition, to: object.value.position)
-            } else {
-                // Subsequent legs: from previous object to current object
-                let previousObject = sortedObjects[index - 1]
-                print("End node: \(previousObject.key)")
+           var previousPosition = redCubePosition
+           
+           for (index, object) in arObjects.enumerated() {
+               print("Processing object: \(object.name)")
 
-                presentRoute(in: arView, from: previousObject.value.position, to: object.value.position)
-            }
-            previousPosition = object.value.position
-        }
-    }
+               if let objectNode = objectNodes[object.name] {
+                   if index == 0 {
+                       // First leg: from red cube to first object
+                       presentRoute(in: arView, from: previousPosition, to: objectNode.position)
+                   } else {
+                       // Subsequent legs: from previous object to current object
+                       let previousObjectNode = objectNodes[arObjects[index - 1].name]!
+                       presentRoute(in: arView, from: previousObjectNode.position, to: objectNode.position)
+                   }
+                   previousPosition = objectNode.position
+               }
+           }
+       }
+//    private func createSequentialRoute(in arView: ARSCNView, startingFrom redCubePosition: SCNVector3) {
+//        var previousPosition = redCubePosition
+//        
+//        for (index, object) in arObjects.enumerated() {
+//            print("Processing object: \(object.name)")
+//
+//            if let objectNode = objectNodes[object.name] {
+//                presentRoute(in: arView, from: previousPosition, to: objectNode.position)
+//                previousPosition = objectNode.position
+//            }
+//        }
+//    }
+       private func addObjectCubes(in arView: ARSCNView, qrTransform: simd_float4x4) {
+
+           for object in arObjects {
+               let cubeNode = createCube(color: object.color)
+               
+               // Calculate the world position based on QR code transform
+               var worldPosition = simd_float4(object.position.x, 0, object.position.z, 1)
+               worldPosition = simd_mul(qrTransform, worldPosition)
+               
+               // Set the cube's position, forcing Y to be at fixedHeight
+               cubeNode.position = SCNVector3(
+                   worldPosition.x,
+                   fixedHeight,
+                   worldPosition.z
+               )
+               
+               cubeNode.name = object.name
+               arView.scene.rootNode.addChildNode(cubeNode)
+               objectNodes[object.name] = cubeNode
+               
+               print("Placed \(object.name) at position: \(cubeNode.position)")
+           }
+       }
     
     private func createDirectionArrows(in arView: ARSCNView, from start: SCNVector3, to end: SCNVector3) {
         let vector = SCNVector3(
@@ -179,45 +173,6 @@ class NavigationService {
            return cubePosition
        }
     
-    private func addObjectCubes(in arView: ARSCNView, qrTransform: simd_float4x4, redCubePosition: SCNVector3) {
-            for object in arObjects {
-                let cubeNode = createCube(color: object.color)
-                
-                // Calculate the world position based on QR code transform
-                var worldPosition = simd_float4(object.position.x, 0, object.position.z, 1)
-                worldPosition = simd_mul(qrTransform, worldPosition)
-                
-                // Set the cube's position, forcing Y to be at fixedHeight
-                cubeNode.position = SCNVector3(
-                    worldPosition.x,
-                    fixedHeight,
-                    worldPosition.z
-                )
-                
-                cubeNode.name = object.name
-                arView.scene.rootNode.addChildNode(cubeNode)
-                objectNodes[object.name] = cubeNode
-                
-                print("Placed \(object.name) at position: \(cubeNode.position)")
-            }
-        }
-
-//        private func presentRoute(in arView: ARSCNView, from start: SCNVector3, to end: SCNVector3) {
-//            // Create new route
-//            createDirectionArrows(in: arView, from: start, to: end)
-//            let vector = SCNVector3(
-//                end.x - start.x,
-//                0, // Ignore Y difference
-//                end.z - start.z
-//            )
-//            let distance = sqrt(pow(vector.x, 2) + pow(vector.z, 2))
-//
-//            print("Route:")
-//            print("Start: \(SCNVector3(start.x, fixedHeight, start.z))")
-//            print("End: \(SCNVector3(end.x, fixedHeight, end.z))")
-//            print("Vector: \(vector)")
-//            print("Distance: \(String(format: "%.2f", distance)) meters")
-//        }
     private func createCube(color: UIColor) -> SCNNode {
         let cubeGeometry = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
         let cubeMaterial = SCNMaterial()
@@ -226,44 +181,57 @@ class NavigationService {
         return SCNNode(geometry: cubeGeometry)
     }
 
-    private func createConnectionLines(in arView: ARSCNView) {
-        guard let redCube = redCubeNode else { return }
-        
-        for (name, objectNode) in objectNodes {
-            let line = SCNGeometry.line(from: redCube.position, to: objectNode.position)
-            let lineNode = SCNNode(geometry: line)
-            arView.scene.rootNode.addChildNode(lineNode)
-        }
-    }
-   
     func addObject(_ object: ARObject) {
-        arObjects.append(object)
-    }
+            arObjects.append(object)
+            print("Added object: \(object.name)")
+        }
+
 
     func removeObject(named name: String) {
-        arObjects.removeAll { $0.name == name }
-    }
-
-    func getObjects() -> [ARObject] {
-        return arObjects
-    }
-
-    func getVectorData() -> [String: SCNVector3] {
-        return vectorData
-    }
-
-    func handleCameraPositionUpdate(position: SCNVector3, qrCodeOrigin: SCNVector3?) -> SCNVector3? {
-        if let origin = qrCodeOrigin {
-            let relativePosition = SCNVector3(
-                position.x - origin.x,
-                position.y - origin.y,
-                position.z - origin.z
-            )
-            print("Updated relative camera position: \(relativePosition)")
-            return relativePosition
+            arObjects.removeAll { $0.name == name }
+            objectNodes[name]?.removeFromParentNode()
+            objectNodes.removeValue(forKey: name)
+            print("Removed object: \(name)")
         }
-        return nil
+    func getObjects() -> [ARObject] {
+            return arObjects
+        }
+    func updateRoute(in arView: ARSCNView) {
+        // Remove existing route and object nodes
+        arView.scene.rootNode.enumerateChildNodes { (node, _) in
+            if node.name == "routeArrow" || objectNodes.values.contains(node) {
+                node.removeFromParentNode()
+            }
+        }
+        objectNodes.removeAll()
+
+        // Create new route
+        if let redCube = redCubeNode {
+            var previousPosition = redCube.position
+            
+            for object in arObjects {
+                let objectNode = createObjectNode(for: object)
+                arView.scene.rootNode.addChildNode(objectNode)
+                objectNodes[object.name] = objectNode
+                
+                presentRoute(in: arView, from: previousPosition, to: objectNode.position)
+                previousPosition = objectNode.position
+            }
+        }
+        
+        print("Route updated with \(arObjects.count) objects")
     }
+
+        private func createObjectNode(for object: ARObject) -> SCNNode {
+            let node = SCNNode()
+            node.geometry = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
+            node.geometry?.firstMaterial?.diffuse.contents = object.color
+            node.position = object.position
+            node.name = object.name
+            return node
+        }
+
+
 
     private func generateDirections(from camPosition: SCNVector3, to targetPosition: SCNVector3, distance: Float) -> String {
         let deltaX = targetPosition.x - camPosition.x
@@ -287,19 +255,6 @@ class NavigationService {
         return directions
     }
 }
-
-extension SCNGeometry {
-    static func line(from vectorA: SCNVector3, to vectorB: SCNVector3) -> SCNGeometry {
-        let vertices: [SCNVector3] = [vectorA, vectorB]
-        let vertexSource = SCNGeometrySource(vertices: vertices)
-        let indices: [UInt32] = [0, 1]
-        let indexData = Data(bytes: indices, count: indices.count * MemoryLayout<UInt32>.size)
-        let element = SCNGeometryElement(data: indexData, primitiveType: .line, primitiveCount: 1, bytesPerIndex: MemoryLayout<UInt32>.size)
-        let geometry = SCNGeometry(sources: [vertexSource], elements: [element])
-        return geometry
-    }
-}
-
 extension SCNVector3 {
     func distance(to vector: SCNVector3) -> Float {
         let deltaX = vector.x - self.x

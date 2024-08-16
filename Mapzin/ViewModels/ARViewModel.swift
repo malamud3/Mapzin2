@@ -6,7 +6,7 @@ class ARViewModel: NSObject, ObservableObject {
     @Published var navigationInstructions: String = "Looking for QR code..."
     @Published var detectedQRCodePosition: SCNVector3?
     @Published var cameraPosition: SCNVector3?
-
+    
     @Published var objectInstructions: [String] = []
     @Published var detectedObjects: [String] = []
     @Published var doorNavigationInstructions: String = ""
@@ -14,7 +14,17 @@ class ARViewModel: NSObject, ObservableObject {
     @Published var currentRoom: String = ""
     @Published var availableRooms: [String] = []
     
-    var arSessionService: ARSessionServiceProtocol  // Changed from private to internal access
+    @Published var selectedItemObject: ARObject? {
+            didSet {
+                if let newObject = selectedItemObject {
+                    addObject(newObject)
+                    updateObjectInstructions()
+                    updateRoute()
+                }
+            }
+        }
+    
+    var arSessionService: ARSessionServiceProtocol
     private let navigationService: NavigationService
     private let visualIndicatorService: VisualIndicatorService
     private let bdmService: BDMService
@@ -23,31 +33,24 @@ class ARViewModel: NSObject, ObservableObject {
 
     init(
         arSessionService: ARSessionServiceProtocol = ARSessionService(),
-        navigationService: NavigationService = NavigationService(),
         visualIndicatorService: VisualIndicatorService = VisualIndicatorService(),
         bdmService: BDMService = BDMService(),
         cameraService: ARCameraServiceProtocol = ARCameraService()
     ) {
         self.arSessionService = arSessionService
-        self.navigationService = navigationService
+        self.navigationService = NavigationService()
         self.visualIndicatorService = visualIndicatorService
         self.bdmService = bdmService
         self.cameraService = cameraService
         super.init()
         self.arSessionService.delegate = self
         loadSceneData()
-
     }
 
     func setupARView(_ arView: ARSCNView) {
         arSessionService.setupARView(arView)
     }
 
-    
-    
-    
-    
-    
     private func loadSceneData() {
         if let nodes = bdmService.parseSCNFile(named: "Salon.scn") {
             self.sceneNodes = nodes
@@ -55,20 +58,55 @@ class ARViewModel: NSObject, ObservableObject {
         }
     }
 
+   
     func addObject(_ object: ARObject) {
-           navigationService.addObject(object)
-       }
-
-       func removeObject(named name: String) {
-           navigationService.removeObject(named: name)
-       }
-
-       private func updateObjectInstructions() {
-           objectInstructions.removeAll()
-           for object in navigationService.getObjects() {
-               objectInstructions.append("\(object.name) cube placed at its position relative to the QR code.")
+        if (detectedQRCodePosition != nil) {
+               navigationService.addObject(object)
+               updateObjectInstructions()
+               updateDetectedObjects()
+               
+               if let arView = arSessionService.arView {
+                   navigationService.updateRoute(in: arView)
+                   print("Route updated with new object: \(object.name)")
+               } else {
+                   print("ARView is nil, cannot update route")
+               }
+           } else {
+               print("QR code not detected yet. Object \(object.name) added to pending list.")
            }
        }
+
+       func updateRoute() {
+           if let arView = arSessionService.arView {
+               navigationService.updateRoute(in: arView)
+           }
+       }
+    
+    private func updateObjectInstructions() {
+            objectInstructions.removeAll()
+            for object in navigationService.getObjects() {
+                objectInstructions.append("\(object.name) cube placed at its position relative to the QR code.")
+            }
+        }
+
+
+    func removeObject(named name: String) {
+        navigationService.removeObject(named: name)
+        updateObjectInstructions()
+        updateDetectedObjects()
+        
+        // If we have an ARView, update the route
+        if let arView = arSessionService.arView {
+            updateRoute()
+        }
+    }
+
+
+
+    private func updateDetectedObjects() {
+        detectedObjects = navigationService.getObjects().map { $0.name }
+    }
+
 
     func updateNavigationInstructions() {
         DispatchQueue.main.async {
@@ -132,17 +170,14 @@ class ARViewModel: NSObject, ObservableObject {
 
 extension ARViewModel: ARSessionServiceDelegate {
     func didAdd(anchor: ARAnchor, in session: ARSession) {
-        if let imageAnchor = anchor as? ARImageAnchor {
-            if let newPosition = navigationService.handleAnchorDetection(anchor: imageAnchor, arView: arSessionService.arView) {
-                DispatchQueue.main.async {
-                    self.detectedQRCodePosition = newPosition
-                    self.navigationInstructions = "QR code detected. Red cube placed at your position."
-                    self.updateObjectInstructions()
-                    self.detectedObjects = self.navigationService.getObjects().map { $0.name }
+            if let imageAnchor = anchor as? ARImageAnchor {
+                if let newPosition = navigationService.handleAnchorDetection(anchor: imageAnchor, arView: arSessionService.arView) {
+                    DispatchQueue.main.async {
+                        self.detectedQRCodePosition = newPosition
+                    }
                 }
             }
         }
-    }
 
     func didUpdateCameraPosition(_ position: SCNVector3) {
         DispatchQueue.main.async {
@@ -151,4 +186,3 @@ extension ARViewModel: ARSessionServiceDelegate {
         updateNavigationInstructions()
     }
 }
-
