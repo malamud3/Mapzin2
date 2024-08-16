@@ -12,13 +12,15 @@ struct ARViewContainer: View {
     @StateObject private var viewModel = ARViewModel()
     @State private var showInstructions = false
     @State private var showSettings = false
-
+    @State private var showAccordionList = false
 
     var body: some View {
         ZStack {
             ARViewRepresentable(viewModel: viewModel)
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
+                Spacer().frame(height: 20)
                 topBar
                 Spacer()
                 if showInstructions {
@@ -27,17 +29,25 @@ struct ARViewContainer: View {
                 bottomBar
             }
             .padding()
+            .safeAreaInset(edge: .top, content: { Color.clear.frame(height: 0) })
+            .safeAreaInset(edge: .bottom, content: { Color.clear.frame(height: 0) })
         }
-        .edgesIgnoringSafeArea(.all)
         .sheet(isPresented: $showSettings) {
             SettingsView()
+        }
+        .sheet(isPresented: $showAccordionList) {
+            AccordionListView(accordionItems: [
+                AccordionItem(title: "Rooms", items: ["Room 201", "Room 202", "Room 203", "Room 204"]),
+                AccordionItem(title: "Facilities", items: ["Elevator", "Stairs", "Restroom"]),
+                AccordionItem(title: "Points of Interest", items: ["Reception", "Cafeteria", "Conference Room"])
+            ])
         }
     }
 
     private var topBar: some View {
         HStack {
-            Button(action: { showSettings = true }) {
-                Image(systemName: "gear")
+            Button(action: { showAccordionList = true }) {
+                Image(systemName: "list.bullet")
                     .foregroundColor(.white)
                     .padding()
                     .background(Color.black.opacity(0.5))
@@ -51,8 +61,8 @@ struct ARViewContainer: View {
                 .background(Color.black.opacity(0.5))
                 .cornerRadius(20)
             Spacer()
-            Button(action: { showInstructions.toggle() }) {
-                Image(systemName: showInstructions ? "info.circle.fill" : "info.circle")
+            Button(action: { showSettings = true }) {
+                Image(systemName: "gear")
                     .foregroundColor(.white)
                     .padding()
                     .background(Color.black.opacity(0.5))
@@ -63,30 +73,37 @@ struct ARViewContainer: View {
 
     private var instructionsPanel: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Navigation Instructions")
-                .font(.headline)
-            Text(viewModel.navigationInstructions)
-                .font(.subheadline)
-            if !viewModel.doorNavigationInstructions.isEmpty {
-                Text("Door: \(viewModel.doorNavigationInstructions)")
-                    .font(.subheadline)
+            HStack {
+                Image(systemName: "arrow.turn.up.left")
+                    .foregroundColor(.blue)
+                VStack(alignment: .leading) {
+                    Text("Room 204")
+                        .font(.headline)
+                    Text("Turn Left in 100 m")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
             }
-            Text("Detected Windows: \(viewModel.detectedWindows.count)")
-                .font(.subheadline)
+            .padding()
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(radius: 5)
         }
         .padding()
-        .background(Color.white.opacity(0.8))
-        .cornerRadius(10)
-        .transition(.move(edge: .top))
     }
 
     private var bottomBar: some View {
         HStack {
             statusIndicator
             Spacer()
-            scanButton
+            Button(action: { showInstructions.toggle() }) {
+                Image(systemName: showInstructions ? "info.circle.fill" : "info.circle")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.black.opacity(0.5))
+                    .clipShape(Circle())
+            }
         }
-
     }
 
     private var statusIndicator: some View {
@@ -101,16 +118,6 @@ struct ARViewContainer: View {
         .padding()
         .background(Color.black.opacity(0.5))
         .cornerRadius(20)
-    }
-    
-    private var scanButton: some View {
-        Button(action: { /* Trigger QR scan */ }) {
-            Text("Scan QR")
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.blue)
-                .cornerRadius(20)
-        }
     }
 }
 

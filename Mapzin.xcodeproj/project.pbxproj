@@ -31,6 +31,7 @@
 		A9496DB72BE381FF009F2B97 /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9496DB62BE381FF009F2B97 /* SignUpButton.swift */; };
 		A94CDD132C4D8642006FC0E3 /* ARViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94CDD122C4D8642006FC0E3 /* ARViewExtension.swift */; };
 		A97506FC2C6F37D900BF60F8 /* Direction_Arrow.scn in Resources */ = {isa = PBXBuildFile; fileRef = A97506FB2C6F37D900BF60F8 /* Direction_Arrow.scn */; };
+		A97506FE2C6F4A2600BF60F8 /* AccordionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97506FD2C6F4A2600BF60F8 /* AccordionListView.swift */; };
 		A97563E22BA6DA43002B08AD /* MapzinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97563E12BA6DA43002B08AD /* MapzinApp.swift */; };
 		A97563E42BA6DA43002B08AD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97563E32BA6DA43002B08AD /* HomeView.swift */; };
 		A97563E62BA6DA44002B08AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A97563E52BA6DA44002B08AD /* Assets.xcassets */; };
@@ -143,6 +144,7 @@
 		A9496DB62BE381FF009F2B97 /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
 		A94CDD122C4D8642006FC0E3 /* ARViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewExtension.swift; sourceTree = "<group>"; };
 		A97506FB2C6F37D900BF60F8 /* Direction_Arrow.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Direction_Arrow.scn; sourceTree = "<group>"; };
+		A97506FD2C6F4A2600BF60F8 /* AccordionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccordionListView.swift; sourceTree = "<group>"; };
 		A97563DE2BA6DA43002B08AD /* Mapzin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mapzin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A97563E12BA6DA43002B08AD /* MapzinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapzinApp.swift; sourceTree = "<group>"; };
 		A97563E32BA6DA43002B08AD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				A9E669212C4551CC007C95A5 /* MyARView.swift */,
+				A97506FD2C6F4A2600BF60F8 /* AccordionListView.swift */,
 			);
 			path = AR;
 			sourceTree = "<group>";
@@ -821,6 +824,7 @@
 				A9D5A0A02C4D1CB1009BCE96 /* ARViewModelProtocol.swift in Sources */,
 				A9CB41102C401F1400CF40FA /* ARSessionService.swift in Sources */,
 				A9C4AC8F2C020701000C4D3E /* SearchResultsList.swift in Sources */,
+				A97506FE2C6F4A2600BF60F8 /* AccordionListView.swift in Sources */,
 				A99B1F4F2C22D37B002B7B32 /* BuildingViewModel.swift in Sources */,
 				A99B1F432C219BE8002B7B32 /* AppScreenType.swift in Sources */,
 				A9916A832BE36B8000427095 /* UserLocation.swift in Sources */,
