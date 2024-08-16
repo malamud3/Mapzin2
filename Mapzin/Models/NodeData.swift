@@ -10,8 +10,9 @@ import SceneKit
 
 enum NodeType {
     case door
-    case window
+    case stairs
     case room
+    case wall
     case other
 }
 
@@ -19,5 +20,4 @@ struct NodeData {
     let name: String
     let position: SCNVector3
     let type: NodeType
-//    let boundingBox: BoundingBox
 }

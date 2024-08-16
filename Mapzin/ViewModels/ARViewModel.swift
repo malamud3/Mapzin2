@@ -26,20 +26,17 @@ class ARViewModel: NSObject, ObservableObject {
     
     var arSessionService: ARSessionServiceProtocol
     private let navigationService: NavigationService
-    private let visualIndicatorService: VisualIndicatorService
     private let bdmService: BDMService
     private let cameraService: ARCameraServiceProtocol
     private var sceneNodes: [NodeData] = []
 
     init(
         arSessionService: ARSessionServiceProtocol = ARSessionService(),
-        visualIndicatorService: VisualIndicatorService = VisualIndicatorService(),
         bdmService: BDMService = BDMService(),
         cameraService: ARCameraServiceProtocol = ARCameraService()
     ) {
         self.arSessionService = arSessionService
         self.navigationService = NavigationService()
-        self.visualIndicatorService = visualIndicatorService
         self.bdmService = bdmService
         self.cameraService = cameraService
         super.init()
@@ -118,7 +115,7 @@ class ARViewModel: NSObject, ObservableObject {
             self.updateCurrentRoom(for: camPosition)
             
             let nearestDoor = self.findNearestNode(of: .door, to: camPosition)
-            let nearestWindow = self.findNearestNode(of: .window, to: camPosition)
+//            let nearestWindow = self.findNearestNode(of: .window, to: camPosition)
             
             var instructions = "You are in the \(self.currentRoom). "
             
@@ -127,10 +124,10 @@ class ARViewModel: NSObject, ObservableObject {
                 instructions += "Nearest door is \(String(format: "%.2f", distance)) meters \(self.getDirection(from: camPosition, to: door.position)). "
             }
             
-            if let window = nearestWindow {
-                let distance = self.calculateDistance(from: camPosition, to: window.position)
-                instructions += "Nearest window is \(String(format: "%.2f", distance)) meters \(self.getDirection(from: camPosition, to: window.position))."
-            }
+//            if let window = nearestWindow {
+//                let distance = self.calculateDistance(from: camPosition, to: window.position)
+//                instructions += "Nearest window is \(String(format: "%.2f", distance)) meters \(self.getDirection(from: camPosition, to: window.position))."
+//            }
             
             self.navigationInstructions = instructions
         }
