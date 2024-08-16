@@ -22,6 +22,7 @@ class NavigationService {
     private var objectNodes: [String: SCNNode] = [:]
     private var vectorData: [String: SCNVector3] = [:]
     private let arrowSpacing: Float = 0.3 // Space between arrows in meters
+    private let axioZ: Float = -2
 
     init() {
         arObjects = [
@@ -40,7 +41,11 @@ class NavigationService {
             if let arView = arView {
                 let redCubePosition = addRedCubeAtUserPosition(arView)
                 addObjectCubes(in: arView, qrTransform: anchor.transform)
-                createDirectionArrows(in: arView)
+                if let firstObject = objectNodes.values.first {
+//                                    createDirectionArrows(in: arView, from: redCubePosition, to: firstObject.position)
+                    createSequentialRoute(in: arView, startingFrom: redCubePosition)
+
+                                }
                 calculateVectorData()
             }
             
@@ -49,41 +54,93 @@ class NavigationService {
         return nil
     }
     
-    private func createDirectionArrows(in arView: ARSCNView) {
-        guard let redCube = redCubeNode else { return }
-        
-        for (name, objectNode) in objectNodes {
-            let vector = SCNVector3(
-                objectNode.position.x - redCube.position.x,
-                objectNode.position.y - redCube.position.y,
-                objectNode.position.z - redCube.position.z
-            )
+//    private func createDirectionArrows(in arView: ARSCNView) {
+//        guard let redCube = redCubeNode else { return }
+//        
+//        for (name, objectNode) in objectNodes {
+//            let vector = SCNVector3(
+//                objectNode.position.x - redCube.position.x,
+//                objectNode.position.y - redCube.position.y,
+//                objectNode.position.z - redCube.position.z
+//            )
+//            
+//            let distance = vector.length()
+//            let direction = vector.normalized()
+//            let arrowCount = Int(distance / arrowSpacing) // Halve the number of arrows
+//
+//            for i in 1..<arrowCount {
+//                let offset = arrowSpacing * 1.05 // Adjust this multiplier to increase/decrease spacing
+//                let position = SCNVector3(
+//                    redCube.position.x + direction.x * Float(i) * offset,
+//                    redCube.position.y + direction.y * Float(i) * offset,
+//                    redCube.position.z + direction.z * Float(i) * offset
+//                )
+//                
+//                if let arrowNode = SCNScene(named: "Direction_Arrow.scn")?.rootNode.childNodes.first {
+//                    arrowNode.position = position
+//                    arrowNode.look(at: objectNode.position)
+//                    
+//                    arrowNode.scale = SCNVector3(0.0007, 0.0007, 0.0007)
+//                    
+//                    arView.scene.rootNode.addChildNode(arrowNode)
+//                }
+//            }
+//        }
+//    }
+    private func createSequentialRoute(in arView: ARSCNView, startingFrom redCubePosition: SCNVector3) {
+            let sortedObjects = objectNodes.sorted { $0.key < $1.key }
+            var previousPosition = redCubePosition
             
-            let distance = vector.length()
-            let direction = vector.normalized()
-            let arrowCount = Int(distance / arrowSpacing) // Halve the number of arrows
-            let midHeight = (redCube.position.y + objectNode.position.y) / 2
-
-            for i in 1..<arrowCount {
-                let offset = arrowSpacing * 1.05 // Adjust this multiplier to increase/decrease spacing
-                let position = SCNVector3(
-                    redCube.position.x + direction.x * Float(i) * offset,
-                    redCube.position.y + direction.y * Float(i) * offset,
-                    redCube.position.z + direction.z * Float(i) * offset
-                )
-                
-                if let arrowNode = SCNScene(named: "Direction_Arrow.scn")?.rootNode.childNodes.first {
-                    arrowNode.position = position
-                    arrowNode.look(at: objectNode.position)
-                    
-                    arrowNode.scale = SCNVector3(0.0007, 0.0007, 0.0007)
-                    
-                    arView.scene.rootNode.addChildNode(arrowNode)
+            for (index, object) in sortedObjects.enumerated() {
+                if index == 0 {
+                    // First leg: from red cube to first object
+                    presentRoute(in: arView, from: previousPosition, to: object.value.position)
+                } else {
+                    // Subsequent legs: from previous object to current object
+                    let previousObject = sortedObjects[index - 1]
+                    presentRoute(in: arView, from: previousObject.value.position, to: object.value.position)
                 }
+                previousPosition = object.value.position
             }
         }
-    }
+    
+    private func createDirectionArrows(in arView: ARSCNView, from start: SCNVector3, to end: SCNVector3) {
+           let vector = SCNVector3(
+               end.x - start.x,
+               end.y - start.y,
+               end.z - start.z
+           )
+           
+           let distance = vector.length()
+           let direction = vector.normalized()
+           let arrowCount = Int(distance / arrowSpacing)
 
+           for i in 1..<arrowCount {
+               let offset = arrowSpacing * 1.05 // Adjust this multiplier to increase/decrease spacing
+               let position = SCNVector3(
+                   start.x + direction.x * Float(i) * offset,
+                   start.y + direction.y * Float(i) * offset,
+                   start.z + direction.z * Float(i) * offset
+               )
+               
+               if let arrowNode = SCNScene(named: "Direction_Arrow.scn")?.rootNode.childNodes.first {
+                   arrowNode.position = position
+                   arrowNode.look(at: end)
+                   
+                   arrowNode.scale = SCNVector3(0.0007, 0.0007, 0.0007)
+                   arrowNode.name = "routeArrow"
+                   
+                   arView.scene.rootNode.addChildNode(arrowNode)
+               }
+           }
+       }
+
+    func presentRoute(in arView: ARSCNView, from start: SCNVector3, to end: SCNVector3) {
+            // Create new route
+            createDirectionArrows(in: arView, from: start, to: end)
+
+            print("Route presented from \(start) to \(end)")
+        }
 
 
     
@@ -112,38 +169,39 @@ class NavigationService {
         }
 
     private func addObjectCubes(in arView: ARSCNView, qrTransform: simd_float4x4) {
-           guard let redCube = redCubeNode else {
-               print("Red cube not found. Cannot align other cubes.")
-               return
-           }
+            guard let redCube = redCubeNode else {
+                print("Red cube not found. Cannot align other cubes.")
+                return
+            }
 
-           for object in arObjects {
-               let cubeNode = createCube(color: object.color)
-               
-               let scaledPosition = SCNVector3(
-                   object.position.x * scaleFactor,
-                   redCube.position.y, // Set y-coordinate to match red cube's height
-                   object.position.z * scaleFactor
-               )
-               
-               let translation = simd_float4x4(
-                   simd_float4(1, 0, 0, 0),
-                   simd_float4(0, 1, 0, 0),
-                   simd_float4(0, 0, 1, 0),
-                   simd_float4(scaledPosition.x, scaledPosition.y, scaledPosition.z, 1)
-               )
-               
-               let combinedTransform = simd_mul(qrTransform, translation)
-               
-               cubeNode.simdTransform = combinedTransform
-               
-               cubeNode.name = object.name
-               arView.scene.rootNode.addChildNode(cubeNode)
-               objectNodes[object.name] = cubeNode
-               
-               print("Placed \(object.name) at position: \(cubeNode.position)")
-           }
-       }
+
+            for object in arObjects {
+                let cubeNode = createCube(color: object.color)
+                
+                let scaledPosition = SCNVector3(
+                    object.position.x * scaleFactor,
+                    redCube.position.y + axioZ, // Apply the height offset here
+                    object.position.z * scaleFactor
+                )
+                
+                let translation = simd_float4x4(
+                    simd_float4(1, 0, 0, 0),
+                    simd_float4(0, 1, 0, 0),
+                    simd_float4(0, 0, 1, 0),
+                    simd_float4(scaledPosition.x, scaledPosition.y, scaledPosition.z, 1)
+                )
+                
+                let combinedTransform = simd_mul(qrTransform, translation)
+                
+                cubeNode.simdTransform = combinedTransform
+                
+                cubeNode.name = object.name
+                arView.scene.rootNode.addChildNode(cubeNode)
+                objectNodes[object.name] = cubeNode
+                
+                print("Placed \(object.name) at position: \(cubeNode.position)")
+            }
+        }
 
         private func createCube(color: UIColor) -> SCNNode {
             let cubeGeometry = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)

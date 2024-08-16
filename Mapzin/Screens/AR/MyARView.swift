@@ -42,7 +42,7 @@ struct ARViewContainer: View {
         .onChange(of: sharedViewModel.selectedItem) {_, newItem in
             if let item = newItem {
                 print("Selected item from AccordionListView: \(item)")
-                sharedViewModel.selectedItem = nil  // Reset after handling
+                print("Selected item from AccordionListView: \(String(describing: sharedViewModel.selectedItem))")
             }
         }
     }
