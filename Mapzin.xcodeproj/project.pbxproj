@@ -264,8 +264,8 @@
 		A907C1ED2C287A6F00F8802B /* AR */ = {
 			isa = PBXGroup;
 			children = (
-				A9E669212C4551CC007C95A5 /* MyARView.swift */,
 				A97506FD2C6F4A2600BF60F8 /* AccordionListView.swift */,
+				A9E669212C4551CC007C95A5 /* MyARView.swift */,
 			);
 			path = AR;
 			sourceTree = "<group>";

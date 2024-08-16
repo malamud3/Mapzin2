@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+class SharedViewModel: ObservableObject {
+    @Published var selectedItem: String?
+    @Published var showAccordionList: Bool = false
+}
+
 struct AccordionItem: Identifiable {
     let id = UUID()
     let title: String
@@ -19,8 +24,16 @@ struct FlattenedItem: Identifiable {
     let parentTitle: String
 }
 
+import SwiftUI
+
 struct AccordionListView: View {
-    let accordionItems: [AccordionItem]
+    @EnvironmentObject private var sharedViewModel: SharedViewModel
+    
+    let accordionItems = [
+        AccordionItem(title: "Floor 0", items: ["Room 101", "Room 102", "Room 103", "Room 104","Stairs0","Bathroom0"]),
+        AccordionItem(title: "Floor 1", items: ["Elevator", "Stairs1", "Restroom"]),
+        AccordionItem(title: "Floor 2", items: ["Reception", "Cafeteria", "Conference Room"])
+    ]
     @State private var expandedItems: Set<UUID> = []
     @State private var searchText = ""
     
@@ -88,9 +101,7 @@ struct AccordionListView: View {
                     }
                 }
             }
-
             .searchable(text: $searchText, prompt: "Search POI")
-            
             .navigationTitle("Accordion List")
         }
     }
@@ -106,17 +117,12 @@ struct AccordionListView: View {
     }
     
     private func itemTapped(_ item: String) {
-        print("Tapped item: \(item)")
-        // Add your custom action here
+        sharedViewModel.selectedItem = item
+        sharedViewModel.showAccordionList = false
     }
 }
-
 struct AccordionListView_Previews: PreviewProvider {
     static var previews: some View {
-        AccordionListView(accordionItems: [
-            AccordionItem(title: "Fruits", items: ["Apple", "Banana", "Orange"]),
-            AccordionItem(title: "Vegetables", items: ["Carrot", "Broccoli", "Spinach"]),
-            AccordionItem(title: "Drinks", items: ["Water", "Coffee", "Tea"])
-        ])
+        AccordionListView()
     }
 }

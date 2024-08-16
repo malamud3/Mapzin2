@@ -10,9 +10,9 @@ import ARKit
 
 struct ARViewContainer: View {
     @StateObject private var viewModel = ARViewModel()
+    @StateObject private var sharedViewModel = SharedViewModel()
     @State private var showInstructions = false
     @State private var showSettings = false
-    @State private var showAccordionList = false
 
     var body: some View {
         ZStack {
@@ -35,18 +35,21 @@ struct ARViewContainer: View {
         .sheet(isPresented: $showSettings) {
             SettingsView()
         }
-        .sheet(isPresented: $showAccordionList) {
-            AccordionListView(accordionItems: [
-                AccordionItem(title: "Rooms", items: ["Room 201", "Room 202", "Room 203", "Room 204"]),
-                AccordionItem(title: "Facilities", items: ["Elevator", "Stairs", "Restroom"]),
-                AccordionItem(title: "Points of Interest", items: ["Reception", "Cafeteria", "Conference Room"])
-            ])
+        .sheet(isPresented: $sharedViewModel.showAccordionList) {
+            AccordionListView()
+                .environmentObject(sharedViewModel)
+        }
+        .onChange(of: sharedViewModel.selectedItem) {_, newItem in
+            if let item = newItem {
+                print("Selected item from AccordionListView: \(item)")
+                sharedViewModel.selectedItem = nil  // Reset after handling
+            }
         }
     }
 
     private var topBar: some View {
         HStack {
-            Button(action: { showAccordionList = true }) {
+            Button(action: { sharedViewModel.showAccordionList = true }) {
                 Image(systemName: "list.bullet")
                     .foregroundColor(.white)
                     .padding()
