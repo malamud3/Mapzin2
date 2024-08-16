@@ -30,6 +30,7 @@
 		A9496DB52BE381D0009F2B97 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9496DB42BE381D0009F2B97 /* LoginButton.swift */; };
 		A9496DB72BE381FF009F2B97 /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9496DB62BE381FF009F2B97 /* SignUpButton.swift */; };
 		A94CDD132C4D8642006FC0E3 /* ARViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94CDD122C4D8642006FC0E3 /* ARViewExtension.swift */; };
+		A97506FC2C6F37D900BF60F8 /* Direction_Arrow.scn in Resources */ = {isa = PBXBuildFile; fileRef = A97506FB2C6F37D900BF60F8 /* Direction_Arrow.scn */; };
 		A97563E22BA6DA43002B08AD /* MapzinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97563E12BA6DA43002B08AD /* MapzinApp.swift */; };
 		A97563E42BA6DA43002B08AD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97563E32BA6DA43002B08AD /* HomeView.swift */; };
 		A97563E62BA6DA44002B08AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A97563E52BA6DA44002B08AD /* Assets.xcassets */; };
@@ -141,6 +142,7 @@
 		A9496DB42BE381D0009F2B97 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		A9496DB62BE381FF009F2B97 /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
 		A94CDD122C4D8642006FC0E3 /* ARViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewExtension.swift; sourceTree = "<group>"; };
+		A97506FB2C6F37D900BF60F8 /* Direction_Arrow.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Direction_Arrow.scn; sourceTree = "<group>"; };
 		A97563DE2BA6DA43002B08AD /* Mapzin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mapzin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A97563E12BA6DA43002B08AD /* MapzinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapzinApp.swift; sourceTree = "<group>"; };
 		A97563E32BA6DA43002B08AD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				A97A7B1A2C0D8E3600DA4619 /* Logger.swift */,
 				A9F2F4A62C3ED38400DF5960 /* Primary_bdm.scn */,
 				A93ACCF12C45355A0032B7A2 /* Salon.scn */,
+				A97506FB2C6F37D900BF60F8 /* Direction_Arrow.scn */,
 				A97563E02BA6DA43002B08AD /* Mapzin */,
 				A97563F12BA6DA44002B08AD /* MapzinTests */,
 				A97563FB2BA6DA44002B08AD /* MapzinUITests */,
@@ -747,6 +750,7 @@
 			files = (
 				A97563E92BA6DA44002B08AD /* Preview Assets.xcassets in Resources */,
 				A9F2F4A72C3ED38400DF5960 /* Primary_bdm.scn in Resources */,
+				A97506FC2C6F37D900BF60F8 /* Direction_Arrow.scn in Resources */,
 				A9BE73B72C3A6C3900B1B808 /* GoogleService-Info.plist in Resources */,
 				A93ACCF22C45355A0032B7A2 /* Salon.scn in Resources */,
 				A97563E62BA6DA44002B08AD /* Assets.xcassets in Resources */,

@@ -7,6 +7,8 @@ class ARViewModel: NSObject, ObservableObject {
     @Published var detectedQRCodePosition: SCNVector3?
     @Published var cameraPosition: SCNVector3?
 
+    @Published var objectInstructions: [String] = []
+    @Published var detectedObjects: [String] = []
     @Published var doorNavigationInstructions: String = ""
     @Published var detectedWindows: [SCNVector3] = []
     @Published var currentRoom: String = ""
@@ -39,9 +41,13 @@ class ARViewModel: NSObject, ObservableObject {
 
     func setupARView(_ arView: ARSCNView) {
         arSessionService.setupARView(arView)
-//        addSceneNodesTo(arView)
     }
 
+    
+    
+    
+    
+    
     private func loadSceneData() {
         if let nodes = bdmService.parseSCNFile(named: "Salon.scn") {
             self.sceneNodes = nodes
@@ -49,29 +55,20 @@ class ARViewModel: NSObject, ObservableObject {
         }
     }
 
-//    private func addSceneNodesTo(_ arView: ARSCNView) {
-//        for node in sceneNodes {
-//            let visualNode = SCNNode()
-//            visualNode.position = node.position
-//            
-//            switch node.type {
-//            case .door:
-//                visualNode.geometry = SCNBox(width: 0.1, height: 2.0, length: 1.0, chamferRadius: 0)
-//                visualNode.geometry?.firstMaterial?.diffuse.contents = UIColor.brown.withAlphaComponent(0.5)
-//            case .window:
-//                visualNode.geometry = SCNBox(width: 0.1, height: 1.0, length: 1.0, chamferRadius: 0)
-//                visualNode.geometry?.firstMaterial?.diffuse.contents = UIColor.blue.withAlphaComponent(0.3)
-//            case .room:
-//                visualNode.geometry = SCNBox(width: 0.1, height: 1.0, length: 1.0, chamferRadius: 0)
-//                visualNode.geometry?.firstMaterial?.diffuse.contents = UIColor.blue.withAlphaComponent(0.3)
-//            case .other:
-//                visualNode.geometry = SCNBox(width: 0.1, height: 1.0, length: 1.0, chamferRadius: 0)
-//                visualNode.geometry?.firstMaterial?.diffuse.contents = UIColor.blue.withAlphaComponent(0.3)
-//            }
-//            
-//            arView.scene.rootNode.addChildNode(visualNode)
-//        }
-//    }
+    func addObject(_ object: ARObject) {
+           navigationService.addObject(object)
+       }
+
+       func removeObject(named name: String) {
+           navigationService.removeObject(named: name)
+       }
+
+       private func updateObjectInstructions() {
+           objectInstructions.removeAll()
+           for object in navigationService.getObjects() {
+               objectInstructions.append("\(object.name) cube placed at its position relative to the QR code.")
+           }
+       }
 
     func updateNavigationInstructions() {
         DispatchQueue.main.async {
@@ -139,6 +136,9 @@ extension ARViewModel: ARSessionServiceDelegate {
             if let newPosition = navigationService.handleAnchorDetection(anchor: imageAnchor, arView: arSessionService.arView) {
                 DispatchQueue.main.async {
                     self.detectedQRCodePosition = newPosition
+                    self.navigationInstructions = "QR code detected. Red cube placed at your position."
+                    self.updateObjectInstructions()
+                    self.detectedObjects = self.navigationService.getObjects().map { $0.name }
                 }
             }
         }
@@ -149,7 +149,6 @@ extension ARViewModel: ARSessionServiceDelegate {
             self.cameraPosition = position
         }
         updateNavigationInstructions()
-
     }
 }
 
