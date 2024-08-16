@@ -18,6 +18,7 @@ class RelativeMapBuilder {
         self.relativeMap.removeAll()
     }
 
+
 //    func addNode(_ node: SCNNode) {
 //        guard let qrPosition = qrCodePosition else {
 //            print("Error: QR code position not set")
