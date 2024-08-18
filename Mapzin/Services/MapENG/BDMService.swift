@@ -5,6 +5,7 @@
 //  Created by Amir Malamud on 23/06/2024.
 //
 
+
 import SceneKit
 
 class BDMService {
@@ -21,10 +22,10 @@ class BDMService {
                 let nodeType: NodeType
                 if node.name?.hasPrefix("Door") == true {
                     nodeType = .door
-                } 
+                }
 //                else if node.name?.hasPrefix("Window") == true {
 //                    nodeType = .window
-//                } 
+//                }
                 else if node.name?.hasSuffix("Room0") == true {
                     nodeType = .room
                 } else {
@@ -38,10 +39,8 @@ class BDMService {
                 )
                 nodeDataArray.append(nodeData)
                 print("Parsed node: \(nodeData.name), Position: \(nodeData.position), Type: \(nodeType)")
-
             }
         }
-
 
         return nodeDataArray
     }

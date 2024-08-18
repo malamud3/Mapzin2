@@ -41,9 +41,9 @@ struct ARViewContainer: View {
                 .environmentObject(sharedViewModel)
         }
         .onChange(of: sharedViewModel.selectedItem) { _, newItem in
-            if let item = newItem {
-                viewModel.selectedItemObject = ARObject(name: item, position: SCNVector3(-0.568, -0.478, -1.851), color: .green)
-            }
+//            if let item = newItem {
+//                viewModel.selectedItemObject = ARObject(name: item, position: SCNVector3(-0.568, -0.478, -1.851), color: .green)
+//            }
 //            viewModel.selectedItemObject = ARObject(name: item, position: SCNVector3(-6.134, 0.067, 0.622), color: .green)
         }
     }

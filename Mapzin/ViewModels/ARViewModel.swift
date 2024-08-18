@@ -46,12 +46,13 @@ class ARViewModel: NSObject, ObservableObject {
 
     func setupARView(_ arView: ARSCNView) {
         arSessionService.setupARView(arView)
+//        loadSceneData()
     }
 
     private func loadSceneData() {
-        if let nodes = bdmService.parseSCNFile(named: "Salon.scn") {
-            self.sceneNodes = nodes
-            self.availableRooms = nodes.filter { $0.name.hasSuffix("Room0") }.map { $0.name }
+        if let nodes = bdmService.parseSCNFile(named: "Amir.scn") {
+//            self.sceneNodes = nodes
+//            self.availableRooms = nodes.filter { $0.name.hasSuffix("Room0") }.map { $0.name }
         }
     }
 

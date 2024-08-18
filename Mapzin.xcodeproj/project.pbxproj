@@ -32,6 +32,8 @@
 		A94CDD132C4D8642006FC0E3 /* ARViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94CDD122C4D8642006FC0E3 /* ARViewExtension.swift */; };
 		A97506FC2C6F37D900BF60F8 /* Direction_Arrow.scn in Resources */ = {isa = PBXBuildFile; fileRef = A97506FB2C6F37D900BF60F8 /* Direction_Arrow.scn */; };
 		A97506FE2C6F4A2600BF60F8 /* AccordionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97506FD2C6F4A2600BF60F8 /* AccordionListView.swift */; };
+		A97507002C72023300BF60F8 /* Amir.scn in Resources */ = {isa = PBXBuildFile; fileRef = A97506FF2C72023300BF60F8 /* Amir.scn */; };
+		A97507022C72160600BF60F8 /* ARPositioningHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97507012C72160600BF60F8 /* ARPositioningHelper.swift */; };
 		A97563E22BA6DA43002B08AD /* MapzinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97563E12BA6DA43002B08AD /* MapzinApp.swift */; };
 		A97563E42BA6DA43002B08AD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97563E32BA6DA43002B08AD /* HomeView.swift */; };
 		A97563E62BA6DA44002B08AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A97563E52BA6DA44002B08AD /* Assets.xcassets */; };
@@ -145,6 +147,8 @@
 		A94CDD122C4D8642006FC0E3 /* ARViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewExtension.swift; sourceTree = "<group>"; };
 		A97506FB2C6F37D900BF60F8 /* Direction_Arrow.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Direction_Arrow.scn; sourceTree = "<group>"; };
 		A97506FD2C6F4A2600BF60F8 /* AccordionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccordionListView.swift; sourceTree = "<group>"; };
+		A97506FF2C72023300BF60F8 /* Amir.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Amir.scn; sourceTree = "<group>"; };
+		A97507012C72160600BF60F8 /* ARPositioningHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARPositioningHelper.swift; sourceTree = "<group>"; };
 		A97563DE2BA6DA43002B08AD /* Mapzin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mapzin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A97563E12BA6DA43002B08AD /* MapzinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapzinApp.swift; sourceTree = "<group>"; };
 		A97563E32BA6DA43002B08AD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -352,6 +356,7 @@
 				A97A7B1A2C0D8E3600DA4619 /* Logger.swift */,
 				A9F2F4A62C3ED38400DF5960 /* Primary_bdm.scn */,
 				A93ACCF12C45355A0032B7A2 /* Salon.scn */,
+				A97506FF2C72023300BF60F8 /* Amir.scn */,
 				A97506FB2C6F37D900BF60F8 /* Direction_Arrow.scn */,
 				A97563E02BA6DA43002B08AD /* Mapzin */,
 				A97563F12BA6DA44002B08AD /* MapzinTests */,
@@ -453,6 +458,7 @@
 			children = (
 				A9D5A0A82C4D6101009BCE96 /* NavigationService.swift */,
 				A90F4B9F2C54D06400C89FE3 /* RelativeMapBuilder.swift */,
+				A97507012C72160600BF60F8 /* ARPositioningHelper.swift */,
 			);
 			path = NavigationENG;
 			sourceTree = "<group>";
@@ -751,6 +757,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A97507002C72023300BF60F8 /* Amir.scn in Resources */,
 				A97563E92BA6DA44002B08AD /* Preview Assets.xcassets in Resources */,
 				A9F2F4A72C3ED38400DF5960 /* Primary_bdm.scn in Resources */,
 				A97506FC2C6F37D900BF60F8 /* Direction_Arrow.scn in Resources */,
@@ -803,6 +810,7 @@
 				A9496DB32BE381AB009F2B97 /* ErrorMessage.swift in Sources */,
 				A9496DAF2BE380BD009F2B97 /* DataFields.swift in Sources */,
 				A9BE73B92C3A6D4600B1B808 /* Floor.swift in Sources */,
+				A97507022C72160600BF60F8 /* ARPositioningHelper.swift in Sources */,
 				A99B1F522C22D5C8002B7B32 /* BuildingCardView.swift in Sources */,
 				A9496DB72BE381FF009F2B97 /* SignUpButton.swift in Sources */,
 				A99B1F4A2C21B4D4002B7B32 /* TransparentNavBar.swift in Sources */,

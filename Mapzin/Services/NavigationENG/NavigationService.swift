@@ -5,42 +5,83 @@
 //  Created by Amir Malamud on 21/07/2024.
 //
 
+//
+//  NavigationService.swift
+//  Mapzin
+//
+//  Created by Amir Malamud on 21/07/2024.
+//
+
 import ARKit
 import SwiftUI
 
 struct ARObject {
     let name: String
-    let position: SCNVector3
+    var position: SCNVector3
     let color: UIColor
 }
 
 class NavigationService {
     private var qrCodeTransform: simd_float4x4?
-    private var arObjects: [ARObject] = [
-        ARObject(name: "sada", position: SCNVector3(-10, -1.4, -8.4), color: .green)
+    private var arObjects: [ARObject] = 
+    [
+        ARObject(name: "Opening1", position: SCNVector3(-0.174, -0.441, -0.382), color: .green),
+        ARObject(name: "Door0", position: SCNVector3(2.08, -0.576, -0.079), color: .blue),
+        ARObject(name: "Door3", position: SCNVector3(0.253, -0.537, 0.801), color: .blue),
+        ARObject(name: "Wall13", position: SCNVector3(2.446, -0.537, -2.119), color: .blue),
+        ARObject(name: "Door2", position: SCNVector3(-0.474, -0.537, 0.811), color: .blue),
+        ARObject(name: "Door20", position: SCNVector3(-3.176, -0.537, 1.163), color: .blue),
+        ARObject(name: "Opening3", position: SCNVector3(-3.415, -0.537, -3.777), color: .blue),
+        ARObject(name: "Refrigerator0", position: SCNVector3(-6.7, -0.537, -3.774), color: .blue),
+        ARObject(name: "Door1", position: SCNVector3(0.293, -0.537, -1.223), color: .blue),
+        ARObject(name: "Window0", position: SCNVector3(-7.766, -0.537, -0.96), color: .blue),
     ]
+    
     private let scaleFactor: Float = 1.0
     private var redCubeNode: SCNNode?
     private var objectNodes: [String: SCNNode] = [:]
     private let arrowSpacing: Float = 0.3 // Space between arrows in meters
     private let fixedHeight: Float = -1.4 // Fixed height for all cubes
-    private let qrCodePosition = SCNVector3(0, -1.5, -2.5)
+    private let qrCodePosition = SCNVector3(-0.705, -0.376, -2.601)
 
     func handleAnchorDetection(anchor: ARImageAnchor, arView: ARSCNView?) -> SCNVector3? {
-        guard let referenceImageName = anchor.referenceImage.name, referenceImageName == "Opening0" else {
-            return nil
+            guard let referenceImageName = anchor.referenceImage.name, referenceImageName == "Opening0" else {
+                return nil
+            }
+            
+            qrCodeTransform = anchor.transform
+            
+            print("1. QR Code position (fixed): \(qrCodePosition)")
+            
+            if let arView = arView {
+                let userPosition = addRedCubeAtUserPosition(arView)
+                
+                let userRelativePosition = userPosition - qrCodePosition
+                print("2. User position relative to QR: \(userRelativePosition)")
+                
+                // Fix ARObject positions relative to user position
+                fixARObjectPositions(userPosition: userPosition)
+                
+                addObjectCubes(in: arView)
+           //     createSequentialRoute(in: arView, startingFrom: userPosition)
+                
+                // Print ARObject positions relative to user position
+                for object in arObjects {
+                    if let objectNode = objectNodes[object.name] {
+                        let objectRelativePosition = objectNode.position - userPosition
+                        print("3. \(object.name) position relative to user: \(objectRelativePosition)")
+                    }
+                }
+            }
+            
+            return qrCodePosition
         }
-        
-        qrCodeTransform = anchor.transform
-        
-        if let arView = arView {
-            let redCubePosition = addRedCubeAtUserPosition(arView)
-            addObjectCubes(in: arView, qrTransform: anchor.transform)
-            createSequentialRoute(in: arView, startingFrom: redCubePosition)
+    private func fixARObjectPositions(userPosition: SCNVector3) {
+            for i in 0..<arObjects.count {
+                let relativePosition = arObjects[i].position - qrCodePosition
+                arObjects[i].position = userPosition + relativePosition
+            }
         }
-        
-        return SCNVector3(anchor.transform.columns.3.x, anchor.transform.columns.3.y, anchor.transform.columns.3.z)
-    }
 
     private func createSequentialRoute(in arView: ARSCNView, startingFrom redCubePosition: SCNVector3) {
         var previousPosition = redCubePosition
@@ -52,28 +93,18 @@ class NavigationService {
         }
     }
 
-    private func addObjectCubes(in arView: ARSCNView, qrTransform: simd_float4x4) {
-        for object in arObjects {
-            let cubeNode = createCube(color: object.color)
-            let scaledPosition = scalePosition(object.position)
-            
-            let relativeObjectPosition = SCNVector3(
-                scaledPosition.x - qrCodePosition.x,
-                0, // Y difference is now 0
-                scaledPosition.z - qrCodePosition.z
-            )
-            
-            var worldPosition = simd_float4(relativeObjectPosition.x, 0, relativeObjectPosition.z, 1)
-            worldPosition = simd_mul(qrTransform, worldPosition)
-            
-            cubeNode.position = SCNVector3(worldPosition.x, fixedHeight, worldPosition.z)
-            cubeNode.name = object.name
-            arView.scene.rootNode.addChildNode(cubeNode)
-            objectNodes[object.name] = cubeNode
-            
-            print("Placed \(object.name) at position: \(cubeNode.position)")
+    private func addObjectCubes(in arView: ARSCNView) {
+            for object in arObjects {
+                let cubeNode = createCube(color: object.color)
+                cubeNode.position = object.position
+                cubeNode.position.y = fixedHeight
+                cubeNode.name = object.name
+                arView.scene.rootNode.addChildNode(cubeNode)
+                objectNodes[object.name] = cubeNode
+                
+                print("Placed \(object.name) at position: \(cubeNode.position)")
+            }
         }
-    }
 
     private func scalePosition(_ position: SCNVector3) -> SCNVector3 {
         return SCNVector3(position.x * scaleFactor, position.y, position.z * scaleFactor)
