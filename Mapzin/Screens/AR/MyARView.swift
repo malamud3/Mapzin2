@@ -12,7 +12,7 @@ struct ARViewContainer: View {
     @StateObject private var sharedViewModel = SharedViewModel()
     @State private var showInstructions = false
     @State private var showSettings = false
-    @State private var currentObjectIndex = 0
+//    @State private var currentObjectIndex = 0
 
      
     var body: some View {
@@ -41,9 +41,9 @@ struct ARViewContainer: View {
                 .environmentObject(sharedViewModel)
         }
         .onChange(of: sharedViewModel.selectedItem) { _, newItem in
-            if let item = newItem {
-                viewModel.selectedItemObject = ARObject(name: item, position: SCNVector3(-0.568, -0.478, -1.851), color: .green)
-            }
+//            if let item = newItem {
+//                viewModel.selectedItemObject = ARObject(name: item, position: SCNVector3(-0.568, -0.478, -1.851), color: .green)
+//            }
 //            viewModel.selectedItemObject = ARObject(name: item, position: SCNVector3(-6.134, 0.067, 0.622), color: .green)
         }
     }
@@ -76,26 +76,48 @@ struct ARViewContainer: View {
     }
 
     private var instructionsPanel: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                Image(systemName: "arrow.turn.up.left")
-                    .foregroundColor(.blue)
-                VStack(alignment: .leading) {
-                    Text("Room 204")
-                        .font(.headline)
-                    Text("Turn Left in 100 m")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+            VStack(alignment: .leading, spacing: 10) {
+                if let instruction = viewModel.currentInstruction {
+                    HStack {
+                        Image(systemName: getDirectionIcon(instruction.direction))
+                            .foregroundColor(.blue)
+                        VStack(alignment: .leading) {
+                            Text(instruction.roomName)
+                                .font(.headline)
+                            Text("\(instruction.direction.capitalized) for \(String(format: "%.2f", instruction.distance)) m")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(radius: 5)
+                } else {
+                    Text("No current instructions")
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 5)
                 }
             }
             .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .shadow(radius: 5)
         }
-        .padding()
-    }
 
+        private func getDirectionIcon(_ direction: String) -> String {
+            switch direction {
+            case "to your left":
+                return "arrow.turn.up.left"
+            case "to your right":
+                return "arrow.turn.up.right"
+            case "in front of you":
+                return "arrow.up"
+            case "behind you":
+                return "arrow.down"
+            default:
+                return "questionmark"
+            }
+        }
     private var bottomBar: some View {
         HStack {
             statusIndicator

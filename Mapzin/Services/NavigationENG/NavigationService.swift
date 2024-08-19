@@ -5,42 +5,71 @@
 //  Created by Amir Malamud on 21/07/2024.
 //
 
+
+
 import ARKit
 import SwiftUI
 
 struct ARObject {
     let name: String
-    let position: SCNVector3
+    var position: SCNVector3
     let color: UIColor
 }
 
-class NavigationService {
+class NavigationService: ObservableObject {
+    @Published var currentInstruction: Instruction?
+    private let instructionService = InstructionService()
     private var qrCodeTransform: simd_float4x4?
-    private var arObjects: [ARObject] = [
-        ARObject(name: "sada", position: SCNVector3(-10, -1.4, -8.4), color: .green)
+    private var arObjects: [ARObject] = 
+    [
+        ARObject(name: "Opening1", position: SCNVector3(-0.174, -0.441, -0.382), color: .green),
     ]
+    
     private let scaleFactor: Float = 1.0
     private var redCubeNode: SCNNode?
     private var objectNodes: [String: SCNNode] = [:]
     private let arrowSpacing: Float = 0.3 // Space between arrows in meters
     private let fixedHeight: Float = -1.4 // Fixed height for all cubes
-    private let qrCodePosition = SCNVector3(0, -1.5, -2.5)
+    private let qrCodePosition = SCNVector3(-0.705, -0.376, -2.601)
 
     func handleAnchorDetection(anchor: ARImageAnchor, arView: ARSCNView?) -> SCNVector3? {
-        guard let referenceImageName = anchor.referenceImage.name, referenceImageName == "Opening0" else {
-            return nil
+            guard let referenceImageName = anchor.referenceImage.name, referenceImageName == "Opening0" else {
+                return nil
+            }
+            
+            qrCodeTransform = anchor.transform
+            
+            print("1. QR Code position (fixed): \(qrCodePosition)")
+            
+            if let arView = arView {
+                let userPosition = addRedCubeAtUserPosition(arView)
+                
+                let userRelativePosition = userPosition - qrCodePosition
+                print("2. User position relative to QR: \(userRelativePosition)")
+                
+                // Fix ARObject positions relative to user position
+                fixARObjectPositions(userPosition: userPosition)
+                
+                addObjectCubes(in: arView)
+                createSequentialRoute(in: arView, startingFrom: userPosition)
+                
+                // Print ARObject positions relative to user position
+                for object in arObjects {
+                    if let objectNode = objectNodes[object.name] {
+                        let objectRelativePosition = objectNode.position - userPosition
+                        print("3. \(object.name) position relative to user: \(objectRelativePosition)")
+                    }
+                }
+            }
+            
+            return qrCodePosition
         }
-        
-        qrCodeTransform = anchor.transform
-        
-        if let arView = arView {
-            let redCubePosition = addRedCubeAtUserPosition(arView)
-            addObjectCubes(in: arView, qrTransform: anchor.transform)
-            createSequentialRoute(in: arView, startingFrom: redCubePosition)
+    private func fixARObjectPositions(userPosition: SCNVector3) {
+            for i in 0..<arObjects.count {
+                let relativePosition = arObjects[i].position - qrCodePosition
+                arObjects[i].position = userPosition + relativePosition
+            }
         }
-        
-        return SCNVector3(anchor.transform.columns.3.x, anchor.transform.columns.3.y, anchor.transform.columns.3.z)
-    }
 
     private func createSequentialRoute(in arView: ARSCNView, startingFrom redCubePosition: SCNVector3) {
         var previousPosition = redCubePosition
@@ -52,28 +81,18 @@ class NavigationService {
         }
     }
 
-    private func addObjectCubes(in arView: ARSCNView, qrTransform: simd_float4x4) {
-        for object in arObjects {
-            let cubeNode = createCube(color: object.color)
-            let scaledPosition = scalePosition(object.position)
-            
-            let relativeObjectPosition = SCNVector3(
-                scaledPosition.x - qrCodePosition.x,
-                0, // Y difference is now 0
-                scaledPosition.z - qrCodePosition.z
-            )
-            
-            var worldPosition = simd_float4(relativeObjectPosition.x, 0, relativeObjectPosition.z, 1)
-            worldPosition = simd_mul(qrTransform, worldPosition)
-            
-            cubeNode.position = SCNVector3(worldPosition.x, fixedHeight, worldPosition.z)
-            cubeNode.name = object.name
-            arView.scene.rootNode.addChildNode(cubeNode)
-            objectNodes[object.name] = cubeNode
-            
-            print("Placed \(object.name) at position: \(cubeNode.position)")
+    private func addObjectCubes(in arView: ARSCNView) {
+            for object in arObjects {
+                let cubeNode = createCube(color: object.color)
+                cubeNode.position = object.position
+                cubeNode.position.y = fixedHeight
+                cubeNode.name = object.name
+                arView.scene.rootNode.addChildNode(cubeNode)
+                objectNodes[object.name] = cubeNode
+                
+                print("Placed \(object.name) at position: \(cubeNode.position)")
+            }
         }
-    }
 
     private func scalePosition(_ position: SCNVector3) -> SCNVector3 {
         return SCNVector3(position.x * scaleFactor, position.y, position.z * scaleFactor)
@@ -102,16 +121,20 @@ class NavigationService {
     }
 
     func presentRoute(in arView: ARSCNView, from start: SCNVector3, to end: SCNVector3) {
-        createDirectionArrows(in: arView, from: start, to: end)
-        let vector = end - start
-        let distance = vector.length()
+           createDirectionArrows(in: arView, from: start, to: end)
+           let vector = end - start
+           let distance = vector.length()
 
-        print("Route:")
-        print("Start: \(start)")
-        print("End: \(end)")
-        print("Vector: \(vector)")
-        print("Distance: \(String(format: "%.2f", distance)) meters")
-    }
+           print("Route:")
+           print("Start: \(start)")
+           print("End: \(end)")
+           print("Vector: \(vector)")
+           print("Distance: \(String(format: "%.2f", distance)) meters")
+
+           // Generate and set the current instruction
+           currentInstruction = instructionService.generateInstruction(from: start, to: end, roomName: "Target Location")
+           print("Current Instruction updated: \(String(describing: currentInstruction))")
+       }
 
     private func addRedCubeAtUserPosition(_ arView: ARSCNView) -> SCNVector3 {
         guard let camera = arView.session.currentFrame?.camera else {
@@ -164,18 +187,9 @@ class NavigationService {
         objectNodes.removeAll()
 
         // Create new route
-        if let redCube = redCubeNode {
-            var previousPosition = redCube.position
-            
-            for object in arObjects {
-                let objectNode = createObjectNode(for: object)
-                arView.scene.rootNode.addChildNode(objectNode)
-                objectNodes[object.name] = objectNode
-                
-                presentRoute(in: arView, from: previousPosition, to: objectNode.position)
-                previousPosition = objectNode.position
-            }
-        }
+        if let redCube = redCubeNode, let lastObject = arObjects.last {
+                    presentRoute(in: arView, from: redCube.position, to: lastObject.position)
+                }
         
         print("Route updated with \(arObjects.count) objects")
     }
