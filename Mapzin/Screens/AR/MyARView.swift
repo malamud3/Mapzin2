@@ -76,34 +76,66 @@ struct ARViewContainer: View {
     }
 
     private var instructionsPanel: some View {
-            VStack(alignment: .leading, spacing: 10) {
-                if let instruction = viewModel.currentInstruction {
-                    HStack {
-                        Image(systemName: getDirectionIcon(instruction.direction))
-                            .foregroundColor(.blue)
-                        VStack(alignment: .leading) {
-                            Text(instruction.roomName)
-                                .font(.headline)
-                            Text("\(instruction.direction.capitalized) for \(String(format: "%.2f", instruction.distance)) m")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .shadow(radius: 5)
-                } else {
-                    Text("No current instructions")
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
+        VStack(alignment: .leading, spacing: 10) {
+            if viewModel.isAtDestination {
+                destinationReachedView
+            } else if let instruction = viewModel.currentInstruction {
+                currentInstructionView(instruction)
+            } else {
+                noInstructionsView
+            }
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(radius: 10)
+    }
+   
+    private var destinationReachedView: some View {
+        VStack(spacing: 15) {
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundColor(.green)
+                .font(.system(size: 50))
+            
+            Text("Destination Reached!")
+                .font(.title2)
+                .fontWeight(.bold)
+            
+            Text("You have arrived at your destination.")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .padding()
+    }
+
+    private func currentInstructionView(_ instruction: Instruction) -> some View {
+        HStack(spacing: 15) {
+            Image(systemName: getDirectionIcon(instruction.direction ?? ""))
+                .foregroundColor(.blue)
+                .font(.system(size: 30))
+            
+            VStack(alignment: .leading, spacing: 5) {
+                Text(instruction.roomName)
+                    .font(.headline)
+                
+                if let direction = instruction.direction, let distance = instruction.distance {
+                    Text("\(direction.capitalized) for \(String(format: "%.2f", distance)) m")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
                 }
             }
-            .padding()
         }
+        .padding()
+    }
 
+    private var noInstructionsView: some View {
+        Text("No current instructions")
+            .font(.subheadline)
+            .foregroundColor(.secondary)
+            .padding()
+    }
         private func getDirectionIcon(_ direction: String) -> String {
             switch direction {
             case "to your left":

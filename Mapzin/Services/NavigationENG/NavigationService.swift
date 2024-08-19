@@ -18,7 +18,8 @@ struct ARObject {
 
 class NavigationService: ObservableObject {
     @Published var currentInstruction: Instruction?
-    private let instructionService = InstructionService()
+    @Published var isAtDestination: Bool = false // New property to track if user is at destination
+    let instructionService = InstructionService()
     private var qrCodeTransform: simd_float4x4?
     private var arObjects: [ARObject] = 
     [
@@ -94,10 +95,6 @@ class NavigationService: ObservableObject {
             }
         }
 
-    private func scalePosition(_ position: SCNVector3) -> SCNVector3 {
-        return SCNVector3(position.x * scaleFactor, position.y, position.z * scaleFactor)
-    }
-    
     private func createDirectionArrows(in arView: ARSCNView, from start: SCNVector3, to end: SCNVector3) {
         let vector = end - start
         let distance = vector.length()
@@ -187,9 +184,18 @@ class NavigationService: ObservableObject {
         objectNodes.removeAll()
 
         // Create new route
-        if let redCube = redCubeNode, let lastObject = arObjects.last {
-                    presentRoute(in: arView, from: redCube.position, to: lastObject.position)
-                }
+        if let redCube = redCubeNode {
+            var previousPosition = redCube.position
+            
+            for object in arObjects {
+                let objectNode = createObjectNode(for: object)
+                arView.scene.rootNode.addChildNode(objectNode)
+                objectNodes[object.name] = objectNode
+                
+                presentRoute(in: arView, from: previousPosition, to: objectNode.position)
+                previousPosition = objectNode.position
+            }
+        }
         
         print("Route updated with \(arObjects.count) objects")
     }
@@ -203,25 +209,5 @@ class NavigationService: ObservableObject {
         return node
     }
 
-    private func generateDirections(from camPosition: SCNVector3, to targetPosition: SCNVector3, distance: Float) -> String {
-        let deltaX = targetPosition.x - camPosition.x
-        let deltaY = targetPosition.y - camPosition.y
-        let deltaZ = targetPosition.z - camPosition.z
-
-        var directions = ""
-        let stepSize: Float = 0.1
-
-        if abs(deltaX) > stepSize {
-            directions += deltaX > 0 ? "Move Right " : "Move Left "
-        }
-        if abs(deltaY) > stepSize {
-            directions += deltaY > 0 ? "Move Up " : "Move Down "
-        }
-        if abs(deltaZ) > stepSize {
-            directions += deltaZ > 0 ? "Move Forward " : "Move Backward "
-        }
-
-        directions += String(format: "for %.2f meters", distance)
-        return directions
-    }
+  
 }
