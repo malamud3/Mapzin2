@@ -79,12 +79,12 @@ struct ARViewContainer: View {
             VStack(alignment: .leading, spacing: 10) {
                 if let instruction = viewModel.currentInstruction {
                     HStack {
-                        Image(systemName: getDirectionIcon(instruction.direction))
+                        Image(systemName: getDirectionIcon(instruction.direction ?? ""))
                             .foregroundColor(.blue)
                         VStack(alignment: .leading) {
                             Text(instruction.roomName)
                                 .font(.headline)
-                            Text("\(instruction.direction.capitalized) for \(String(format: "%.2f", instruction.distance)) m")
+                            Text("\(String(describing: instruction.direction?.capitalized)) for \(String(format: "%.2f", instruction.distance ?? "")) m")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                         }

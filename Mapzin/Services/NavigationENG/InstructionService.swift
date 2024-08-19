@@ -10,11 +10,12 @@ import SceneKit
 
 struct Instruction: Equatable {
     let roomName: String
-    let direction: String
-    let distance: Float
+    let direction: String?
+    let distance: Float?
 }
 
 class InstructionService {
+    
     func generateInstruction(from start: SCNVector3, to end: SCNVector3, roomName: String) -> Instruction {
         let vector = end - start
         let distance = vector.length()
