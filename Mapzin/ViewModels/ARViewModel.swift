@@ -1,6 +1,9 @@
 import ARKit
 import SwiftUI
 import SceneKit
+import Combine
+
+
 
 class ARViewModel: NSObject, ObservableObject {
     @Published var navigationInstructions: String = "Looking for QR code..."
@@ -12,8 +15,13 @@ class ARViewModel: NSObject, ObservableObject {
     @Published var doorNavigationInstructions: String = ""
     @Published var detectedWindows: [SCNVector3] = []
     @Published var currentRoom: String = ""
-    @Published var availableRooms: [String] = []
-    
+    @Published var currentInstruction: Instruction? {
+            didSet {
+                print("Current Instruction updated: \(String(describing: currentInstruction))")
+            }
+        }
+    private var cancellables = Set<AnyCancellable>()
+
     @Published var selectedItemObject: ARObject? {
             didSet {
                 if let newObject = selectedItemObject {
@@ -31,19 +39,57 @@ class ARViewModel: NSObject, ObservableObject {
     private var sceneNodes: [NodeData] = []
 
     init(
-        arSessionService: ARSessionServiceProtocol = ARSessionService(),
-        bdmService: BDMService = BDMService(),
-        cameraService: ARCameraServiceProtocol = ARCameraService()
-    ) {
-        self.arSessionService = arSessionService
-        self.navigationService = NavigationService()
-        self.bdmService = bdmService
-        self.cameraService = cameraService
-        super.init()
-        self.arSessionService.delegate = self
-        loadSceneData()
-    }
+            arSessionService: ARSessionServiceProtocol = ARSessionService(),
+            bdmService: BDMService = BDMService(),
+            cameraService: ARCameraServiceProtocol = ARCameraService()
+        ) {
+            self.arSessionService = arSessionService
+            self.navigationService = NavigationService()
+            self.bdmService = bdmService
+            self.cameraService = cameraService
+            super.init()
+            self.arSessionService.delegate = self
+            loadSceneData()
+            setupBindings()
+        }
+    private func setupBindings() {
+            navigationService.$currentInstruction
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] instruction in
+                    self?.currentInstruction = instruction
+                    print("ARViewModel received instruction update: \(String(describing: instruction))")
+                }
+                .store(in: &cancellables)
+        }
 
+    func updateRoute() {
+           print("updateRoute called")
+           if let arView = arSessionService.arView {
+               navigationService.updateRoute(in: arView)
+           } else {
+               print("arView is nil in updateRoute")
+           }
+       }
+    
+    private func updateCurrentInstruction() {
+        
+           guard let start = cameraPosition,
+                 let end = selectedItemObject?.position else {
+               currentInstruction = nil
+               return
+           }
+                print("updateCurrentInstruction called")
+                print("Camera Position: \(String(describing: cameraPosition))")
+                print("Selected Item Object: \(String(describing: selectedItemObject))")
+           let vector = end - start
+           let distance = vector.length()
+           let direction = getDirection(from: start, to: end)
+           let roomName = currentRoom.isEmpty ? "Unknown Room" : currentRoom
+           
+           DispatchQueue.main.async {
+               self.currentInstruction = Instruction(roomName: roomName, direction: direction, distance: distance)
+           }
+       }
     func setupARView(_ arView: ARSCNView) {
         arSessionService.setupARView(arView)
 //        loadSceneData()
@@ -56,7 +102,6 @@ class ARViewModel: NSObject, ObservableObject {
         }
     }
 
-   
     func addObject(_ object: ARObject) {
         if (detectedQRCodePosition != nil) {
                navigationService.addObject(object)
@@ -74,11 +119,7 @@ class ARViewModel: NSObject, ObservableObject {
            }
        }
 
-       func updateRoute() {
-           if let arView = arSessionService.arView {
-               navigationService.updateRoute(in: arView)
-           }
-       }
+
     
     private func updateObjectInstructions() {
             objectInstructions.removeAll()
@@ -94,7 +135,7 @@ class ARViewModel: NSObject, ObservableObject {
         updateDetectedObjects()
         
         // If we have an ARView, update the route
-        if let arView = arSessionService.arView {
+        if (arSessionService.arView) != nil {
             updateRoute()
         }
     }
@@ -116,7 +157,6 @@ class ARViewModel: NSObject, ObservableObject {
             self.updateCurrentRoom(for: camPosition)
             
             let nearestDoor = self.findNearestNode(of: .door, to: camPosition)
-//            let nearestWindow = self.findNearestNode(of: .window, to: camPosition)
             
             var instructions = "You are in the \(self.currentRoom). "
             
@@ -124,12 +164,7 @@ class ARViewModel: NSObject, ObservableObject {
                 let distance = self.calculateDistance(from: camPosition, to: door.position)
                 instructions += "Nearest door is \(String(format: "%.2f", distance)) meters \(self.getDirection(from: camPosition, to: door.position)). "
             }
-            
-//            if let window = nearestWindow {
-//                let distance = self.calculateDistance(from: camPosition, to: window.position)
-//                instructions += "Nearest window is \(String(format: "%.2f", distance)) meters \(self.getDirection(from: camPosition, to: window.position))."
-//            }
-            
+                
             self.navigationInstructions = instructions
         }
     }

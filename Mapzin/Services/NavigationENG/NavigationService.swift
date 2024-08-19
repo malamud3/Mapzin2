@@ -5,12 +5,7 @@
 //  Created by Amir Malamud on 21/07/2024.
 //
 
-//
-//  NavigationService.swift
-//  Mapzin
-//
-//  Created by Amir Malamud on 21/07/2024.
-//
+
 
 import ARKit
 import SwiftUI
@@ -21,20 +16,13 @@ struct ARObject {
     let color: UIColor
 }
 
-class NavigationService {
+class NavigationService: ObservableObject {
+    @Published var currentInstruction: Instruction?
+    private let instructionService = InstructionService()
     private var qrCodeTransform: simd_float4x4?
     private var arObjects: [ARObject] = 
     [
         ARObject(name: "Opening1", position: SCNVector3(-0.174, -0.441, -0.382), color: .green),
-        ARObject(name: "Door0", position: SCNVector3(2.08, -0.576, -0.079), color: .blue),
-        ARObject(name: "Door3", position: SCNVector3(0.253, -0.537, 0.801), color: .blue),
-        ARObject(name: "Wall13", position: SCNVector3(2.446, -0.537, -2.119), color: .blue),
-        ARObject(name: "Door2", position: SCNVector3(-0.474, -0.537, 0.811), color: .blue),
-        ARObject(name: "Door20", position: SCNVector3(-3.176, -0.537, 1.163), color: .blue),
-        ARObject(name: "Opening3", position: SCNVector3(-3.415, -0.537, -3.777), color: .blue),
-        ARObject(name: "Refrigerator0", position: SCNVector3(-6.7, -0.537, -3.774), color: .blue),
-        ARObject(name: "Door1", position: SCNVector3(0.293, -0.537, -1.223), color: .blue),
-        ARObject(name: "Window0", position: SCNVector3(-7.766, -0.537, -0.96), color: .blue),
     ]
     
     private let scaleFactor: Float = 1.0
@@ -63,7 +51,7 @@ class NavigationService {
                 fixARObjectPositions(userPosition: userPosition)
                 
                 addObjectCubes(in: arView)
-           //     createSequentialRoute(in: arView, startingFrom: userPosition)
+                createSequentialRoute(in: arView, startingFrom: userPosition)
                 
                 // Print ARObject positions relative to user position
                 for object in arObjects {
@@ -133,16 +121,20 @@ class NavigationService {
     }
 
     func presentRoute(in arView: ARSCNView, from start: SCNVector3, to end: SCNVector3) {
-        createDirectionArrows(in: arView, from: start, to: end)
-        let vector = end - start
-        let distance = vector.length()
+           createDirectionArrows(in: arView, from: start, to: end)
+           let vector = end - start
+           let distance = vector.length()
 
-        print("Route:")
-        print("Start: \(start)")
-        print("End: \(end)")
-        print("Vector: \(vector)")
-        print("Distance: \(String(format: "%.2f", distance)) meters")
-    }
+           print("Route:")
+           print("Start: \(start)")
+           print("End: \(end)")
+           print("Vector: \(vector)")
+           print("Distance: \(String(format: "%.2f", distance)) meters")
+
+           // Generate and set the current instruction
+           currentInstruction = instructionService.generateInstruction(from: start, to: end, roomName: "Target Location")
+           print("Current Instruction updated: \(String(describing: currentInstruction))")
+       }
 
     private func addRedCubeAtUserPosition(_ arView: ARSCNView) -> SCNVector3 {
         guard let camera = arView.session.currentFrame?.camera else {
@@ -195,18 +187,9 @@ class NavigationService {
         objectNodes.removeAll()
 
         // Create new route
-        if let redCube = redCubeNode {
-            var previousPosition = redCube.position
-            
-            for object in arObjects {
-                let objectNode = createObjectNode(for: object)
-                arView.scene.rootNode.addChildNode(objectNode)
-                objectNodes[object.name] = objectNode
-                
-                presentRoute(in: arView, from: previousPosition, to: objectNode.position)
-                previousPosition = objectNode.position
-            }
-        }
+        if let redCube = redCubeNode, let lastObject = arObjects.last {
+                    presentRoute(in: arView, from: redCube.position, to: lastObject.position)
+                }
         
         print("Route updated with \(arObjects.count) objects")
     }

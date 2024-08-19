@@ -34,6 +34,7 @@
 		A97506FE2C6F4A2600BF60F8 /* AccordionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97506FD2C6F4A2600BF60F8 /* AccordionListView.swift */; };
 		A97507002C72023300BF60F8 /* Amir.scn in Resources */ = {isa = PBXBuildFile; fileRef = A97506FF2C72023300BF60F8 /* Amir.scn */; };
 		A97507022C72160600BF60F8 /* ARPositioningHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97507012C72160600BF60F8 /* ARPositioningHelper.swift */; };
+		A97507042C73359300BF60F8 /* InstructionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97507032C73359300BF60F8 /* InstructionService.swift */; };
 		A97563E22BA6DA43002B08AD /* MapzinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97563E12BA6DA43002B08AD /* MapzinApp.swift */; };
 		A97563E42BA6DA43002B08AD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97563E32BA6DA43002B08AD /* HomeView.swift */; };
 		A97563E62BA6DA44002B08AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A97563E52BA6DA44002B08AD /* Assets.xcassets */; };
@@ -149,6 +150,7 @@
 		A97506FD2C6F4A2600BF60F8 /* AccordionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccordionListView.swift; sourceTree = "<group>"; };
 		A97506FF2C72023300BF60F8 /* Amir.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Amir.scn; sourceTree = "<group>"; };
 		A97507012C72160600BF60F8 /* ARPositioningHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARPositioningHelper.swift; sourceTree = "<group>"; };
+		A97507032C73359300BF60F8 /* InstructionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionService.swift; sourceTree = "<group>"; };
 		A97563DE2BA6DA43002B08AD /* Mapzin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mapzin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A97563E12BA6DA43002B08AD /* MapzinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapzinApp.swift; sourceTree = "<group>"; };
 		A97563E32BA6DA43002B08AD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 				A9D5A0A82C4D6101009BCE96 /* NavigationService.swift */,
 				A90F4B9F2C54D06400C89FE3 /* RelativeMapBuilder.swift */,
 				A97507012C72160600BF60F8 /* ARPositioningHelper.swift */,
+				A97507032C73359300BF60F8 /* InstructionService.swift */,
 			);
 			path = NavigationENG;
 			sourceTree = "<group>";
@@ -826,6 +829,7 @@
 				A94488092C03522E0007A9F0 /* UserLocationAnnotationView.swift in Sources */,
 				A9D5A0A22C4D2CB0009BCE96 /* ARCameraServiceProtocol.swift in Sources */,
 				A9A683C32C1EF1000016455C /* KeyboardAdaptive.swift in Sources */,
+				A97507042C73359300BF60F8 /* InstructionService.swift in Sources */,
 				A92BB5122C28311A004061D7 /* KeyboardObserver.swift in Sources */,
 				A9E8C5692C08478B004CFBBA /* FirebaseAuthService.swift in Sources */,
 				A9F2F4A92C3FDDD900DF5960 /* ARkitMet.swift in Sources */,
