@@ -20,6 +20,7 @@
 		A92BB50E2C282BE7004061D7 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB50D2C282BE7004061D7 /* CustomButton.swift */; };
 		A92BB5122C28311A004061D7 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB5112C28311A004061D7 /* KeyboardObserver.swift */; };
 		A92BB5142C283473004061D7 /* CustomAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92BB5132C283473004061D7 /* CustomAlertModifier.swift */; };
+		A930C6042C7CA56400BA133A /* genralFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930C6032C7CA56400BA133A /* genralFuncs.swift */; };
 		A93ACCF22C45355A0032B7A2 /* Salon.scn in Resources */ = {isa = PBXBuildFile; fileRef = A93ACCF12C45355A0032B7A2 /* Salon.scn */; };
 		A93ACCF42C45397F0032B7A2 /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A93ACCF32C45397F0032B7A2 /* ARKit.framework */; };
 		A94488092C03522E0007A9F0 /* UserLocationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94488082C03522E0007A9F0 /* UserLocationAnnotationView.swift */; };
@@ -135,6 +136,7 @@
 		A92BB50D2C282BE7004061D7 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		A92BB5112C28311A004061D7 /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		A92BB5132C283473004061D7 /* CustomAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertModifier.swift; sourceTree = "<group>"; };
+		A930C6032C7CA56400BA133A /* genralFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = genralFuncs.swift; sourceTree = "<group>"; };
 		A93ACCF12C45355A0032B7A2 /* Salon.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Salon.scn; sourceTree = "<group>"; };
 		A93ACCF32C45397F0032B7A2 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
 		A94488082C03522E0007A9F0 /* UserLocationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationAnnotationView.swift; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 				A9BE73B12C3A6A2B00B1B808 /* API */,
 				A9BE73AB2C3A648500B1B808 /* Sensors */,
 				A9923A032C4FED70007171D2 /* MockData.swift */,
+				A930C6032C7CA56400BA133A /* genralFuncs.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -794,6 +797,7 @@
 				A91CD55B2C130DE10056DE4D /* POI.swift in Sources */,
 				A99B1F452C21A494002B7B32 /* CoordinatorView.swift in Sources */,
 				A92BB5142C283473004061D7 /* CustomAlertModifier.swift in Sources */,
+				A930C6042C7CA56400BA133A /* genralFuncs.swift in Sources */,
 				A9C4AC932C0210A9000C4D3E /* SearchViewModel.swift in Sources */,
 				A92BB5042C27F4F8004061D7 /* BDMService.swift in Sources */,
 				A92BB50E2C282BE7004061D7 /* CustomButton.swift in Sources */,

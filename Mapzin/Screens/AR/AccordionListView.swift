@@ -28,90 +28,103 @@ import SwiftUI
 
 struct AccordionListView: View {
     @EnvironmentObject private var sharedViewModel: SharedViewModel
+    @State private var expandedSections: Set<String> = []
+    @State private var searchText = ""
     
     let accordionItems = [
-        AccordionItem(title: "Floor 0", items: ["Room 101", "Room 102", "Room 103", "Room 104","Stairs0","Bathroom0"]),
+        AccordionItem(title: "Floor 0", items: ["Room 101", "Room 102", "Room 103", "Room 104", "Stairs0", "Bathroom0"]),
         AccordionItem(title: "Floor 1", items: ["Elevator", "Stairs1", "Restroom"]),
         AccordionItem(title: "Floor 2", items: ["Reception", "Cafeteria", "Conference Room"])
     ]
-    @State private var expandedItems: Set<UUID> = []
-    @State private var searchText = ""
     
-    var flattenedItems: [FlattenedItem] {
-        accordionItems.flatMap { item in
-            item.items.map { FlattenedItem(title: $0, parentTitle: item.title) }
-        }
-    }
-    
-    var filteredItems: [FlattenedItem] {
+    var filteredItems: [String] {
         if searchText.isEmpty {
             return []
         } else {
-            return flattenedItems.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
+            return accordionItems.flatMap { $0.items }.filter { $0.localizedCaseInsensitiveContains(searchText) }
         }
     }
     
     var body: some View {
-        NavigationView {
-            VStack {
-                if searchText.isEmpty {
-                    List {
-                        ForEach(accordionItems) { item in
-                            Section {
-                                Button(action: {
-                                    toggleExpansion(for: item.id)
-                                }) {
-                                    HStack {
-                                        Text(item.title)
-                                            .font(.headline)
-                                        Spacer()
-                                        Image(systemName: expandedItems.contains(item.id) ? "chevron.up" : "chevron.down")
-                                    }
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                                
-                                if expandedItems.contains(item.id) {
-                                    ForEach(item.items, id: \.self) { subItem in
-                                        Button(action: {
-                                            itemTapped(subItem)
-                                        }) {
-                                            Text(subItem)
-                                                .padding(.leading)
-                                        }
-                                        .buttonStyle(PlainButtonStyle())
-                                    }
-                                }
-                            }
+            NavigationView {
+                ZStack {
+                    LinearGradient(
+                        gradient: Gradient(colors: [.black, .gray]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                    .edgesIgnoringSafeArea(.all)
+                    
+                    VStack {
+                        SearchBar(searchText: $searchText)
+                            .padding(.top)
+                            .shadow(color: .black.opacity(0.4), radius: 5, x: 0, y: 2)
+                        
+                        if searchText.isEmpty {
+                            accordionList
+                        } else {
+                            searchResultsList
                         }
                     }
-                } else {
-                    List(filteredItems) { item in
-                        Button(action: {
-                            itemTapped(item.title)
-                        }) {
-                            VStack(alignment: .leading) {
-                                Text(item.title)
-                                    .font(.body)
-                                Text(item.parentTitle)
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
+                }
+                .navigationTitle("Search POI")
+                .navigationBarTitleDisplayMode(.inline)
+                .foregroundColor(.white)
+            }
+            .colorScheme(.dark)
+            .accentColor(.white)
+        }
+    
+    private var accordionList: some View {
+        List {
+            ForEach(accordionItems) { section in
+                Section(header: sectionHeader(for: section)) {
+                    if expandedSections.contains(section.title) {
+                        ForEach(section.items, id: \.self) { item in
+                            Button(action: {
+                                itemTapped(item)
+                            }) {
+                                Text(item)
+                                    .padding(.leading)
                             }
                         }
-                        .buttonStyle(PlainButtonStyle())
                     }
                 }
             }
-            .searchable(text: $searchText, prompt: "Search POI")
-            .navigationTitle("Accordion List")
+        }
+        .listStyle(InsetGroupedListStyle())
+    }
+    
+    private var searchResultsList: some View {
+        List(filteredItems, id: \.self) { item in
+            Button(action: {
+                itemTapped(item)
+            }) {
+                Text(item)
+            }
+        }
+        .listStyle(PlainListStyle())
+    }
+    
+    private func sectionHeader(for section: AccordionItem) -> some View {
+        Button(action: {
+            toggleExpansion(for: section.title)
+        }) {
+            HStack {
+                Text(section.title)
+                    .font(.headline)
+                Spacer()
+                Image(systemName: expandedSections.contains(section.title) ? "chevron.up" : "chevron.down")
+            }
         }
     }
     
-    private func toggleExpansion(for id: UUID) {
+    private func toggleExpansion(for title: String) {
         withAnimation {
-            if expandedItems.contains(id) {
-                expandedItems.remove(id)
+            if expandedSections.contains(title) {
+                expandedSections.remove(title)
             } else {
-                expandedItems.insert(id)
+                expandedSections.insert(title)
             }
         }
     }
@@ -121,6 +134,7 @@ struct AccordionListView: View {
         sharedViewModel.showAccordionList = false
     }
 }
+
 struct AccordionListView_Previews: PreviewProvider {
     static var previews: some View {
         AccordionListView()

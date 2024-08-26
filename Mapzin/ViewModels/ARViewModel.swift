@@ -3,30 +3,14 @@ import SwiftUI
 import SceneKit
 import Combine
 
-
-
 class ARViewModel: NSObject, ObservableObject {
     @Published var detectedQRCodePosition: SCNVector3?
     @Published var cameraPosition: SCNVector3?
     
     @Published var objectInstructions: [String] = []
     @Published var detectedObjects: [String] = []
-    @Published var currentInstruction: Instruction? {
-            didSet {
-                print("Current Instruction updated: \(String(describing: currentInstruction))")
-            }
-        }
+    @Published var currentInstruction: Instruction? 
     @Published var isAtDestination: Bool = false
-
-    @Published var selectedItemObject: ARObject? {
-            didSet {
-                if let newObject = selectedItemObject {
-                    addObject(newObject)
-                    updateObjectInstructions()
-                    updateRoute()
-                }
-            }
-        }
     
     var arSessionService: ARSessionServiceProtocol
     private let navigationService: NavigationService
@@ -34,7 +18,7 @@ class ARViewModel: NSObject, ObservableObject {
     private let cameraService: ARCameraServiceProtocol
     private var sceneNodes: [NodeData] = []
     private var cancellables = Set<AnyCancellable>()
-    private let destinationThreshold: Float = 1.15
+    private let destinationThreshold: Float = 1.5
 
     init(
             arSessionService: ARSessionServiceProtocol = ARSessionService(),
@@ -47,7 +31,6 @@ class ARViewModel: NSObject, ObservableObject {
             self.cameraService = cameraService
             super.init()
             self.arSessionService.delegate = self
-            loadSceneData()
             setupBindings()
         }
     private func setupBindings() {
@@ -55,21 +38,10 @@ class ARViewModel: NSObject, ObservableObject {
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] instruction in
                     self?.currentInstruction = instruction
-                    print("ARViewModel received instruction update: \(String(describing: instruction))")
                 }
                 .store(in: &cancellables)
         }
-
-    func updateRoute() {
-            print("updateRoute called")
-            if let arView = arSessionService.arView {
-                navigationService.updateRoute(in: arView)
-                checkDestinationReached()
-            } else {
-                print("arView is nil in updateRoute")
-            }
-        }
-    
+ 
     private func checkDestinationReached() {
            guard let userPosition = cameraPosition,
                  let destination = navigationService.getObjects().last?.position else {
@@ -90,55 +62,12 @@ class ARViewModel: NSObject, ObservableObject {
 //        loadSceneData()
     }
 
-    private func loadSceneData() {
-        if let nodes = bdmService.parseSCNFile(named: "Amir.scn") {
-//            self.sceneNodes = nodes
-//            self.availableRooms = nodes.filter { $0.name.hasSuffix("Room0") }.map { $0.name }
-        }
-    }
-
-    func addObject(_ object: ARObject) {
-           if (detectedQRCodePosition != nil) {
-               navigationService.addObject(object)
-               updateObjectInstructions()
-               updateDetectedObjects()
-               
-               if let arView = arSessionService.arView {
-                   navigationService.updateRoute(in: arView)
-                   print("Route updated with new object: \(object.name)")
-                   checkDestinationReached()
-               } else {
-                   print("ARView is nil, cannot update route")
-               }
-           } else {
-               print("QR code not detected yet. Object \(object.name) added to pending list.")
-           }
-       }
-
-    private func updateObjectInstructions() {
-            objectInstructions.removeAll()
-            for object in navigationService.getObjects() {
-                objectInstructions.append("\(object.name) cube placed at its position relative to the QR code.")
-            }
-        }
-
-
-    func removeObject(named name: String) {
-           navigationService.removeObject(named: name)
-           updateObjectInstructions()
-           updateDetectedObjects()
-           
-           if arSessionService.arView != nil {
-               updateRoute()
-           }
-       }
-
-
-
-    private func updateDetectedObjects() {
-        detectedObjects = navigationService.getObjects().map { $0.name }
-    }
-
+//    private func loadSceneData() {
+//        if let nodes = bdmService.parseSCNFile(named: "Amir.scn") {
+////            self.sceneNodes = nodes
+////            self.availableRooms = nodes.filter { $0.name.hasSuffix("Room0") }.map { $0.name }
+//        }
+//    }
 
     func updateNavigationInstructions() {
             DispatchQueue.main.async { [weak self] in
@@ -157,23 +86,11 @@ class ARViewModel: NSObject, ObservableObject {
                 )
                 
                 self.currentInstruction = updatedInstruction
-                
-                print("Updated navigation instruction: \(updatedInstruction)")
-                
                 self.checkDestinationReached()
             }
         }
 
-
    
-
-    private func calculateDistance(from start: SCNVector3, to end: SCNVector3) -> Float {
-        let dx = end.x - start.x
-        let dy = end.y - start.y
-        let dz = end.z - start.z
-        return sqrt(dx*dx + dy*dy + dz*dz)
-    }
-
     private func getDirection(from start: SCNVector3, to end: SCNVector3) -> String {
         let dx = end.x - start.x
         let dz = end.z - start.z

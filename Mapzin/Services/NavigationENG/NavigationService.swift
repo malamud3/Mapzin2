@@ -18,12 +18,15 @@ struct ARObject {
 
 class NavigationService: ObservableObject {
     @Published var currentInstruction: Instruction?
-    @Published var isAtDestination: Bool = false // New property to track if user is at destination
+    @Published var isAtDestination: Bool = false
+    @Published var currentDestinationIndex: Int = -1
     let instructionService = InstructionService()
     private var qrCodeTransform: simd_float4x4?
     private var arObjects: [ARObject] = 
     [
         ARObject(name: "Opening1", position: SCNVector3(-0.174, -0.441, -0.382), color: .green),
+        ARObject(name: "Door0", position: SCNVector3(2.08, -0.576, -0.079), color: .blue),
+
     ]
     
     private let scaleFactor: Float = 1.0
@@ -39,32 +42,16 @@ class NavigationService: ObservableObject {
             }
             
             qrCodeTransform = anchor.transform
-            
-            print("1. QR Code position (fixed): \(qrCodePosition)")
-            
+                        
             if let arView = arView {
                 let userPosition = addRedCubeAtUserPosition(arView)
-                
-                let userRelativePosition = userPosition - qrCodePosition
-                print("2. User position relative to QR: \(userRelativePosition)")
-                
-                // Fix ARObject positions relative to user position
                 fixARObjectPositions(userPosition: userPosition)
-                
                 addObjectCubes(in: arView)
                 createSequentialRoute(in: arView, startingFrom: userPosition)
-                
-                // Print ARObject positions relative to user position
-                for object in arObjects {
-                    if let objectNode = objectNodes[object.name] {
-                        let objectRelativePosition = objectNode.position - userPosition
-                        print("3. \(object.name) position relative to user: \(objectRelativePosition)")
-                    }
-                }
             }
-            
             return qrCodePosition
         }
+    
     private func fixARObjectPositions(userPosition: SCNVector3) {
             for i in 0..<arObjects.count {
                 let relativePosition = arObjects[i].position - qrCodePosition
@@ -91,7 +78,6 @@ class NavigationService: ObservableObject {
                 arView.scene.rootNode.addChildNode(cubeNode)
                 objectNodes[object.name] = cubeNode
                 
-                print("Placed \(object.name) at position: \(cubeNode.position)")
             }
         }
 
@@ -119,18 +105,7 @@ class NavigationService: ObservableObject {
 
     func presentRoute(in arView: ARSCNView, from start: SCNVector3, to end: SCNVector3) {
            createDirectionArrows(in: arView, from: start, to: end)
-           let vector = end - start
-           let distance = vector.length()
-
-           print("Route:")
-           print("Start: \(start)")
-           print("End: \(end)")
-           print("Vector: \(vector)")
-           print("Distance: \(String(format: "%.2f", distance)) meters")
-
-           // Generate and set the current instruction
            currentInstruction = instructionService.generateInstruction(from: start, to: end, roomName: "Target Location")
-           print("Current Instruction updated: \(String(describing: currentInstruction))")
        }
 
     private func addRedCubeAtUserPosition(_ arView: ARSCNView) -> SCNVector3 {
@@ -146,7 +121,6 @@ class NavigationService: ObservableObject {
         arView.scene.rootNode.addChildNode(cubeNode)
         redCubeNode = cubeNode
         
-        print("Red cube placed at camera position: \(cubePosition)")
         return cubePosition
     }
 
@@ -167,7 +141,6 @@ class NavigationService: ObservableObject {
         arObjects.removeAll { $0.name == name }
         objectNodes[name]?.removeFromParentNode()
         objectNodes.removeValue(forKey: name)
-        print("Removed object: \(name)")
     }
 
     func getObjects() -> [ARObject] {
@@ -197,7 +170,6 @@ class NavigationService: ObservableObject {
             }
         }
         
-        print("Route updated with \(arObjects.count) objects")
     }
 
     private func createObjectNode(for object: ARObject) -> SCNNode {
@@ -208,6 +180,4 @@ class NavigationService: ObservableObject {
         node.name = object.name
         return node
     }
-
-  
 }
