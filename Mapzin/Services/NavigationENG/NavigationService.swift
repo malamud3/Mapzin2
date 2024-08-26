@@ -35,6 +35,7 @@ class NavigationService: ObservableObject {
     private let arrowSpacing: Float = 0.3 // Space between arrows in meters
     private let fixedHeight: Float = -1.4 // Fixed height for all cubes
     private let qrCodePosition = SCNVector3(-0.705, -0.376, -2.601)
+    private let destinationThreshold: Float = 1.5
 
     func handleAnchorDetection(anchor: ARImageAnchor, arView: ARSCNView?) -> SCNVector3? {
             guard let referenceImageName = anchor.referenceImage.name, referenceImageName == "Opening0" else {
@@ -42,7 +43,7 @@ class NavigationService: ObservableObject {
             }
             
             qrCodeTransform = anchor.transform
-                        
+            currentDestinationIndex = 0
             if let arView = arView {
                 let userPosition = addRedCubeAtUserPosition(arView)
                 fixARObjectPositions(userPosition: userPosition)
@@ -51,6 +52,42 @@ class NavigationService: ObservableObject {
             }
             return qrCodePosition
         }
+    func updateNavigation(userPosition: SCNVector3) {
+        if(currentDestinationIndex != -1){
+            checkDestinationReached(userPosition: userPosition)
+            updateCurrentInstruction(userPosition: userPosition)
+        }
+    }
+    private func checkDestinationReached(userPosition: SCNVector3) {
+            guard currentDestinationIndex < arObjects.count else { return }
+   
+            let currentDestination = arObjects[currentDestinationIndex].position
+            let distance = calculateDistance(from: userPosition, to: currentDestination)
+            
+            if distance <= destinationThreshold {
+                if currentDestinationIndex == arObjects.count - 1 {
+                    isAtDestination = true
+                    currentInstruction = nil
+                } else {
+                    currentDestinationIndex += 1
+                    updateCurrentInstruction(userPosition: userPosition)
+                }
+            }
+        }
+    private func updateCurrentInstruction(userPosition: SCNVector3) {
+           guard currentDestinationIndex < arObjects.count else {
+               currentInstruction = nil
+               return
+           }
+           
+           let destination = arObjects[currentDestinationIndex]
+           currentInstruction = instructionService.generateInstruction(
+               from: userPosition,
+               to: destination.position,
+               roomName: destination.name
+           )
+       }
+    
     
     private func fixARObjectPositions(userPosition: SCNVector3) {
             for i in 0..<arObjects.count {
@@ -105,7 +142,7 @@ class NavigationService: ObservableObject {
 
     func presentRoute(in arView: ARSCNView, from start: SCNVector3, to end: SCNVector3) {
            createDirectionArrows(in: arView, from: start, to: end)
-           currentInstruction = instructionService.generateInstruction(from: start, to: end, roomName: "Target Location")
+//           currentInstruction = instructionService.generateInstruction(from: start, to: end, roomName: "Target Location")
        }
 
     private func addRedCubeAtUserPosition(_ arView: ARSCNView) -> SCNVector3 {
