@@ -16,7 +16,8 @@ function euclideanDistance(a: POI, b: POI): number {
 }
 
 export function aStar(pois: POI[], start: POI, end: POI): POI[] {
-    const openSet = new PriorityQueue<Node>((a, b) => a.f - b.f);
+    console.log(`Starting A* algorithm from ${start._id} to ${end._id}`);
+    const openSet = new PriorityQueue<Node>((a, b) => b.f - a.f);
     const openSetMap = new Map<string, Node>();
     const closedSet = new Set<string>();
     const startNode: Node = { poi: start, f: 0, g: 0, h: 0, parent: null };
@@ -28,7 +29,10 @@ export function aStar(pois: POI[], start: POI, end: POI): POI[] {
         const current = openSet.dequeue()!;
         openSetMap.delete(current.poi._id!.toString());
 
+        console.log(`Exploring node: ${current.poi._id}, f: ${current.f}, g: ${current.g}, h: ${current.h}`);
+
         if (current.poi._id === end._id) {
+            console.log('Path found!');
             return reconstructPath(current);
         }
 
@@ -42,6 +46,8 @@ export function aStar(pois: POI[], start: POI, end: POI): POI[] {
             const h = euclideanDistance(neighborPOI, end);
             const f = tentativeG + h;
 
+            console.log(`  Neighbor: ${neighborPOI._id}, tentative g: ${tentativeG}, h: ${h}, f: ${f}`);
+
             const existingNeighbor = openSetMap.get(neighborPOI._id!.toString());
             if (!existingNeighbor) {
                 const neighborNode: Node = {
@@ -53,7 +59,9 @@ export function aStar(pois: POI[], start: POI, end: POI): POI[] {
                 };
                 openSet.add(neighborNode);
                 openSetMap.set(neighborPOI._id!.toString(), neighborNode);
+                console.log(`  Added new node to open set: ${neighborPOI._id}`);
             } else if (tentativeG < existingNeighbor.g) {
+                console.log(`  Updating existing node: ${neighborPOI._id}`);
                 // Update existing node
                 existingNeighbor.g = tentativeG;
                 existingNeighbor.f = f;
@@ -65,6 +73,7 @@ export function aStar(pois: POI[], start: POI, end: POI): POI[] {
         }
     }
 
+    console.log('No path found');
     return []; // No path found
 }
 
@@ -77,5 +86,6 @@ function reconstructPath(endNode: Node): POI[] {
         current = current.parent;
     }
 
+    console.log('Reconstructed path:', path.map(poi => poi._id).join(' -> '));
     return path;
 }

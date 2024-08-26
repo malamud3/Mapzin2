@@ -21,7 +21,21 @@ export const NodeBoundaryFix = (nodes: NodeBoundary[]): NodeBoundary[] => {
         type: node.type
     }));
 };
-
+// Helper function to create a POI object
+function createPOI(name: string, x: number, y: number, z: number, floor: number, description: string, connections: Array<{ connectedPoiId: string; distance: number }>): POI {
+    return {
+        name,
+        type: "default",
+        location: { x, y, z },
+        floor,
+        description,
+        connections
+    };
+}
+// Parse the JSON data
+const testCases = JSON.parse(`[
+  // ... (the entire JSON string would go here)
+]`);
 
 // const convertNode2DToPOI = (node: Node2D, floor: number, connections: Connection[]): POI => {
 //     const description = `POI of type ${node.type}`;

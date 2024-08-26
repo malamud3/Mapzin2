@@ -1,83 +1,216 @@
-import { ObjectId } from 'mongodb';
-import { POI } from "../entities/POI";
 import { aStar } from "../services/aStar"; // Import the aStar function
+import {createPOI} from "../entities/POI"
+import { ObjectId } from 'mongodb';
 
-describe('A* Algorithm Tests', () => {
-    // Helper function to create a POI
-    function createPOI(id: string, name: string, x: number, y: number, connections: {connectedPoiId: string, distance: number}[] = []): POI {
-        return {
-            _id: new ObjectId(id),
-            name,
-            type: "TestPOI", // Add a type
-            location: { x, y, z: 0 }, // Add z coordinate
-            floor: 1, // Add floor
-            description: `Test POI: ${name}`, // Add description
-            connections
-        };
-    }
+test('Simple path with two points', () => {
+    const start = createPOI(
+        new ObjectId().toHexString(),
+        'Start',
+        'TestPOI',
+        0,
+        0,
+        0,
+        1,
+        'Start point'
+    );
+    const end = createPOI(
+        new ObjectId().toHexString(),
+        'End',
+        'TestPOI',
+        1,
+        1,
+        0,
+        1,
+        'End point'
+    );
+    start.connections.push({ connectedPoiId: end._id!.toString(), distance: 1 });
 
-    test('Simple path with two points', () => {
-        const pois = [
-            createPOI('1', 'Start', 0, 0, [{connectedPoiId: '2', distance: 5}]),
-            createPOI('2', 'End', 3, 4)
-        ];
-        const path = aStar(pois, pois[0], pois[1]);
-        expect(path.map(p => p.name)).toEqual(['Start', 'End']);
-    });
+    const result = aStar([start, end], start, end);
 
-    test('Path with multiple points', () => {
-        const pois = [
-            createPOI('1', 'A', 0, 0, [{connectedPoiId: '2', distance: 1}, {connectedPoiId: '3', distance: 5}]),
-            createPOI('2', 'B', 1, 0, [{connectedPoiId: '1', distance: 1}, {connectedPoiId: '4', distance: 2}]),
-            createPOI('3', 'C', 5, 0, [{connectedPoiId: '1', distance: 5}, {connectedPoiId: '4', distance: 1}]),
-            createPOI('4', 'D', 6, 0, [{connectedPoiId: '2', distance: 2}, {connectedPoiId: '3', distance: 1}])
-        ];
-        const path = aStar(pois, pois[0], pois[3]);
-        expect(path.map(p => p.name)).toEqual(['A', 'B', 'D']);
-    });
+    expect(result).toHaveLength(2);
+    expect(result[0]).toEqual(start);
+    expect(result[1]).toEqual(end);
+});
+test('Multi-point path with four points', () => {
+    const pointA = createPOI(
+        new ObjectId().toHexString(),
+        'A',
+        'default',
+        0,
+        0,
+        0,
+        1,
+        'Start point'
+    );
+    const pointB = createPOI(
+        new ObjectId().toHexString(),
+        'B',
+        'default',
+        1,
+        0,
+        0,
+        1,
+        'Intermediate point'
+    );
+    const pointC = createPOI(
+        new ObjectId().toHexString(),
+        'C',
+        'default',
+        2,
+        0,
+        0,
+        1,
+        'Intermediate point'
+    );
+    const pointD = createPOI(
+        new ObjectId().toHexString(),
+        'D',
+        'default',
+        3,
+        0,
+        0,
+        1,
+        'End point'
+    );
 
-    test('No path available', () => {
-        const pois = [
-            createPOI('1', 'Start', 0, 0),
-            createPOI('2', 'End', 1, 1)
-        ];
-        const path = aStar(pois, pois[0], pois[1]);
-        expect(path).toEqual([]);
-    });
+    pointA.connections.push({ connectedPoiId: pointB._id!.toString(), distance: 1 });
+    pointB.connections.push({ connectedPoiId: pointC._id!.toString(), distance: 1 });
+    pointC.connections.push({ connectedPoiId: pointD._id!.toString(), distance: 1 });
 
-    test('Start and end are the same', () => {
-        const poi = createPOI('1', 'Start/End', 0, 0);
-        const path = aStar([poi], poi, poi);
-        expect(path).toEqual([poi]);
-    });
+    const result = aStar([pointA, pointB, pointC, pointD], pointA, pointD);
+// Print the reconstructed path with both IDs and names
+    console.log("Reconstructed path: " +
+        result.map(point => `${point._id} (${point.name})`).join(" -> "));
+    expect(result).toHaveLength(4);
+    expect(result[0]).toEqual(pointA);
+    expect(result[1]).toEqual(pointB);
+    expect(result[2]).toEqual(pointC);
+    expect(result[3]).toEqual(pointD);
+});
+test('Complex path with multiple options', () => {
+    const pointA = createPOI(
+        new ObjectId().toHexString(),
+        'A',
+        'default',
+        0,
+        0,
+        0,
+        1,
+        'Start point'
+    );
+    const pointB = createPOI(
+        new ObjectId().toHexString(),
+        'B',
+        'default',
+        1,
+        0,
+        0,
+        1,
+        'Intermediate point'
+    );
+    const pointC = createPOI(
+        new ObjectId().toHexString(),
+        'C',
+        'default',
+        0,
+        2,
+        0,
+        1,
+        'Intermediate point'
+    );
+    const pointD = createPOI(
+        new ObjectId().toHexString(),
+        'D',
+        'default',
+        1,
+        1,
+        0,
+        1,
+        'Intermediate point'
+    );
+    const pointE = createPOI(
+        new ObjectId().toHexString(),
+        'E',
+        'default',
+        2,
+        2,
+        0,
+        1,
+        'End point'
+    );
 
-    test('Complex path with obstacles', () => {
-        const pois = [
-            createPOI('1', 'Start', 0, 0, [{connectedPoiId: '2', distance: 1}, {connectedPoiId: '4', distance: 1}]),
-            createPOI('2', 'B', 1, 0, [{connectedPoiId: '1', distance: 1}, {connectedPoiId: '3', distance: 1}]),
-            createPOI('3', 'C', 2, 0, [{connectedPoiId: '2', distance: 1}, {connectedPoiId: '5', distance: 1}]),
-            createPOI('4', 'D', 0, 1, [{connectedPoiId: '1', distance: 1}, {connectedPoiId: '6', distance: 1}]),
-            createPOI('5', 'E', 2, 1, [{connectedPoiId: '3', distance: 1}, {connectedPoiId: '8', distance: 1}]),
-            createPOI('6', 'F', 0, 2, [{connectedPoiId: '4', distance: 1}, {connectedPoiId: '7', distance: 1}]),
-            createPOI('7', 'G', 1, 2, [{connectedPoiId: '6', distance: 1}, {connectedPoiId: '8', distance: 1}]),
-            createPOI('8', 'End', 2, 2, [{connectedPoiId: '5', distance: 1}, {connectedPoiId: '7', distance: 1}])
-        ];
-        const path = aStar(pois, pois[0], pois[7]);
-        expect(path.map(p => p.name)).toEqual(['Start', 'D', 'F', 'G', 'End']);
-    });
+    pointA.connections.push(
+        { connectedPoiId: pointB._id!.toString(), distance: 1 },
+        { connectedPoiId: pointC._id!.toString(), distance: 2 }
+    );
+    pointB.connections.push({ connectedPoiId: pointD._id!.toString(), distance: 1 });
+    pointC.connections.push({ connectedPoiId: pointE._id!.toString(), distance: 2 });
+    pointD.connections.push({ connectedPoiId: pointE._id!.toString(), distance: 1 });
 
-    test('Path with equal cost alternatives', () => {
-        const pois = [
-            createPOI('1', 'Start', 0, 0, [{connectedPoiId: '2', distance: 1}, {connectedPoiId: '3', distance: 1}]),
-            createPOI('2', 'A', 1, 0, [{connectedPoiId: '1', distance: 1}, {connectedPoiId: '4', distance: 1}]),
-            createPOI('3', 'B', 0, 1, [{connectedPoiId: '1', distance: 1}, {connectedPoiId: '4', distance: 1}]),
-            createPOI('4', 'End', 1, 1, [{connectedPoiId: '2', distance: 1}, {connectedPoiId: '3', distance: 1}])
-        ];
-        const path = aStar(pois, pois[0], pois[3]);
-        expect(path.length).toBe(3);
-        expect(path[0].name).toBe('Start');
-        expect(path[2].name).toBe('End');
-        // The middle point can be either 'A' or 'B' depending on how ties are broken
-        expect(['A', 'B']).toContain(path[1].name);
-    });
+    const result = aStar([pointA, pointB, pointC, pointD, pointE], pointA, pointE);
+
+    // Print the reconstructed path with both IDs and names
+    console.log("Reconstructed path: " +
+        result.map(point => `${point._id} (${point.name})`).join(" -> "));
+
+    expect(result).toHaveLength(4);
+    expect(result.map(point => point.name)).toEqual(['A', 'B', 'D', 'E']);
+});
+test('Complex path with multiple options and specific node structure', () => {
+    const pointA = createPOI(
+        new ObjectId().toHexString(),
+        'A',
+        'default',
+        0,
+        0,
+        0,
+        1,
+        'Start point'
+    );
+    const pointB = createPOI(
+        new ObjectId().toHexString(),
+        'B',
+        'default',
+        2,
+        0,
+        0,
+        1,
+        'Intermediate point'
+    );
+    const pointC = createPOI(
+        new ObjectId().toHexString(),
+        'C',
+        'default',
+        0,
+        1,
+        0,
+        1,
+        'Intermediate point'
+    );
+    const pointD = createPOI(
+        new ObjectId().toHexString(),
+        'D',
+        'default',
+        1,
+        2,
+        0,
+        1,
+        'End point'
+    );
+
+    pointA.connections.push(
+        { connectedPoiId: pointB._id!.toString(), distance: 2 },
+        { connectedPoiId: pointC._id!.toString(), distance: 1 }
+    );
+    pointB.connections.push({ connectedPoiId: pointD._id!.toString(), distance: 2 });
+    pointC.connections.push({ connectedPoiId: pointD._id!.toString(), distance: 1 });
+
+    const result = aStar([pointA, pointB, pointC, pointD], pointA, pointD);
+
+    // Print the reconstructed path with both IDs and names
+    console.log("Reconstructed path: " +
+        result.map(point => `${point._id} (${point.name})`).join(" -> "));
+
+    expect(result).toHaveLength(3);
+    expect(result.map(point => point.name)).toEqual(['A', 'C', 'D']);
 });

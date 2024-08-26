@@ -28,3 +28,29 @@ export function isValidPOI(data: any): data is POI {
         data.connections.every((connection: any) => isValidConnection(connection))
     );
 }
+export function createPOI(
+    id: string | ObjectId | undefined,
+    name: string,
+    type: string,
+    x: number,
+    y: number,
+    z: number,
+    floor: number,
+    description: string,
+    connections: Connection[] = []
+): POI {
+    let _id: string | ObjectId | undefined = id;
+    if (typeof id === 'string') {
+        _id = new ObjectId(id);
+    }
+
+    return {
+        _id,
+        name,
+        type,
+        location: { x, y, z },
+        floor,
+        description,
+        connections
+    };
+}
