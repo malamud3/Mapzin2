@@ -29,9 +29,9 @@ class InstructionService {
         let dz = end.z - start.z
         
         if abs(dx) > abs(dz) {
-            return dx > 0 ? "to your right" : "to your left"
+            return dx > 0 ?  "to your left" : "to your right"
         } else {
-            return dz > 0 ? "in front of you" : "behind you"
+            return dz > 0 ?  "behind you"  : "in front of you" 
         }
     }
 }

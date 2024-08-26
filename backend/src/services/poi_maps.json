@@ -1,0 +1,775 @@
+[
+  {
+    "level": 1,
+    "nodes": [
+      {
+        "poi": {
+          "name": "A",
+          "type": "default",
+          "location": { "x": 0, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Start point",
+          "connections": [{ "connectedPoiId": "B", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "B",
+          "type": "default",
+          "location": { "x": 1, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "C", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "C",
+          "type": "default",
+          "location": { "x": 2, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "D", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "D",
+          "type": "default",
+          "location": { "x": 3, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "End point",
+          "connections": []
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      }
+    ],
+    "solution": ["A", "B", "C", "D"]
+  },
+  {
+    "level": 2,
+    "nodes": [
+      {
+        "poi": {
+          "name": "A",
+          "type": "default",
+          "location": { "x": 0, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Start point",
+          "connections": [
+            { "connectedPoiId": "B", "distance": 1 },
+            { "connectedPoiId": "C", "distance": 2 }
+          ]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "B",
+          "type": "default",
+          "location": { "x": 1, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "D", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "C",
+          "type": "default",
+          "location": { "x": 0, "y": 1, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "D", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "D",
+          "type": "default",
+          "location": { "x": 1, "y": 1, "z": 0 },
+          "floor": 1,
+          "description": "End point",
+          "connections": []
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      }
+    ],
+    "solution": ["A", "B", "D"]
+  },
+  {
+    "level": 3,
+    "nodes": [
+      {
+        "poi": {
+          "name": "A",
+          "type": "default",
+          "location": { "x": 0, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Start point",
+          "connections": [
+            { "connectedPoiId": "B", "distance": 2 },
+            { "connectedPoiId": "C", "distance": 3 }
+          ]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "B",
+          "type": "default",
+          "location": { "x": 2, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "D", "distance": 2 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "C",
+          "type": "default",
+          "location": { "x": 1, "y": 1, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "D", "distance": 2 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "D",
+          "type": "default",
+          "location": { "x": 2, "y": 2, "z": 0 },
+          "floor": 1,
+          "description": "End point",
+          "connections": []
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      }
+    ],
+    "solution": ["A", "B", "D"]
+  },
+  {
+    "level": 4,
+    "nodes": [
+      {
+        "poi": {
+          "name": "A",
+          "type": "default",
+          "location": { "x": 0, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Start point",
+          "connections": [
+            { "connectedPoiId": "B", "distance": 1 },
+            { "connectedPoiId": "D", "distance": 1 }
+          ]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "B",
+          "type": "default",
+          "location": { "x": 1, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "C", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "C",
+          "type": "default",
+          "location": { "x": 2, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": []
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "D",
+          "type": "default",
+          "location": { "x": 0, "y": 1, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "E", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "E",
+          "type": "default",
+          "location": { "x": 1, "y": 1, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "F", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "F",
+          "type": "default",
+          "location": { "x": 2, "y": 1, "z": 0 },
+          "floor": 1,
+          "description": "End point",
+          "connections": []
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      }
+    ],
+    "solution": ["A", "D", "E", "F"]
+  },
+  {
+    "level": 5,
+    "nodes": [
+      {
+        "poi": {
+          "name": "A",
+          "type": "default",
+          "location": { "x": 0, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Start point",
+          "connections": [
+            { "connectedPoiId": "B", "distance": 2 },
+            { "connectedPoiId": "C", "distance": 2 }
+          ]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "B",
+          "type": "default",
+          "location": { "x": 2, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "D", "distance": 2 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "C",
+          "type": "default",
+          "location": { "x": 0, "y": 1, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "D", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "D",
+          "type": "default",
+          "location": { "x": 1, "y": 2, "z": 0 },
+          "floor": 1,
+          "description": "End point",
+          "connections": []
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      }
+    ],
+    "solution": ["A", "B", "D"]
+  },
+  {
+    "level": 6,
+    "nodes": [
+      {
+        "poi": {
+          "name": "A",
+          "type": "default",
+          "location": { "x": 0, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Start point",
+          "connections": [{ "connectedPoiId": "B", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "B",
+          "type": "default",
+          "location": { "x": 1, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [
+            { "connectedPoiId": "C", "distance": 2 },
+            { "connectedPoiId": "D", "distance": 1 }
+          ]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "C",
+          "type": "default",
+          "location": { "x": 2, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "E", "distance": 2 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "D",
+          "type": "default",
+          "location": { "x": 1, "y": 1, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "E", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "E",
+          "type": "default",
+          "location": { "x": 2, "y": 2, "z": 0 },
+          "floor": 1,
+          "description": "End point",
+          "connections": []
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      }
+    ],
+    "solution": ["A", "B", "D", "E"]
+  },
+  {
+    "level": 7,
+    "nodes": [
+      {
+        "poi": {
+          "name": "A",
+          "type": "default",
+          "location": { "x": 0, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Start point",
+          "connections": [
+            { "connectedPoiId": "B", "distance": 1 },
+            { "connectedPoiId": "C", "distance": 2 }
+          ]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "B",
+          "type": "default",
+          "location": { "x": 1, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "D", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "C",
+          "type": "default",
+          "location": { "x": 0, "y": 2, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "E", "distance": 2 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "D",
+          "type": "default",
+          "location": { "x": 1, "y": 1, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "E", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "E",
+          "type": "default",
+          "location": { "x": 2, "y": 2, "z": 0 },
+          "floor": 1,
+          "description": "End point",
+          "connections": []
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      }
+    ],
+    "solution": ["A", "B", "D", "E"]
+  },
+  {
+    "level": 8,
+    "nodes": [
+      {
+        "poi": {
+          "name": "A",
+          "type": "default",
+          "location": { "x": 0, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Start point",
+          "connections": [
+            { "connectedPoiId": "B", "distance": 1 },
+            { "connectedPoiId": "C", "distance": 4 }
+          ]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "B",
+          "type": "default",
+          "location": { "x": 1, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "D", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "C",
+          "type": "default",
+          "location": { "x": 0, "y": 2, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "E", "distance": 3 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "D",
+          "type": "default",
+          "location": { "x": 1, "y": 1, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "F", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "E",
+          "type": "default",
+          "location": { "x": 2, "y": 2, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "F", "distance": 2 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "F",
+          "type": "default",
+          "location": { "x": 2, "y": 3, "z": 0 },
+          "floor": 1,
+          "description": "End point",
+          "connections": []
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      }
+    ],
+    "solution": ["A", "B", "D", "F"]
+  },
+  {
+    "level": 9,
+    "nodes": [
+      {
+        "poi": {
+          "name": "A",
+          "type": "default",
+          "location": { "x": 0, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Start point",
+          "connections": [{ "connectedPoiId": "B", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "B",
+          "type": "default",
+          "location": { "x": 1, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [
+            { "connectedPoiId": "C", "distance": 2 },
+            { "connectedPoiId": "D", "distance": 2 }
+          ]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "C",
+          "type": "default",
+          "location": { "x": 1, "y": 2, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "E", "distance": 2 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "D",
+          "type": "default",
+          "location": { "x": 3, "y": 1, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "F", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "E",
+          "type": "default",
+          "location": { "x": 2, "y": 3, "z": 0 },
+          "floor": 1,
+          "description": "End point",
+          "connections": []
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "F",
+          "type": "default",
+          "location": { "x": 4, "y": 2, "z": 0 },
+          "floor": 1,
+          "description": "End point",
+          "connections": []
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      }
+    ],
+    "solution": ["A", "B", "D", "F"]
+  },
+  {
+    "level": 10,
+    "nodes": [
+      {
+        "poi": {
+          "name": "A",
+          "type": "default",
+          "location": { "x": 0, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Start point",
+          "connections": [{ "connectedPoiId": "B", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "B",
+          "type": "default",
+          "location": { "x": 1, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [
+            { "connectedPoiId": "C", "distance": 2 },
+            { "connectedPoiId": "D", "distance": 2 }
+          ]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "C",
+          "type": "default",
+          "location": { "x": 2, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "D", "distance": 1 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "D",
+          "type": "default",
+          "location": { "x": 3, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "Intermediate point",
+          "connections": [{ "connectedPoiId": "E", "distance": 2 }]
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      },
+      {
+        "poi": {
+          "name": "E",
+          "type": "default",
+          "location": { "x": 4, "y": 0, "z": 0 },
+          "floor": 1,
+          "description": "End point",
+          "connections": []
+        },
+        "f": 0,
+        "g": 0,
+        "h": 0,
+        "parent": null
+      }
+    ],
+    "solution": ["A", "B", "C", "D", "E"]
+  }
+]
