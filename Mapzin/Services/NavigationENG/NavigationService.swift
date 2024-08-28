@@ -8,13 +8,8 @@
 
 
 import ARKit
-import SwiftUI
 
-struct ARObject {
-    let name: String
-    var position: SCNVector3
-    let color: UIColor
-}
+
 
 class NavigationService: ObservableObject {
     @Published var currentInstruction: Instruction?

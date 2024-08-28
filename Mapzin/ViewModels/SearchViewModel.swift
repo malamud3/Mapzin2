@@ -73,15 +73,15 @@ class SearchViewModel: ObservableObject {
         Task {
             do {
                 let result = try await MKDirections(request: request).calculate()
+                
                 DispatchQueue.main.async {
                     self.route = result.routes.first
                     self.routeDestination = destination
                     self.routeDisplaying = true
                 }
+                
             } catch {
-                DispatchQueue.main.async {
                     print("Error fetching route: \(error)")
-                }
             }
         }
     }

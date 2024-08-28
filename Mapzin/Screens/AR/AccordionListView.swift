@@ -7,25 +7,6 @@
 
 import SwiftUI
 
-class SharedViewModel: ObservableObject {
-    @Published var selectedItem: String?
-    @Published var showAccordionList: Bool = false
-}
-
-struct AccordionItem: Identifiable {
-    let id = UUID()
-    let title: String
-    let items: [String]
-}
-
-struct FlattenedItem: Identifiable {
-    let id = UUID()
-    let title: String
-    let parentTitle: String
-}
-
-import SwiftUI
-
 struct AccordionListView: View {
     @EnvironmentObject private var sharedViewModel: SharedViewModel
     @State private var expandedSections: Set<String> = []

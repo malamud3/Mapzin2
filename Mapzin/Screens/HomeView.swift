@@ -74,15 +74,9 @@ struct HomeView: View {
         switch task {
         case .task1:
             print("Task 1 selected")
-            // Add task 1 specific logic
         case .task2:
             print("Task 2 selected")
             coordinator.push(.selectBuilding)
         }
     }
 }
-
-enum TaskType {
-    case task1, task2
-}
-

@@ -64,27 +64,6 @@ class ARViewModel: NSObject, ObservableObject {
 //        }
 //    }
 
-//    func updateNavigationInstructions() {
-//            DispatchQueue.main.async { [weak self] in
-//                guard let self = self,
-//                      let camPosition = self.cameraPosition,
-//                      let targetObject = self.navigationService.getObjects().last else {
-//                    return
-//                }
-//                
-//                let targetPosition = targetObject.position
-//                
-//                let updatedInstruction = self.navigationService.instructionService.generateInstruction(
-//                    from: camPosition,
-//                    to: targetPosition,
-//                    roomName: targetObject.name
-//                )
-//                
-//                self.currentInstruction = updatedInstruction
-//                self.checkDestinationReached()
-//            }
-//        }
-
    
     private func getDirection(from start: SCNVector3, to end: SCNVector3) -> String {
         let dx = end.x - start.x
