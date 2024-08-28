@@ -189,13 +189,6 @@ struct SettingsView: View {
                     Toggle("Show Path", isOn: .constant(true))
                     Toggle("Audio Instructions", isOn: .constant(false))
                 }
-                Section(header: Text("Display Settings")) {
-                    Picker("Map Style", selection: .constant(0)) {
-                        Text("Standard").tag(0)
-                        Text("Satellite").tag(1)
-                        Text("Hybrid").tag(2)
-                    }
-                }
             }
             .navigationTitle("Settings")
             .navigationBarItems(trailing: Button("Done") {
