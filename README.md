@@ -28,10 +28,6 @@ For detailed project documentation, including design decisions and technical spe
 3. **Dynamic Updates**: The app recalculates routes in real-time to handle deviations or changes in the environment.
 4. **End-to-End Integration**: Combines outdoor GPS navigation with indoor AR-based systems for a seamless experience.
 
-## Challenges and Achievements
-- **Innovative Problem-Solving**: Created accurate maps despite incomplete floor plans by leveraging LiDAR technology.
-- **Complex Development Environment**: Overcame hardware restrictions and external challenges, such as limited access to devices.
-- **High Scalability**: Designed a robust system that supports multiple devices and environments.
 
 ## Installation
 To clone and run the app locally, you’ll need:
